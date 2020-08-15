@@ -21,6 +21,10 @@
         <li class="nav-item">
           <a class="nav-link" href="/lakip/data">Data</a>
         </li>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/lakip/about">About</a>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-expanded="false">
@@ -39,11 +43,34 @@
           <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
         </li>
       </ul>
-      <!-- <form class="d-flex">
+
+    </div>
+    <div class="dropdown">
+      <button class="btn btn-bd-light dropdown-toggle" id="bd-versions" data-toggle="dropdown" aria-expanded="false"
+        data-display="static">
+        Bootstrap v5.0
+      </button>
+      <ul class="dropdown-menu dropdown-menu-md-right" aria-labelledby="bd-versions">
+
+
+        <li><a class="dropdown-item current" aria-current="true" href="/docs/5.0/">Latest (5.0.x)</a></li>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        <li><a class="dropdown-item" href="https://getbootstrap.com/docs/4.5/">v4.5.0</a></li>
+        <li><a class="dropdown-item" href="https://getbootstrap.com/docs/3.4/">v3.4.1</a></li>
+        <li><a class="dropdown-item" href="https://getbootstrap.com/2.3.2/">v2.3.2</a></li>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        <li><a class="dropdown-item" href="/docs/versions/">All versions</a></li>
+      </ul>
+    </div>
+    <!-- <form class="d-flex">
         <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form> -->
-    </div>
+  </div>
   </div>
 </nav>
 

@@ -12,6 +12,17 @@
   <link rel="stylesheet" href="/css/style.css">
   <!-- <link rel="stylesheet" href="/bootstrap/css/dashboard.css"> -->
   <link rel="stylesheet" href="/css/codeigniter.css">
+  <script src="/js/script.js"></script>
+  <script>
+  $(document).ready(function() {
+    $("#myInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+  </script>
   <title><?= $title ?></title>
 </head>
 
@@ -41,6 +52,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
     integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous">
   </script>
+  <script src="/js/script.js"></script>
 </body>
 
 </html>

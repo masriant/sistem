@@ -1,4 +1,6 @@
-<?php namespace Config;
+<?php
+
+namespace Config;
 
 use CodeIgniter\Config\BaseConfig;
 
@@ -21,6 +23,10 @@ class Pager extends BaseConfig
 		'default_full'   => 'CodeIgniter\Pager\Views\default_full',
 		'default_simple' => 'CodeIgniter\Pager\Views\default_simple',
 		'default_head'   => 'CodeIgniter\Pager\Views\default_head',
+		'lakip_pagination' => 'App\Views\Pagers\lakip_pagination',
+		'center_pagination' => 'App\Views\Pagers\center_pagination',
+		'bootstrap_pagination'   => 'App\Views\Pagers\bootstrap_pagination',
+		'bootstrapcenter_pagination'   => 'App\Views\Pagers\bootstrapcenter_pagination',
 	];
 
 	/*

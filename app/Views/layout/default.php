@@ -9,20 +9,30 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
     integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/codeigniter.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- <link rel="stylesheet" href="/bootstrap/css/dashboard.css"> -->
+  <link rel="stylesheet" href="/css/codeigniter.css">
   <title><?= $title ?></title>
 </head>
 
 <body>
-  <div class="container">
-
-
+  <div class="container-fluid">
+    <?= $this->include('layout/header') ?>
     <?= $this->include('layout/menu') ?>
     <?= $this->include('layout/sidebar') ?>
     <?= $this->renderSection('content') ?>
 
   </div>
+  <section class="footer">
+    <!-- FOOTER: DEBUG INFO + COPYRIGHTS -->
+    <footer>
+      <div class="copyrights">
+
+        <p>&copy; <?= date('Y') ?> Masrianto Foundation.</p>
+      </div>
+    </footer>
+
+  </section>
   <!-- Optional JavaScript -->
   <!-- Popper.js first, then Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"

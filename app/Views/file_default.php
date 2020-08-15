@@ -8,19 +8,7 @@
 
   <h1>About this page</h1>
 
-  <p>If you would like to edit this page you will find it located at: <?php if ($username === 'sally') : ?>
-
-    <h3>Hi Sally</h3>
-
-    <?php elseif ($username === 'joe') : ?>
-
-    <h3>Hi Joe</h3>
-
-    <?php else : ?>
-
-    <h3>Hi unknown user</h3>
-
-    <?php endif ?></p>
+  <p>If you would like to edit this page you will find it located at: </p>
 
   <pre><code>app/Views/file_default.php</code></pre>
 

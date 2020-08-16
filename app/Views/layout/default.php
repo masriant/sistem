@@ -48,6 +48,13 @@
     </footer>
 
   </section>
+  <script language="javascript" type="text/javascript">
+  /* <![CDATA[ */
+  document.write('<a href="makepdf.php?url=' + encodeURIComponent(location.href) + '">');
+  document.write('Create PDF file of this page');
+  document.write('</a>');
+  /* ]]> */
+  </script>
   <!-- Optional JavaScript -->
   <!-- Popper.js first, then Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"

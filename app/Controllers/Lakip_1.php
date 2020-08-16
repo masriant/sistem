@@ -2,14 +2,14 @@
 
 namespace App\Controllers;
 
-use Mpdf\Mpdf;
 use App\Models\LakipModel;
-// use PhpOffice\PhpSpreadsheet\Spreadsheet;
-// use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Mpdf\Mpdf;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Lakip extends BaseController
 {
-  // protected $lakipModel;
+  protected $lakipModel;
   public function __construct()
   {
     $this->lakipModel = new LakipModel();
@@ -95,23 +95,11 @@ class Lakip extends BaseController
 
   public function pdf()
   {
-    $lakip = $this->lakipModel->findAll();
+    $this->lakipModel->findAll();
     $this->Mpdf = new Mpdf;
     $data = [
       'title' => 'PDF',
-      'lakip' => $lakip,
-    ];
-    return view('home/makepdf', $data);
-  }
-  //--------------------------------------------------------------------
-
-  public function invoice()
-  {
-    $lakip = $this->lakipModel->findAll();
-    $this->Mpdf = new Mpdf;
-    $data = [
-      'title' => 'PDF',
-      'lakip' => $lakip,
+      'lakip' => $this->lakipModel->findAll(),
     ];
     return view('home/makepdf', $data);
   }
@@ -120,24 +108,12 @@ class Lakip extends BaseController
   public function getpdf()
   {
     $lakip = $this->lakipModel->findAll();
-    // $this->Mpdf = new Mpdf;
-    // $data = [
-    //   'lakip' => $lakip,
-    // ];
+    $this->Mpdf = new Mpdf;
     $mpdf = new \Mpdf\Mpdf([
       'mode' => 'utf-8',
+      'format' => 'A4', 'L',
       'margin_top' => 30,
-      'format' => 'A4', 'L'
     ]);
-
-    $mpdf->SetHeader('<img src="assets/brand/lakip.jpeg" width="70" />|<p>LEMBAGA ADMINISTRASI KEUANGAN DAN ILMU PEMERINTAHAN</p>
-    <p>SKT DITJEN POLPUM KEMENDAGRI NOMOR : 001-00-00/034/I/2019</p> 
-    <p>Sekretariat : Jln. Serdang Baru Raya No. 4B, Kemayoran - Jakarta 10650</p>
-    <p>Website : www.lakip.co.id E-mail : admin@lakip.co.id Telp./Fax. 021-42885718</p>
-    |');
-
-    $tgl_cetak = date('d F Y H:i:s');
-    $mpdf->SetFooter(base_url() . '|{PAGENO}|' . $tgl_cetak);
 
     $html = '<!DOCTYPE html>
     <html lang="en">
@@ -170,9 +146,96 @@ class Lakip extends BaseController
     $html .= '</table>
 </body>
 </html>';
+    $header = '<!--mpdf
 
+<htmlpageheader name="letterheader">
+    <table width="100%" style=" font-family: sans-serif;">
+        <tr>
+          <td width="50%" style="color:#0000BB; "><span style="font-weight: bold; font-size: 14pt;">Acme Trading Co.</span><br />123 Anystreet<br />Your City<br />GD12 4LP<br /><span style="font-size: 15pt;">☎</span> 01777 123 567</td>
+          <td width="50%" style="text-align: right; vertical-align: top;">Invoice No.<br /><span style="font-weight: bold; font-size: 12pt;">0012345</span></td>
+        </tr>
+    </table>
+    <div style="margin-top: 1cm; text-align: right; font-family: sans-serif;">
+        {DATE jS F Y}
+    </div>
+</htmlpageheader>
+
+<htmlpagefooter name="letterfooter2">
+    <div style="border-top: 1px solid #000000; font-size: 9pt; text-align: center; padding-top: 3mm; font-family: sans-serif; ">
+        Page {PAGENO} of {nbpg}
+    </div>
+</htmlpagefooter>
+mpdf-->
+
+<style>
+    @page {
+        margin-top: 2.5cm;
+        margin-bottom: 2.5cm;
+        margin-left: 2cm;
+        margin-right: 2cm;
+        footer: html_letterfooter2;
+        background-color: pink;
+    }
+  
+    @page :first {
+        margin-top: 8cm;
+        margin-bottom: 4cm;
+        header: html_letterheader;
+        footer: _blank;
+        resetpagenum: 1;
+        background-color: yellow;
+    }
+  
+    @page letterhead :first {
+        margin-top: 8cm;
+        margin-bottom: 4cm;
+        header: html_letterheader;
+        footer: _blank;
+        resetpagenum: 1;
+        background-color: lightblue;
+    }
+    .letter {
+        page-break-before: always;
+        page: letterhead;
+    }
+</style>';
+
+    $firstletter = '<div>Dear Sir or Madam,<br />
+Contents of your letter...
+<pagebreak />
+... more letter on page 2 ...
+<pagebreak />
+... more letter on page 3 ...
+</div>';
+
+    $letter = '<div class="letter">Dear Sir or Madam,<br />
+Contents of your letter...
+<pagebreak />
+... more letter on page 2 ...
+<pagebreak />
+... more letter on page 3 ...
+</div>';
+
+    // require __DIR__ . '/vendor/autoload.php';
+    $mpdf = new \Mpdf\Mpdf();
+
+    $mpdf->WriteHTML($header);
+    $mpdf->WriteHTML($firstletter);
+    $mpdf->WriteHTML($letter);
+    $mpdf->WriteHTML($letter);
+    $tgl_cetak = date('d F Y H:i:s');
+    $mpdf->SetFooter(base_url() . '|{PAGENO}|' . $tgl_cetak);
 
     $mpdf->WriteHTML($html);
+
+    $filename = "Data ";
+    $tgl_cetak = date('dmY His');
+
+
+    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    header('Content-Disposition: attachment;filename="' . $filename . $tgl_cetak . '.pdf"');
+    header('Cache-Control: max-age=0');
+
 
     return redirect()->to($mpdf->Output('filename.pdf', 'I'));
   }

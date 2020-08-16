@@ -39,12 +39,10 @@
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
+
       </ul>
       <form method="POST" action="">
-        <select class="form-select form-select-sm btn-outline-danger" aria-label=".form-select-sm"
+        <select class="form-select form-select-sm btn-outline-danger mr-2" aria-label=".form-select-sm"
           onChange="document.location.href=this.options[this.selectedIndex].value;">
           <option selected>Open select menu</option>
           <option value="data">Data</option>
@@ -63,8 +61,8 @@
       ?>
     </div>
     <!-- <form class="d-flex">
-      <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
+      <input class="form-control mr-2" type="search" id="myInput" placeholder="Search" aria-label="Search">
+      <button class="btn btn-sm btn-outline-success" type="submit">Search</button>
     </form> -->
   </div>
   <div class="dropdown">

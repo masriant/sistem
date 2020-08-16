@@ -15,9 +15,11 @@ class Lakip extends BaseController
 
   public function index()
   {
+
     $data = [
       'title' => 'Home',
       'message' => 'Welcome to my Blog!'
+
     ];
     return view('home/default', $data);
   }
@@ -74,5 +76,26 @@ class Lakip extends BaseController
 
     ];
     return view('home/about', $data);
+  }
+  //--------------------------------------------------------------------
+
+  public function datatables()
+  {
+    // $currentPage = $this->request->getVar('page_id') ? $this->request->getVar('page_id') : 1;
+    // $keyword = $this->request->getVar('keyword');
+    // if ($keyword) {
+    //   $lakip = $this->lakipModel->search($keyword);
+    // } else {
+    //   $lakip = $this->lakipModel;
+    // }
+    $data = [
+      'title' => 'About',
+      'lakip' => $this->lakipModel->findAll(),
+      // 'lakip' => $lakip->paginate(10, 'id'),
+      // 'pager' => $this->lakipModel->pager,
+      // 'currentPage' => $currentPage,
+
+    ];
+    return view('home/datatables', $data);
   }
 }

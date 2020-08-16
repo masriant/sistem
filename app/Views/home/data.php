@@ -13,14 +13,26 @@
     </div>
   </div>
   <div class="row">
-    <div class="col">
+    <div class="col-3">
+      <?php
 
-      <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-        <option selected>Open select menu</option>
-        <option value="1">2018</option>
-        <option value="2">2019</option>
-        <option value="3">2020</option>
-      </select>
+      if (isset($_GET["data"])) {
+        header("location:lakip/data");
+      } elseif (isset($_GET["datatables"])) {
+        header("location:lakip/datatables");
+      }
+
+      ?>
+      <form method="POST" action="">
+        <select class="form-select form-select-sm" aria-label=".form-select-sm"
+          onChange="document.location.href=this.options[this.selectedIndex].value;">
+          <option selected>Open select menu</option>
+          <option value="data">Data</option>
+          <option value="about">About</option>
+          <option value="datatables">Table</option>
+        </select>
+      </form>
+
     </div>
   </div>
   <div class="row">
@@ -38,9 +50,10 @@
   </div>
   <div class="row">
     <div class="col">
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead>
+      <div class="table-responsive{-sm|-md|-lg|-xl|-xxl}">
+        <table class="table table-striped table-sm caption-top">
+          <caption>List of users</caption>
+          <thead class="table-dark">
             <tr>
               <th>No.</th>
               <th>Nama</th>
@@ -49,7 +62,7 @@
               <th>Opsi</th>
             </tr>
           </thead>
-          <tbody id="myTable">
+          <tbody>
             <?php $i = 1 + (10 * ($currentPage - 1)); ?>
             <?php foreach ($lakip as $row) : ?>
             <tr>

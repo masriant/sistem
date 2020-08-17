@@ -116,7 +116,7 @@ class Lakip extends BaseController
 
   public function create()
   {
-    // $lakip = $this->lakipModel->findAll();
+    $lakip = $this->lakipModel->findAll();
     $counter = $this->lakipModel->kodeUser();
     $urutan = (int) substr($counter, 3, 3);
     $urutan++;
@@ -126,7 +126,7 @@ class Lakip extends BaseController
     $data = [
       'title' => 'Tambah User',
       'validation' => \Config\Services::validation(),
-      // 'lakip' => $lakip,
+      'lakip' => $lakip,
       'kode' => $autourut,
 
 
@@ -229,40 +229,40 @@ class Lakip extends BaseController
           'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
-      // 'kodeqr' => [
-      //   'rules' => 'max_size[kodeqr,1024]|is_image[kodeqr]|mime_in[kodeqr,image/jpg,image/jpeg,image/png]',
-      //   'errors' => [
-      //     'max_size' => 'Ukuran {field} terlalu besar.',
-      //     'is_image' => 'Yang anda pilih bukan gambar.',
-      //     'mime_in' => 'Yang anda pilih bukan gambar.'
-      //   ]
-      // ]
+      'kodeqr' => [
+        'rules' => 'max_size[kodeqr,1024]|is_image[kodeqr]|mime_in[kodeqr,image/jpg,image/jpeg,image/png]',
+        'errors' => [
+          'max_size' => 'Ukuran {field} terlalu besar.',
+          'is_image' => 'Yang anda pilih bukan gambar.',
+          'mime_in' => 'Yang anda pilih bukan gambar.'
+        ]
+      ]
     ])) {
       // $validation = \Config\Services::validation();
       // return redirect()->to('/lakip/create')->withInput()->with('validation', $validation);
       return redirect()->to('/lakip/create')->withInput();
     }
 
-    // ambil gambar
-    // $filekodeqr = $this->request->getFile('kodeqr');
+    // ambil gambar<===
+    $filekodeqr = $this->request->getFile('kodeqr');
     // Apakah tidak ada gambar yang di upload
-    // if ($filekodeqr->getError() == 4) {
-    //   $namakodeqr = 'default.jpg';
-    // } else {
-    //   // Generate nama kodeqr random
-    //   $namakodeqr = $filekodeqr->getRandomName();
-    //   // pindahkan file ke folder img
-    //   $filekodeqr->move('images', $namakodeqr);
-    //   // ambil nama file
-    //   // $namakodeqr = $filekodeqr->getName();
-    // }
+    if ($filekodeqr->getError() == 4) {
+      $namakodeqr = 'default.jpg';
+    } else {
+      // Generate nama kodeqr random<===
+      $namakodeqr = $filekodeqr->getRandomName();
+      // pindahkan file ke folder img<===
+      $filekodeqr->move('images', $namakodeqr);
+      // ambil nama file<===
+      // $namakodeqr = $filekodeqr->getName(); <====
+    }
 
 
-    // $slug = url_title($this->request->getVar('nama'), '-', true);
+    $slug = url_title($this->request->getVar('nama'), '-', true);
     $this->lakipModel->save([
       'userid' => $this->request->getVar('userid'),
       'nama' => $this->request->getVar('nama'),
-      // 'slug' => $slug,
+      'slug' => $slug,
       'jabatan' => $this->request->getVar('jabatan'),
       'instansi' => $this->request->getVar('instansi'),
       'kabupaten' => $this->request->getVar('kabupaten'),
@@ -274,7 +274,7 @@ class Lakip extends BaseController
       'checkout' => $this->request->getVar('checkout'),
       'kontribusi' => $this->request->getVar('kontribusi'),
       'kodeqr' => $this->request->getVar('kodeqr'),
-      // 'kodeqr' => $namakodeqr
+      'kodeqr' => $namakodeqr
     ]);
 
     session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');

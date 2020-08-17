@@ -26,6 +26,7 @@
         <select class="form-select form-select-sm" aria-label=".form-select-sm"
           onChange="document.location.href=this.options[this.selectedIndex].value;">
           <option selected>Open select menu</option>
+          <option value="create">Tambah</option>
           <option value="data">Data</option>
           <option value="about">About</option>
           <option value="datatables">Table</option>

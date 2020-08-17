@@ -67,7 +67,7 @@
                   <label for="pembayaran" class="col-sm-2 col-form-label">Pembayaran</label>
                   <div class="col-sm-10">
                     <input type="text" readonly class="form-control-plaintext" id="staticEmail"
-                      value="Peningkatan Kapasitas dan Kapabilitas Aparatur Sekretariat DPRD dalam Menunjang Kegiatan Anggota DPRD <?= $lakip['kodeqr']; ?>">
+                      value="Peningkatan Kapasitas dan Kapabilitas Aparatur Sekretariat DPRD dalam Menunjang Kegiatan Anggota DPRD">
                   </div>
                 </div>
 

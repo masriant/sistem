@@ -124,7 +124,7 @@ class Lakip extends BaseController
     $autourut = $huruf . sprintf("%03s", $urutan);
 
     $data = [
-      'title' => 'Data User',
+      'title' => 'Tambah User',
       'validation' => \Config\Services::validation(),
       // 'lakip' => $lakip,
       'kode' => $autourut,

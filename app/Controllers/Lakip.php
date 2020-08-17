@@ -75,9 +75,19 @@ class Lakip extends BaseController
 
   public function kwitansi($id)
   {
+    $lakip = $this->lakipModel->find($id);
+    $counter = $this->lakipModel->kodeUser();
+    $urutan = (int) substr($counter, 3, 3);
+    $urutan++;
+    $huruf = "LKP";
+    $autourut = $huruf . sprintf("%03s", $urutan);
+
     $data = [
       'title' => 'Kwitansi',
-      'lakip' => $this->lakipModel->find($id),
+      'kontribusi' => 4500000,
+      'lakip' => $lakip,
+      'kode' => $autourut,
+
 
     ];
     return view('home/kwitansi-user', $data);
@@ -86,12 +96,42 @@ class Lakip extends BaseController
 
   public function userid($id)
   {
+    $lakip = $this->lakipModel->find($id);
+    $counter = $this->lakipModel->kodeUser();
+    $urutan = (int) substr($counter, 3, 3);
+    $urutan++;
+    $huruf = "LKP";
+    $autourut = $huruf . sprintf("%03s", $urutan);
+
     $data = [
       'title' => 'Data User',
-      'lakip' => $this->lakipModel->find($id),
+      'lakip' => $lakip,
+      'kode' => $autourut,
+
 
     ];
     return view('home/detail-user', $data);
+  }
+  //--------------------------------------------------------------------
+
+  public function create()
+  {
+    // $lakip = $this->lakipModel->findAll();
+    $counter = $this->lakipModel->kodeUser();
+    $urutan = (int) substr($counter, 3, 3);
+    $urutan++;
+    $huruf = "LKP";
+    $autourut = $huruf . sprintf("%03s", $urutan);
+
+    $data = [
+      'title' => 'Data User',
+      'validation' => \Config\Services::validation(),
+      // 'lakip' => $lakip,
+      'kode' => $autourut,
+
+
+    ];
+    return view('home/create_user', $data);
   }
   //--------------------------------------------------------------------
 
@@ -107,6 +147,13 @@ class Lakip extends BaseController
     $data = [
       'title' => 'About',
       'lakip' => $this->lakipModel->findAll(),
+      'count' => $this->lakipModel->countAll(),
+      'flat' => $this->lakipModel->getPlatform(),
+      'versi' => $this->lakipModel->getVersion(),
+      'getLastQuery' => $this->lakipModel->getLastQuery(),
+
+
+
       // 'lakip' => $lakip->paginate(10, 'id'),
       // 'pager' => $this->lakipModel->pager,
       // 'currentPage' => $currentPage,

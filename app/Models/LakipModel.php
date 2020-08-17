@@ -42,4 +42,14 @@ class LakipModel extends Model
 
     return $this->table('lakip')->like('nama', $keyword)->orLike('alamat', $keyword)->orLike('kodeqr', $keyword);
   }
+
+  public function kodeUser()
+  {
+    return $this->table('lakip')->countAll();
+  }
+
+  public function kwitansiUrut()
+  {
+    return $this->table('lakip')->count();
+  }
 }

@@ -15,15 +15,15 @@
           <a class="nav-link active" aria-current="page" href="">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/lakip">Lakip</a>
+          <a class="nav-link" href="<?= base_url(); ?>/lakip">Lakip</a>
         </li>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/lakip/datatables">Datatables</a>
+          <a class="nav-link" href="<?= base_url(); ?>/lakip/datatables">Datatables</a>
         </li>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/lakip/about">About</a>
+          <a class="nav-link" href="<?= base_url(); ?>/lakip/about">About</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -31,11 +31,11 @@
             Admin Panel
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="/lakip/data">Data</a></li>
+            <li><a class="dropdown-item" href="<?= base_url(); ?>/lakip/data">Data</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="/lakip/about">About</a></li>
+            <li><a class="dropdown-item" href="<?= base_url(); ?>/lakip/about">About</a></li>
           </ul>
         </li>
 

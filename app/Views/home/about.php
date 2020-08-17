@@ -4,6 +4,8 @@
 <section class="content">
   <div class="row">
     <div class="col-3">
+
+
       <form method="POST" action="">
         <select class="form-select form-select-sm" aria-label=".form-select-sm"
           onChange="document.location.href=this.options[this.selectedIndex].value;">
@@ -28,10 +30,24 @@
     <div class="col">
       <div class="bd-intro pt-md-3 pl-lg-4">
         <h1 class="bd-title" id="content"><?= $title; ?></h1>
-        <p class="bd-lead">An overview of the founding team and core contributors to Bootstrap.</p>
+        <p class="bd-lead">Percobaan.</p>
 
       </div>
+      <div>
+        <h1>
+          <?=
+            $count . '<br>',
+            $flat . '<br>',
+            $versi . '<br>',
+            $getLastQuery . '<br>'
 
+
+
+
+
+          ?>
+        </h1>
+      </div>
 
 
       <main class="bd-content order-1 pl-lg-4">

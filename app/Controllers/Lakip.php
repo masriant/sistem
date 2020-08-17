@@ -120,7 +120,7 @@ class Lakip extends BaseController
     $counter = $this->lakipModel->kodeUser();
     $urutan = (int) substr($counter, 3, 3);
     $urutan++;
-    $huruf = "LKP";
+    $huruf = "USR-";
     $autourut = $huruf . sprintf("%03s", $urutan);
 
     $data = [
@@ -133,6 +133,167 @@ class Lakip extends BaseController
     ];
     return view('home/create_user', $data);
   }
+  //--------------------------------------------------------------------
+  public function save()
+  {
+    // validasi input 
+    if (!$this->validate([
+      'userid' => [
+        'rules' => 'required|is_unique[lakip.userid]',
+        'errors' => [
+          'required' => '{field} harus diisi.',
+          'is_unique' => '{field} sudah terdaftar.'
+        ]
+      ],
+      'nama' => [
+        'rules' => 'required|is_unique[lakip.nama]',
+        'errors' => [
+          'required' => '{field} harus diisi.',
+          'is_unique' => '{field} sudah terdaftar.'
+        ]
+      ],
+      'jabatan' => [
+        'rules' => 'required|is_unique[lakip.jabatan]',
+        'errors' => [
+          'required' => '{field} harus diisi.',
+          'is_unique' => '{field} sudah terdaftar.'
+        ]
+      ],
+      'instansi' => [
+        'rules' => 'required|is_unique[lakip.instansi]',
+        'errors' => [
+          'required' => '{field} harus diisi.',
+          'is_unique' => '{field} sudah terdaftar.'
+        ]
+      ],
+      'kabupaten' => [
+        'rules' => 'required|is_unique[lakip.kabupaten]',
+        'errors' => [
+          'required' => '{field} harus diisi.',
+          'is_unique' => '{field} sudah terdaftar.'
+        ]
+      ],
+      'tema' => [
+        'rules' => 'required|is_unique[lakip.tema]',
+        'errors' => [
+          'required' => '{field} harus diisi.',
+          'is_unique' => '{field} sudah terdaftar.'
+        ]
+      ],
+      'lokasi' => [
+        'rules' => 'required|is_unique[lakip.lokasi]',
+        'errors' => [
+          'required' => '{field} harus diisi.',
+          'is_unique' => '{field} sudah terdaftar.'
+        ]
+      ],
+      'hotel' => [
+        'rules' => 'required|is_unique[lakip.hotel]',
+        'errors' => [
+          'required' => '{field} harus diisi.',
+          'is_unique' => '{field} sudah terdaftar.'
+        ]
+      ],
+      'room' => [
+        'rules' => 'required|is_unique[lakip.room]',
+        'errors' => [
+          'required' => '{field} harus diisi.',
+          'is_unique' => '{field} sudah terdaftar.'
+        ]
+      ],
+      'checkin' => [
+        'rules' => 'required|is_unique[lakip.checkin]',
+        'errors' => [
+          'required' => '{field} harus diisi.',
+          'is_unique' => '{field} sudah terdaftar.'
+        ]
+      ],
+      'checkout' => [
+        'rules' => 'required|is_unique[lakip.checkout]',
+        'errors' => [
+          'required' => '{field} harus diisi.',
+          'is_unique' => '{field} sudah terdaftar.'
+        ]
+      ],
+      'kontribusi' => [
+        'rules' => 'required|is_unique[lakip.kontribusi]',
+        'errors' => [
+          'required' => '{field} harus diisi.',
+          'is_unique' => '{field} sudah terdaftar.'
+        ]
+      ],
+      'kodeqr' => [
+        'rules' => 'required|is_unique[lakip.kodeqr]',
+        'errors' => [
+          'required' => '{field} harus diisi.',
+          'is_unique' => '{field} sudah terdaftar.'
+        ]
+      ],
+      // 'kodeqr' => [
+      //   'rules' => 'max_size[kodeqr,1024]|is_image[kodeqr]|mime_in[kodeqr,image/jpg,image/jpeg,image/png]',
+      //   'errors' => [
+      //     'max_size' => 'Ukuran {field} terlalu besar.',
+      //     'is_image' => 'Yang anda pilih bukan gambar.',
+      //     'mime_in' => 'Yang anda pilih bukan gambar.'
+      //   ]
+      // ]
+    ])) {
+      // $validation = \Config\Services::validation();
+      // return redirect()->to('/lakip/create')->withInput()->with('validation', $validation);
+      return redirect()->to('/lakip/create')->withInput();
+    }
+
+    // ambil gambar
+    // $filekodeqr = $this->request->getFile('kodeqr');
+    // Apakah tidak ada gambar yang di upload
+    // if ($filekodeqr->getError() == 4) {
+    //   $namakodeqr = 'default.jpg';
+    // } else {
+    //   // Generate nama kodeqr random
+    //   $namakodeqr = $filekodeqr->getRandomName();
+    //   // pindahkan file ke folder img
+    //   $filekodeqr->move('images', $namakodeqr);
+    //   // ambil nama file
+    //   // $namakodeqr = $filekodeqr->getName();
+    // }
+
+
+    // $slug = url_title($this->request->getVar('nama'), '-', true);
+    $this->lakipModel->save([
+      'userid' => $this->request->getVar('userid'),
+      'nama' => $this->request->getVar('nama'),
+      // 'slug' => $slug,
+      'jabatan' => $this->request->getVar('jabatan'),
+      'instansi' => $this->request->getVar('instansi'),
+      'kabupaten' => $this->request->getVar('kabupaten'),
+      'tema' => $this->request->getVar('tema'),
+      'lokasi' => $this->request->getVar('lokasi'),
+      'hotel' => $this->request->getVar('hotel'),
+      'room' => $this->request->getVar('room'),
+      'checkin' => $this->request->getVar('checkin'),
+      'checkout' => $this->request->getVar('checkout'),
+      'kontribusi' => $this->request->getVar('kontribusi'),
+      'kodeqr' => $this->request->getVar('kodeqr'),
+      // 'kodeqr' => $namakodeqr
+    ]);
+
+    session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
+
+    return redirect()->to('/lakip');
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
   //--------------------------------------------------------------------
 
   public function about()

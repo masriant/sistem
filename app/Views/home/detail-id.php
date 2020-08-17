@@ -60,7 +60,7 @@
           <p class="card-text">Hotel : <?= $lakip['alamat']; ?></p>
           <p class="card-text">Jakarta, <?= date('d M Y') ?> - <?= date('d M Y') ?></p>
 
-          <a href="/lakip/datatables" class="btn btn-primary">Go Back</a>
+          <a href="/lakip/userid/<?= $lakip['id']; ?>" class="btn btn-primary">Go Back</a>
         </div>
         <div class="card-footer text-center text-muted">
           Updated at : <?= $lakip['updated_at']; ?>

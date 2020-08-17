@@ -19,7 +19,7 @@
         </li>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/lakip/data">Data</a>
+          <a class="nav-link" href="/lakip/datatables">Datatables</a>
         </li>
         </li>
         <li class="nav-item">
@@ -28,15 +28,14 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-expanded="false">
-            Dropdown
+            Admin Panel
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="/lakip/datatables">Datatables</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="/lakip/data">Data</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" href="/lakip/about">About</a></li>
           </ul>
         </li>
 

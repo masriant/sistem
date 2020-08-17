@@ -7,8 +7,7 @@
     <div class="col">
       <!-- <div class="text-center py-5 px-3"> -->
       <div class="text-center">
-        <h1><?= $message; ?></h1>
-        <p class="lead">HTML document.<br><?= $message; ?></p>
+        <p class="lead">Welcome to <br><?= $message; ?></p>
       </div>
     </div>
   </div>
@@ -58,7 +57,6 @@
               <th>No.</th>
               <th>Nama</th>
               <th>Alamat</th>
-              <th>Kode</th>
               <th>Opsi</th>
             </tr>
           </thead>
@@ -66,13 +64,16 @@
             <?php $i = 1 + (10 * ($currentPage - 1)); ?>
             <?php foreach ($lakip as $row) : ?>
             <tr>
-              <td><?= $i++; ?></td>
+              <td><?= $i++; ?>.</td>
               <td><?= $row['nama']; ?></td>
               <td><?= $row['alamat']; ?></td>
-              <td><?= $row['kodeqr']; ?></td>
               <td>
+                <a href="<?= base_url(); ?>/lakip/userid/<?= $row['id']; ?>" target="_blank"
+                  class="btn btn-sm btn-warning" role="button">Data User</a>
                 <a href="<?= base_url(); ?>/lakip/detail/<?= $row['id']; ?>" target="_blank"
-                  class="btn btn-sm btn-success" role="button">Detail</a>
+                  class="btn btn-sm btn-success" role="button">Sertifikat</a>
+                <a href="<?= base_url(); ?>/lakip/kwitansi/<?= $row['id']; ?>" target="_blank"
+                  class="btn btn-sm btn-danger" role="button">Kwitansi</a>
               </td>
             </tr>
             <?php endforeach; ?>

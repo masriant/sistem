@@ -45,7 +45,7 @@ class Lakip extends BaseController
       'lakip' => $lakip->paginate(10, 'id'),
       'pager' => $this->lakipModel->pager,
       'currentPage' => $currentPage,
-      'message' => 'Welcome to my Blog!'
+      'message' => 'Admin Panel!'
     ];
     return view('home/data', $data);
   }
@@ -54,11 +54,44 @@ class Lakip extends BaseController
   public function detail($id)
   {
     $data = [
-      'title' => 'Data',
+      'title' => 'Sertifikat',
       'lakip' => $this->lakipModel->find($id),
 
     ];
     return view('home/detail', $data);
+  }
+  //--------------------------------------------------------------------
+
+  public function datauser($id)
+  {
+    $data = [
+      'title' => 'Data User ID',
+      'lakip' => $this->lakipModel->find($id),
+
+    ];
+    return view('home/detail-id', $data);
+  }
+  //--------------------------------------------------------------------
+
+  public function kwitansi($id)
+  {
+    $data = [
+      'title' => 'Kwitansi',
+      'lakip' => $this->lakipModel->find($id),
+
+    ];
+    return view('home/kwitansi-user', $data);
+  }
+  //--------------------------------------------------------------------
+
+  public function userid($id)
+  {
+    $data = [
+      'title' => 'Data User',
+      'lakip' => $this->lakipModel->find($id),
+
+    ];
+    return view('home/detail-user', $data);
   }
   //--------------------------------------------------------------------
 

@@ -35,29 +35,12 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="<?= base_url(); ?>/lakip/about">About</a></li>
+            <li><a class="dropdown-item" href="<?= base_url(); ?>/project/data">Project</a></li>
           </ul>
         </li>
 
       </ul>
-      <form method="POST" action="">
-        <select class="form-select form-select-sm btn-outline-danger mr-2" aria-label=".form-select-sm"
-          onChange="document.location.href=this.options[this.selectedIndex].value;">
-          <option selected>Open select menu</option>
-          <option value="data">Data</option>
-          <option value="about">About</option>
-          <option value="datatables">Table</option>
-        </select>
-      </form>
-      <?php
 
-      if (isset($_GET["data"])) {
-        header("location:lakip/data");
-      } elseif (isset($_GET["datatables"])) {
-        header("location:lakip/datatables");
-      }
-
-      ?>
     </div>
     <!-- <form class="d-flex">
       <input class="form-control mr-2" type="search" id="myInput" placeholder="Search" aria-label="Search">
@@ -83,7 +66,7 @@
       <li>
         <hr class="dropdown-divider">
       </li>
-      <li><a class="dropdown-item" href="">All versions</a></li>
+      <li><a class="dropdown-item" href="/">All versions</a></li>
     </ul>
   </div>
   </div>

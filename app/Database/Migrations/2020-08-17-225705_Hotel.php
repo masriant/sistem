@@ -15,43 +15,35 @@ class Hotel extends Migration
 				'unsigned'       => true,
 				'auto_increment' => true,
 			],
-			'userid'       => [
-				'type'           => 'VARCHAR',
-				'constraint'     => '255',
-			],
-			'nama'       => [
-				'type'           => 'VARCHAR',
-				'constraint'     => '255',
-			],
-			'slug'       => [
-				'type'           => 'VARCHAR',
-				'constraint'     => '255',
-			],
-			'jabatan'       => [
-				'type'           => 'VARCHAR',
-				'constraint'     => '255',
-			],
-			'instansi'       => [
-				'type'           => 'VARCHAR',
-				'constraint'     => '255',
-			],
-			'kabupaten'       => [
-				'type'           => 'VARCHAR',
-				'constraint'     => '255',
-			],
-			'tema'       => [
-				'type'           => 'TEXT',
-				// 'constraint'     => '255',
-			],
-			'lokasi'       => [
-				'type'           => 'VARCHAR',
-				'constraint'     => '255',
-			],
 			'hotel'       => [
 				'type'           => 'VARCHAR',
 				'constraint'     => '255',
 			],
+			'alamat'       => [
+				'type'           => 'VARCHAR',
+				'constraint'     => '255',
+			],
+			'kota'       => [
+				'type'           => 'VARCHAR',
+				'constraint'     => '255',
+			],
+			'grup'       => [
+				'type'           => 'VARCHAR',
+				'constraint'     => '255',
+			],
 			'room'       => [
+				'type'           => 'VARCHAR',
+				'constraint'     => '255',
+			],
+			'marketing'       => [
+				'type'           => 'VARCHAR',
+				'constraint'     => '255',
+			],
+			'contact_marketing'       => [
+				'type'           => 'VARCHAR',
+				'constraint'     => '255',
+			],
+			'status_marketing'       => [
 				'type'           => 'VARCHAR',
 				'constraint'     => '255',
 			],
@@ -63,11 +55,31 @@ class Hotel extends Migration
 				'type'           => 'VARCHAR',
 				'constraint'     => '255',
 			],
-			'kontribusi'       => [
+			'bed_single'       => [
 				'type'           => 'VARCHAR',
 				'constraint'     => '255',
 			],
-			'kodeqr'       => [
+			'bed_double'       => [
+				'type'           => 'VARCHAR',
+				'constraint'     => '255',
+			],
+			'bed_twin'       => [
+				'type'           => 'VARCHAR',
+				'constraint'     => '255',
+			],
+			'meeting_halfday'       => [
+				'type'           => 'VARCHAR',
+				'constraint'     => '255',
+			],
+			'meeting_fullday'       => [
+				'type'           => 'VARCHAR',
+				'constraint'     => '255',
+			],
+			'meeting_fullboard'       => [
+				'type'           => 'VARCHAR',
+				'constraint'     => '255',
+			],
+			'compliment'       => [
 				'type'           => 'VARCHAR',
 				'constraint'     => '255',
 			],
@@ -93,7 +105,7 @@ class Hotel extends Migration
 
 	public function down()
 	{
-		// $this->forge->dropTable('db_hotel', TRUE);
+		$this->forge->dropTable('db_hotel', TRUE);
 	}
 }
 

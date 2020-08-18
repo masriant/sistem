@@ -16,9 +16,9 @@
       <?php
 
       if (isset($_GET["data"])) {
-        header("location:lakip/data");
-      } elseif (isset($_GET["datatables"])) {
-        header("location:lakip/datatables");
+        header("location:project");
+      } elseif (isset($_GET["create"])) {
+        header("location:project");
       }
 
       ?>

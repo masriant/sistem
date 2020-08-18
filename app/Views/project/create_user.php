@@ -7,18 +7,18 @@
   <div class="row">
     <div class="col-6">
       <div class="card-body">
-        <form class="row g-3" action="/lakip/save" method="post" enctype="multipart/form-data">
+        <form class="row g-3" action="/project/save" method="post" enctype="multipart/form-data">
           <!-- <form class="form-horizontal" action="/lakip/save" method="post" enctype="multipart/form-data"> -->
           <?= csrf_field(); ?>
           <!-- <div class="row g-3"> -->
           <div class="mb-3 row">
-            <label for="userid" class="col-md-3 col-form-label">User ID</label>
+            <label for="userid" class="col-sm-3 col-form-label">User ID</label>
             <div class="col-md-8">
               <input type="text" class="form-control" id="userid" value="<?= $kode; ?>" readonly>
             </div>
           </div>
           <div class="mb-3 row">
-            <label for="nama" class="col-md-3 col-form-label">Nama</label>
+            <label for="nama" class="col-sm-3 col-form-label">Nama</label>
             <div class="col-md-8">
               <input type="text" class="form-control <?= ($validation->hasError('nama')) ? 'is-invalid' : ''; ?>"
                 id="nama" name="nama" value="<?= old('nama'); ?>">
@@ -28,7 +28,7 @@
             </div>
           </div>
           <div class=" mb-3 row">
-            <label for="jabatan" class="col-md-3 col-form-label">Jabatan</label>
+            <label for="jabatan" class="col-sm-3 col-form-label">Jabatan</label>
             <div class="col-md-8">
               <input type="text" class="form-control <?= ($validation->hasError('jabatan')) ? 'is-invalid' : ''; ?>"
                 id="jabatan" name="jabatan" value="<?= old('jabatan'); ?>">
@@ -38,7 +38,7 @@
             </div>
           </div>
           <div class="mb-3 row">
-            <label for="instansi" class="col-md-3 col-form-label">Instansi</label>
+            <label for="instansi" class="col-sm-3 col-form-label">Instansi</label>
             <div class="col-md-8">
               <input type="text" class="form-control <?= ($validation->hasError('instansi')) ? 'is-invalid' : ''; ?>"
                 id="instansi" name="instansi" value="<?= old('instansi'); ?>">
@@ -48,7 +48,7 @@
             </div>
           </div>
           <div class="mb-3 row">
-            <label for="kabupaten" class="col-md-3 col-form-label">Kabupaten</label>
+            <label for="kabupaten" class="col-sm-3 col-form-label">Kabupaten</label>
             <div class="col-md-8">
               <input type="text" class="form-control <?= ($validation->hasError('kabupaten')) ? 'is-invalid' : ''; ?>"
                 id="kabupaten" name="kabupaten" value="<?= old('kabupaten'); ?>">
@@ -58,17 +58,28 @@
             </div>
           </div>
           <div class="mb-3 row">
-            <label for="tema" class="col-md-3 col-form-label">Tema</label>
+            <label for="tema" class="col-sm-3 col-form-label">Tema</label>
             <div class="col-md-8">
-              <textarea class="form-control <?= ($validation->hasError('tema')) ? 'is-invalid' : ''; ?>" id="tema"
-                name="tema" value="<?= old('tema'); ?>" aria-label="With textarea"></textarea>
+              <?php
+
+              ?>
+              <select class="form-select form-select-sm <?= ($validation->hasError('tema')) ? 'is-invalid' : ''; ?>"
+                id="tema" name="tema">
+                <option selected>Open this select tema</option>
+                <option value="<?= old('tema'); ?>"><?= old('tema'); ?></option>
+              </select>
               <div class="invalid-feedback">
                 <?= $validation->getError('tema'); ?>
               </div>
             </div>
           </div>
+          <?php
+          if (isset($_POST['tema'])) {
+            echo $_POST['tema'];
+          }
+          ?>
           <div class="mb-3 row">
-            <label for="lokasi" class="col-md-3 col-form-label">Lokasi</label>
+            <label for="lokasi" class="col-sm-3 col-form-label">Lokasi</label>
             <div class="col-md-8">
               <input type="text" class="form-control <?= ($validation->hasError('lokasi')) ? 'is-invalid' : ''; ?>"
                 id="lokasi" name="lokasi" value="<?= old('lokasi'); ?>">
@@ -78,7 +89,7 @@
             </div>
           </div>
           <div class="mb-3 row">
-            <label for="hotel" class="col-md-3 col-form-label">Hotel</label>
+            <label for="hotel" class="col-sm-3 col-form-label">Hotel</label>
             <div class="col-md-8">
               <input type="text" class="form-control <?= ($validation->hasError('hotel')) ? 'is-invalid' : ''; ?>"
                 id="hotel" name="hotel" value="<?= old('hotel'); ?>">
@@ -88,7 +99,7 @@
             </div>
           </div>
           <div class="mb-3 row">
-            <label for="room" class="col-md-3 col-form-label">Room</label>
+            <label for="room" class="col-sm-3 col-form-label">Room</label>
             <div class="col-md-8">
               <input type="text" class="form-control <?= ($validation->hasError('room')) ? 'is-invalid' : ''; ?>"
                 id="room" name="room" value="<?= old('room'); ?>">
@@ -98,7 +109,7 @@
             </div>
           </div>
           <div class="mb-3 row">
-            <label for="checkin" class="col-md-3 col-form-label">Check-In</label>
+            <label for="checkin" class="col-sm-3 col-form-label">Check-In</label>
             <div class="col-md-8">
               <input type="date" class="form-control <?= ($validation->hasError('checkin')) ? 'is-invalid' : ''; ?>"
                 id="checkin" name="checkin" value="<?= old('checkin'); ?>">
@@ -108,7 +119,7 @@
             </div>
           </div>
           <div class="mb-3 row">
-            <label for="checkout" class="col-md-3 col-form-label">Check-Out</label>
+            <label for="checkout" class="col-sm-3 col-form-label">Check-Out</label>
             <div class="col-md-8">
               <input type="date" class="form-control <?= ($validation->hasError('checkout')) ? 'is-invalid' : ''; ?>"
                 id="checkout" name="checkout" value="<?= old('checkout'); ?>">
@@ -118,7 +129,7 @@
             </div>
           </div>
           <div class="mb-3 row">
-            <label for="kontribusi" class="col-md-3 col-form-label">Kontribusi</label>
+            <label for="kontribusi" class="col-sm-3 col-form-label">Kontribusi</label>
             <div class="col-md-8">
               <input type="text" class="form-control <?= ($validation->hasError('kontribusi')) ? 'is-invalid' : ''; ?>"
                 id="kontribusi" name="kontribusi" value="<?= old('kontribusi'); ?>">

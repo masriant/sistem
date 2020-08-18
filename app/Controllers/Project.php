@@ -3,16 +3,17 @@
 namespace App\Controllers;
 
 use Mpdf\Mpdf;
-use App\Models\LakipModel;
+use App\Models\ProjectModel;
+// use App\Models\projectModel;
 // use PhpOffice\PhpSpreadsheet\Spreadsheet;
 // use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-class Lakip extends BaseController
+class Project extends BaseController
 {
-  // protected $lakipModel;
+  // protected $projectModel;
   public function __construct()
   {
-    $this->lakipModel = new LakipModel();
+    $this->projectModel = new ProjectModel();
     $this->Mpdf = new Mpdf;
   }
   //--------------------------------------------------------------------
@@ -21,7 +22,7 @@ class Lakip extends BaseController
   {
 
     $data = [
-      'title' => 'Home',
+      'title' => 'Project',
       'message' => 'Welcome to my'
 
     ];
@@ -35,20 +36,20 @@ class Lakip extends BaseController
     $currentPage = $this->request->getVar('page_id') ? $this->request->getVar('page_id') : 1;
     $keyword = $this->request->getVar('keyword');
     if ($keyword) {
-      $lakip = $this->lakipModel->search($keyword);
+      $lakip = $this->projectModel->search($keyword);
     } else {
-      $lakip = $this->lakipModel;
+      $lakip = $this->projectModel;
     }
     $data = [
       'title' => 'Data',
-      'lakip' => $this->lakipModel->findAll(),
+      'lakip' => $this->projectModel->findAll(),
       'lakip' => $lakip->paginate(),
       'lakip' => $lakip->paginate(10, 'id'),
-      'pager' => $this->lakipModel->pager,
+      'pager' => $this->projectModel->pager,
       'currentPage' => $currentPage,
       'message' => 'Admin Panel!'
     ];
-    return view('home/data', $data);
+    return view('project/lakip_index', $data);
   }
   //--------------------------------------------------------------------
 
@@ -56,10 +57,10 @@ class Lakip extends BaseController
   {
     $data = [
       'title' => 'Sertifikat',
-      'lakip' => $this->lakipModel->find($id),
+      'lakip' => $this->projectModel->find($id),
 
     ];
-    return view('home/detail', $data);
+    return view('project/detail', $data);
   }
   //--------------------------------------------------------------------
 
@@ -67,17 +68,17 @@ class Lakip extends BaseController
   {
     $data = [
       'title' => 'Data User ID',
-      'lakip' => $this->lakipModel->find($id),
+      'lakip' => $this->projectModel->find($id),
 
     ];
-    return view('home/detail-id', $data);
+    return view('project/detail-id', $data);
   }
   //--------------------------------------------------------------------
 
   public function kwitansi($id)
   {
-    $lakip = $this->lakipModel->find($id);
-    $counter = $this->lakipModel->kodeUser();
+    $lakip = $this->projectModel->find($id);
+    $counter = $this->projectModel->kodeUser();
     $urutan = (int) substr($counter, 3, 3);
     $urutan++;
     $huruf = "LKP";
@@ -91,14 +92,14 @@ class Lakip extends BaseController
 
 
     ];
-    return view('home/kwitansi-user', $data);
+    return view('project/kwitansi-user', $data);
   }
   //--------------------------------------------------------------------
 
   public function userid($id)
   {
-    $lakip = $this->lakipModel->find($id);
-    $counter = $this->lakipModel->kodeUser();
+    $lakip = $this->projectModel->find($id);
+    $counter = $this->projectModel->kodeUser();
     $urutan = (int) substr($counter, 3, 3);
     $urutan++;
     $huruf = "LKP";
@@ -111,14 +112,16 @@ class Lakip extends BaseController
 
 
     ];
-    return view('home/detail-user', $data);
+    return view('project/detail-user', $data);
   }
   //--------------------------------------------------------------------
 
   public function create()
   {
-    $lakip = $this->lakipModel->findAll();
-    $counter = $this->lakipModel->kodeUser();
+
+    $tema = $this->projectModel->listTema();
+    // $lakip = $this->projectModel->findAll();
+    $counter = $this->projectModel->kodeUser();
     $urutan = (int) substr($counter, 3, 3);
     $urutan++;
     $huruf = "USR-";
@@ -127,12 +130,13 @@ class Lakip extends BaseController
     $data = [
       'title' => 'Tambah User',
       'validation' => \Config\Services::validation(),
-      'lakip' => $lakip,
+      'tema' => $tema,
+      // 'lakip' => $lakip,
       'kode' => $autourut,
 
 
     ];
-    return view('home/create_user', $data);
+    return view('project/create_user', $data);
   }
   //--------------------------------------------------------------------
   public function save()
@@ -140,91 +144,91 @@ class Lakip extends BaseController
     // validasi input 
     if (!$this->validate([
       'userid' => [
-        'rules' => 'required|is_unique[lakip.userid]',
+        'rules' => 'required|is_unique[db_project.userid]',
         'errors' => [
           'required' => '{field} harus diisi.',
           'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'nama' => [
-        'rules' => 'required|is_unique[lakip.nama]',
+        'rules' => 'required|is_unique[db_project.nama]',
         'errors' => [
           'required' => '{field} harus diisi.',
           'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'jabatan' => [
-        'rules' => 'required|is_unique[lakip.jabatan]',
+        'rules' => 'required|is_unique[db_project.jabatan]',
         'errors' => [
           'required' => '{field} harus diisi.',
           'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'instansi' => [
-        'rules' => 'required|is_unique[lakip.instansi]',
+        'rules' => 'required|is_unique[db_project.instansi]',
         'errors' => [
           'required' => '{field} harus diisi.',
           'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'kabupaten' => [
-        'rules' => 'required|is_unique[lakip.kabupaten]',
+        'rules' => 'required|is_unique[db_project.kabupaten]',
         'errors' => [
           'required' => '{field} harus diisi.',
           'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'tema' => [
-        'rules' => 'required|is_unique[lakip.tema]',
+        'rules' => 'required|is_unique[db_project.tema]',
         'errors' => [
           'required' => '{field} harus diisi.',
           'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'lokasi' => [
-        'rules' => 'required|is_unique[lakip.lokasi]',
+        'rules' => 'required|is_unique[db_project.lokasi]',
         'errors' => [
           'required' => '{field} harus diisi.',
           'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'hotel' => [
-        'rules' => 'required|is_unique[lakip.hotel]',
+        'rules' => 'required|is_unique[db_project.hotel]',
         'errors' => [
           'required' => '{field} harus diisi.',
           'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'room' => [
-        'rules' => 'required|is_unique[lakip.room]',
+        'rules' => 'required|is_unique[db_project.room]',
         'errors' => [
           'required' => '{field} harus diisi.',
           'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'checkin' => [
-        'rules' => 'required|is_unique[lakip.checkin]',
+        'rules' => 'required|is_unique[db_project.checkin]',
         'errors' => [
           'required' => '{field} harus diisi.',
           'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'checkout' => [
-        'rules' => 'required|is_unique[lakip.checkout]',
+        'rules' => 'required|is_unique[db_project.checkout]',
         'errors' => [
           'required' => '{field} harus diisi.',
           'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'kontribusi' => [
-        'rules' => 'required|is_unique[lakip.kontribusi]',
+        'rules' => 'required|is_unique[db_project.kontribusi]',
         'errors' => [
           'required' => '{field} harus diisi.',
           'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'kodeqr' => [
-        'rules' => 'required|is_unique[lakip.kodeqr]',
+        'rules' => 'required|is_unique[db_project.kodeqr]',
         'errors' => [
           'required' => '{field} harus diisi.',
           'is_unique' => '{field} sudah terdaftar.'
@@ -241,26 +245,26 @@ class Lakip extends BaseController
     ])) {
       // $validation = \Config\Services::validation();
       // return redirect()->to('/lakip/create')->withInput()->with('validation', $validation);
-      return redirect()->to('/lakip/create')->withInput();
+      return redirect()->to('/project/create')->withInput();
     }
 
     // ambil gambar<===
     $filekodeqr = $this->request->getFile('kodeqr');
     // Apakah tidak ada gambar yang di upload
     if ($filekodeqr->getError() == 4) {
-      $namakodeqr = 'default.jpg';
+      $namakodeqr = 'default.png';
     } else {
       // Generate nama kodeqr random<===
       $namakodeqr = $filekodeqr->getRandomName();
       // pindahkan file ke folder img<===
-      $filekodeqr->move('images', $namakodeqr);
+      $filekodeqr->move('assets/images', $namakodeqr);
       // ambil nama file<===
       // $namakodeqr = $filekodeqr->getName(); <====
     }
 
 
     $slug = url_title($this->request->getVar('nama'), '-', true);
-    $this->lakipModel->save([
+    $this->projectModel->save([
       'userid' => $this->request->getVar('userid'),
       'nama' => $this->request->getVar('nama'),
       'slug' => $slug,
@@ -280,7 +284,7 @@ class Lakip extends BaseController
 
     session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
 
-    return redirect()->to('/lakip');
+    return redirect()->to('/project');
   }
 
 
@@ -302,22 +306,22 @@ class Lakip extends BaseController
     // $currentPage = $this->request->getVar('page_id') ? $this->request->getVar('page_id') : 1;
     // $keyword = $this->request->getVar('keyword');
     // if ($keyword) {
-    //   $lakip = $this->lakipModel->search($keyword);
+    //   $lakip = $this->projectModel->search($keyword);
     // } else {
-    //   $lakip = $this->lakipModel;
+    //   $lakip = $this->projectModel;
     // }
     $data = [
       'title' => 'About',
-      'lakip' => $this->lakipModel->findAll(),
-      'count' => $this->lakipModel->countAll(),
-      'flat' => $this->lakipModel->getPlatform(),
-      'versi' => $this->lakipModel->getVersion(),
-      'getLastQuery' => $this->lakipModel->getLastQuery(),
+      'lakip' => $this->projectModel->findAll(),
+      'count' => $this->projectModel->countAll(),
+      'flat' => $this->projectModel->getPlatform(),
+      'versi' => $this->projectModel->getVersion(),
+      'getLastQuery' => $this->projectModel->getLastQuery(),
 
 
 
       // 'lakip' => $lakip->paginate(10, 'id'),
-      // 'pager' => $this->lakipModel->pager,
+      // 'pager' => $this->projectModel->pager,
       // 'currentPage' => $currentPage,
 
     ];
@@ -328,8 +332,8 @@ class Lakip extends BaseController
   public function datatables()
   {
     $data = [
-      'title' => 'Datatables',
-      'lakip' => $this->lakipModel->findAll(),
+      'title' => 'About',
+      'lakip' => $this->projectModel->findAll(),
     ];
     return view('home/datatables', $data);
   }
@@ -337,7 +341,7 @@ class Lakip extends BaseController
 
   public function pdf()
   {
-    $lakip = $this->lakipModel->findAll();
+    $lakip = $this->projectModel->findAll();
     $this->Mpdf = new Mpdf;
     $data = [
       'title' => 'PDF',
@@ -349,7 +353,7 @@ class Lakip extends BaseController
 
   public function invoice()
   {
-    $lakip = $this->lakipModel->findAll();
+    $lakip = $this->projectModel->findAll();
     $this->Mpdf = new Mpdf;
     $data = [
       'title' => 'PDF',
@@ -361,7 +365,7 @@ class Lakip extends BaseController
 
   public function getpdf()
   {
-    $lakip = $this->lakipModel->findAll();
+    $lakip = $this->projectModel->findAll();
     // $this->Mpdf = new Mpdf;
     // $data = [
     //   'lakip' => $lakip,

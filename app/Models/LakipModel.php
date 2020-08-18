@@ -7,8 +7,11 @@ use CodeIgniter\Model;
 class LakipModel extends Model
 {
   protected $table = 'lakip';
+  // protected $table = ['lakip', 'db_project'];
+
   protected $useTimestamps = true;
   protected $allowedFields = ['nama', 'alamat', 'kodeqr'];
+  // protected $allowedFields = ['nama', 'alamat', 'kodeqr', 'userid', 'nama', 'slug', 'jabatan', 'instansi', 'kabupaten', 'tema', 'lokasi', 'hotel', 'room', 'checkin', 'checkout', 'kontribusi', 'kodeqr'];
 
   protected $primaryKey = 'id';
 

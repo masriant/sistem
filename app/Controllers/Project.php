@@ -20,13 +20,22 @@ class Project extends BaseController
 
   public function index()
   {
+    $counter = $this->projectModel->kodeUser();
+    $urutan = (int) substr($counter, 3, 3);
+    $urutan++;
+    $huruf = "USR-";
+    $autourut = $huruf . sprintf("%03s", $urutan);
 
     $data = [
-      'title' => 'Project',
-      'message' => 'Welcome to my'
+      'title' => 'Tambah User',
+      'validation' => \Config\Services::validation(),
+      // 'tema' => $tema,
+      // 'lakip' => $lakip,
+      'kode' => $autourut,
+
 
     ];
-    return view('default', $data);
+    return view('project/index', $data);
   }
 
   //--------------------------------------------------------------------
@@ -42,7 +51,7 @@ class Project extends BaseController
     }
     $data = [
       'title' => 'Data',
-      'lakip' => $this->projectModel->findAll(),
+      'lakip' => $this->projectModel->getAll(),
       'lakip' => $lakip->paginate(),
       'lakip' => $lakip->paginate(10, 'id'),
       'pager' => $this->projectModel->pager,
@@ -119,7 +128,7 @@ class Project extends BaseController
   public function create()
   {
 
-    $tema = $this->projectModel->listTema();
+    // $tema = $this->projectModel->listTema();
     // $lakip = $this->projectModel->findAll();
     $counter = $this->projectModel->kodeUser();
     $urutan = (int) substr($counter, 3, 3);
@@ -130,7 +139,7 @@ class Project extends BaseController
     $data = [
       'title' => 'Tambah User',
       'validation' => \Config\Services::validation(),
-      'tema' => $tema,
+      // 'tema' => $tema,
       // 'lakip' => $lakip,
       'kode' => $autourut,
 

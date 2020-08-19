@@ -6,7 +6,8 @@ use CodeIgniter\Model;
 
 class ProjectModel extends Model
 {
-  protected $table = ['db_project', 'db_hotel', 'db_instansi', 'db_kwitansi', 'db_register', 'db_sertifikat', 'db_content', 'db_tema'];
+  protected $table = ['db_project'];
+  // protected $table = ['db_project', 'db_hotel', 'db_instansi', 'db_kwitansi', 'db_register', 'db_sertifikat', 'db_content', 'db_tema'];
 
   protected $useTimestamps = true;
   protected $allowedFields = ['userid', 'nama', 'slug', 'jabatan', 'instansi', 'kabupaten', 'tema', 'lokasi', 'hotel', 'room', 'checkin', 'checkout', 'kontribusi', 'kodeqr'];
@@ -53,8 +54,8 @@ class ProjectModel extends Model
   {
     return $this->table('db_project')->count();
   }
-  public function listTema()
-  {
-    return $this->table('db_tema')->findAll();
-  }
+  // public function getAll()
+  // {
+  //   return $this->db->get->table($this->table, ["db_tema"])->result();
+  // }
 }

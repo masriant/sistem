@@ -1,3 +1,37 @@
+// previewImg
+function previewImg() {
+
+  const sampul = document.querySelector('#sampul');
+  const sampulLabel = document.querySelector('.custom-file-label');
+  const imgPreview = document.querySelector('.img-preview');
+
+  sampulLabel.textContent = sampul.files[0].name;
+
+  const fileSampul = new FileReader();
+  fileSampul.readAsDataURL(sampul.files[0]);
+
+  fileSampul.onload = function (e) {
+    imgPreview.src = e.target.result;
+  }
+}
+
+// previewImg
+function previewImg() {
+
+  const kodeqr = document.querySelector('#kodeqr');
+  const kodeqrLabel = document.querySelector('.custom-file-label');
+  const imgPreview = document.querySelector('.img-preview');
+
+  kodeqrLabel.textContent = kodeqr.files[0].name;
+
+  const fileKodeqr = new FileReader();
+  fileKodeqr.readAsDataURL(kodeqr.files[0]);
+
+  fileKodeqr.onload = function (e) {
+    imgPreview.src = e.target.result;
+  }
+}
+
 function myFunction() {
   var input, filter, ul, li, a, i, txtValue;
   input = document.getElementById("myInput");

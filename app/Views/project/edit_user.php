@@ -11,19 +11,11 @@
           <!-- <form class="form-horizontal" action="/lakip/save" method="post" enctype="multipart/form-data"> -->
           <?= csrf_field(); ?>
           <!-- <div class="row g-3"> -->
-          <?php
-          //     <//?= $this->include('admin/_partials/navbar') ?//>
-
-          $bulan = date('n');
-          $tahun = date('Y');
-          $nomor = "/SPD/" . $bulan . "/" . $tahun;
-          ?>
           <div class="mb-3 row">
             <div class="mb-3 row">
               <label for="userid" class="col-sm-3 col-form-label"><?= $kode; ?></label>
               <div class="col-md-8">
-                <input type="text" class="form-control <?= ($validation->hasError('kodeqr')) ? 'is-invalid' : ''; ?>"
-                  name="userid" id="userid" value="<?= $kode; ?>" readonly>
+                <input type="text" class="form-control <?= ($validation->hasError('kodeqr')) ? 'is-invalid' : ''; ?>" name="userid" id="userid" value="<?= $kode; ?>" readonly>
                 <div class="invalid-feedback">
                   <?= $validation->getError('userid'); ?>
                 </div>
@@ -32,8 +24,7 @@
             <div class="mb-3 row">
               <label for="nama" class="col-sm-3 col-form-label">Nama</label>
               <div class="col-md-8">
-                <input type="text" class="form-control <?= ($validation->hasError('nama')) ? 'is-invalid' : ''; ?>"
-                  id="nama" name="nama" value="<?= old('nama'); ?>">
+                <input type="text" class="form-control <?= ($validation->hasError('nama')) ? 'is-invalid' : ''; ?>" id="nama" name="nama" value="<?= old('nama'); ?>">
                 <div class="invalid-feedback">
                   <?= $validation->getError('nama'); ?>
                 </div>
@@ -42,8 +33,7 @@
             <div class=" mb-3 row">
               <label for="jabatan" class="col-sm-3 col-form-label">Jabatan</label>
               <div class="col-md-8">
-                <input type="text" class="form-control <?= ($validation->hasError('jabatan')) ? 'is-invalid' : ''; ?>"
-                  id="jabatan" name="jabatan" value="<?= old('jabatan'); ?>">
+                <input type="text" class="form-control <?= ($validation->hasError('jabatan')) ? 'is-invalid' : ''; ?>" id="jabatan" name="jabatan" value="<?= old('jabatan'); ?>">
                 <div class="invalid-feedback">
                   <?= $validation->getError('jabatan'); ?>
                 </div>
@@ -52,8 +42,7 @@
             <div class="mb-3 row">
               <label for="instansi" class="col-sm-3 col-form-label">Instansi</label>
               <div class="col-md-8">
-                <input type="text" class="form-control <?= ($validation->hasError('instansi')) ? 'is-invalid' : ''; ?>"
-                  id="instansi" name="instansi" value="<?= old('instansi'); ?>">
+                <input type="text" class="form-control <?= ($validation->hasError('instansi')) ? 'is-invalid' : ''; ?>" id="instansi" name="instansi" value="<?= old('instansi'); ?>">
                 <div class="invalid-feedback">
                   <?= $validation->getError('instansi'); ?>
                 </div>
@@ -62,8 +51,7 @@
             <div class="mb-3 row">
               <label for="kabupaten" class="col-sm-3 col-form-label">Kabupaten</label>
               <div class="col-md-8">
-                <input type="text" class="form-control <?= ($validation->hasError('kabupaten')) ? 'is-invalid' : ''; ?>"
-                  id="kabupaten" name="kabupaten" value="<?= old('kabupaten'); ?>">
+                <input type="text" class="form-control <?= ($validation->hasError('kabupaten')) ? 'is-invalid' : ''; ?>" id="kabupaten" name="kabupaten" value="<?= old('kabupaten'); ?>">
                 <div class="invalid-feedback">
                   <?= $validation->getError('kabupaten'); ?>
                 </div>
@@ -73,8 +61,7 @@
             <div class="mb-3 row">
               <label for="tema" class="col-sm-3 col-form-label">Tema</label>
               <div class="col-md-8">
-                <input type="text" class="form-control <?= ($validation->hasError('tema')) ? 'is-invalid' : ''; ?>"
-                  id="tema" name="tema" value="<?= old('tema'); ?>">
+                <input type="text" class="form-control <?= ($validation->hasError('tema')) ? 'is-invalid' : ''; ?>" id="tema" name="tema" value="<?= old('tema'); ?>">
                 <div class="invalid-feedback">
                   <?= $validation->getError('tema'); ?>
                 </div>
@@ -106,8 +93,7 @@
             <div class="mb-3 row">
               <label for="lokasi" class="col-sm-3 col-form-label">Lokasi</label>
               <div class="col-md-8">
-                <input type="text" class="form-control <?= ($validation->hasError('lokasi')) ? 'is-invalid' : ''; ?>"
-                  id="lokasi" name="lokasi" value="<?= old('lokasi'); ?>">
+                <input type="text" class="form-control <?= ($validation->hasError('lokasi')) ? 'is-invalid' : ''; ?>" id="lokasi" name="lokasi" value="<?= old('lokasi'); ?>">
                 <div class="invalid-feedback">
                   <?= $validation->getError('lokasi'); ?>
                 </div>
@@ -116,8 +102,7 @@
             <div class="mb-3 row">
               <label for="hotel" class="col-sm-3 col-form-label">Hotel</label>
               <div class="col-md-8">
-                <input type="text" class="form-control <?= ($validation->hasError('hotel')) ? 'is-invalid' : ''; ?>"
-                  id="hotel" name="hotel" value="<?= old('hotel'); ?>">
+                <input type="text" class="form-control <?= ($validation->hasError('hotel')) ? 'is-invalid' : ''; ?>" id="hotel" name="hotel" value="<?= old('hotel'); ?>">
                 <div class="invalid-feedback">
                   <?= $validation->getError('hotel'); ?>
                 </div>
@@ -126,8 +111,7 @@
             <div class="mb-3 row">
               <label for="room" class="col-sm-3 col-form-label">Room</label>
               <div class="col-md-8">
-                <input type="text" class="form-control <?= ($validation->hasError('room')) ? 'is-invalid' : ''; ?>"
-                  id="room" name="room" value="<?= old('room'); ?>">
+                <input type="text" class="form-control <?= ($validation->hasError('room')) ? 'is-invalid' : ''; ?>" id="room" name="room" value="<?= old('room'); ?>">
                 <div class="invalid-feedback">
                   <?= $validation->getError('room'); ?>
                 </div>
@@ -136,8 +120,7 @@
             <div class="mb-3 row">
               <label for="checkin" class="col-sm-3 col-form-label">Check-In</label>
               <div class="col-md-8">
-                <input type="date" class="form-control <?= ($validation->hasError('checkin')) ? 'is-invalid' : ''; ?>"
-                  id="checkin" name="checkin" value="<?= old('checkin'); ?>">
+                <input type="date" class="form-control <?= ($validation->hasError('checkin')) ? 'is-invalid' : ''; ?>" id="checkin" name="checkin" value="<?= old('checkin'); ?>">
                 <div class="invalid-feedback">
                   <?= $validation->getError('checkin'); ?>
                 </div>
@@ -146,8 +129,7 @@
             <div class="mb-3 row">
               <label for="checkout" class="col-sm-3 col-form-label">Check-Out</label>
               <div class="col-md-8">
-                <input type="date" class="form-control <?= ($validation->hasError('checkout')) ? 'is-invalid' : ''; ?>"
-                  id="checkout" name="checkout" value="<?= old('checkout'); ?>">
+                <input type="date" class="form-control <?= ($validation->hasError('checkout')) ? 'is-invalid' : ''; ?>" id="checkout" name="checkout" value="<?= old('checkout'); ?>">
                 <div class="invalid-feedback">
                   <?= $validation->getError('checkout'); ?>
                 </div>
@@ -156,9 +138,7 @@
             <div class="mb-3 row">
               <label for="kontribusi" class="col-sm-3 col-form-label">Kontribusi</label>
               <div class="col-md-8">
-                <input type="text"
-                  class="form-control <?= ($validation->hasError('kontribusi')) ? 'is-invalid' : ''; ?>" id="kontribusi"
-                  name="kontribusi" value="<?= old('kontribusi'); ?>">
+                <input type="text" class="form-control <?= ($validation->hasError('kontribusi')) ? 'is-invalid' : ''; ?>" id="kontribusi" name="kontribusi" value="<?= old('kontribusi'); ?>">
                 <div class="invalid-feedback">
                   <?= $validation->getError('kontribusi'); ?>
                 </div>
@@ -171,9 +151,7 @@
               </div>
               <div class="col-md-6">
                 <div class="custom-file">
-                  <input type="file"
-                    class="custom-file-input <?= ($validation->hasError('kodeqr')) ? 'is-invalid' : ''; ?>" id="kodeqr"
-                    name="kodeqr" onchange="previewImg()">
+                  <input type="file" class="custom-file-input <?= ($validation->hasError('kodeqr')) ? 'is-invalid' : ''; ?>" id="kodeqr" name="kodeqr" onchange="previewImg()">
                   <div class="invalid-feedback">
                     <?= $validation->getError('kodeqr'); ?>
                   </div>

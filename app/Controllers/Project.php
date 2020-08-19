@@ -160,87 +160,87 @@ class Project extends BaseController
         ]
       ],
       'nama' => [
-        'rules' => 'required|is_unique[db_project.nama]',
+        'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          'is_unique' => '{field} sudah terdaftar.'
+          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'jabatan' => [
-        'rules' => 'required|is_unique[db_project.jabatan]',
+        'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          'is_unique' => '{field} sudah terdaftar.'
+          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'instansi' => [
-        'rules' => 'required|is_unique[db_project.instansi]',
+        'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          'is_unique' => '{field} sudah terdaftar.'
+          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'kabupaten' => [
-        'rules' => 'required|is_unique[db_project.kabupaten]',
+        'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          'is_unique' => '{field} sudah terdaftar.'
+          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'tema' => [
-        'rules' => 'required|is_unique[db_project.tema]',
+        'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          'is_unique' => '{field} sudah terdaftar.'
+          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'lokasi' => [
-        'rules' => 'required|is_unique[db_project.lokasi]',
+        'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          'is_unique' => '{field} sudah terdaftar.'
+          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'hotel' => [
-        'rules' => 'required|is_unique[db_project.hotel]',
+        'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          'is_unique' => '{field} sudah terdaftar.'
+          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'room' => [
-        'rules' => 'required|is_unique[db_project.room]',
+        'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          'is_unique' => '{field} sudah terdaftar.'
+          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'checkin' => [
-        'rules' => 'required|is_unique[db_project.checkin]',
+        'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          'is_unique' => '{field} sudah terdaftar.'
+          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'checkout' => [
-        'rules' => 'required|is_unique[db_project.checkout]',
+        'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          'is_unique' => '{field} sudah terdaftar.'
+          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'kontribusi' => [
-        'rules' => 'required|is_unique[db_project.kontribusi]',
+        'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          'is_unique' => '{field} sudah terdaftar.'
+          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'kodeqr' => [
-        'rules' => 'required|is_unique[db_project.kodeqr]',
+        'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          'is_unique' => '{field} sudah terdaftar.'
+          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'kodeqr' => [

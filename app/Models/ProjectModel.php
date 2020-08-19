@@ -47,12 +47,13 @@ class ProjectModel extends Model
 
   public function kodeUser()
   {
+    // return $this->table('db_project')->countAll();
     return $this->table('db_project')->countAll();
   }
 
   public function noUrut()
   {
-    return $this->table('db_project')->count();
+    return $this->table('db_project')->countAll();
   }
   // public function getAll()
   // {

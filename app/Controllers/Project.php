@@ -198,6 +198,44 @@ class Project extends BaseController
     return view('project/add_user', $data);
   }
   //--------------------------------------------------------------------
+
+  public function editing($slug)
+  {
+    $data = [
+      'title' => 'Form Ubah Data',
+      'validation' => \Config\Services::validation(),
+      'project' => $this->projectModel->getProject($slug),
+    ];
+
+    return view('project/user_edit', $data);
+  }
+  //--------------------------------------------------------------------
+
+  public function edit($slug)
+  {
+    // $counter = $this->projectModel->kodeUser();
+    // $urutan = (int) substr($counter, 3, 3);
+    // $urutan++;
+    // $huruf = "USR-";
+    // $autourut = $huruf . sprintf("%03s", $urutan);
+
+    // $maxkode = $this->projectModel->noUrut();
+    // $noUrut = (int) substr($maxkode, 3, 3);
+    // $noUrut++;
+    // $char = "USR-";
+    // $newID = $char . sprintf("%03s", $noUrut);
+
+    $data = [
+      'title' => 'Tambah User',
+      'validation' => \Config\Services::validation(),
+      'project' => $this->projectModel->getProject($slug),
+      // 'kode' => $autourut,
+      // 'newID' => $newID,
+
+    ];
+    return view('project/edit_user', $data);
+  }
+  //--------------------------------------------------------------------
   public function save()
   {
     // validasi input 
@@ -302,9 +340,9 @@ class Project extends BaseController
         ]
       ]
     ])) {
-      $validation = \Config\Services::validation();
+      // $validation = \Config\Services::validation();
       // return redirect()->to('/lakip/create')->withInput()->with('validation', $validation);
-      return redirect()->to('/project/add')->withInput()->with('validation', $validation);
+      return redirect()->to('/project/add')->withInput();
     }
 
     // ambil gambar<===
@@ -449,9 +487,9 @@ class Project extends BaseController
         ]
       ]
     ])) {
-      $validation = \Config\Services::validation();
+      // $validation = \Config\Services::validation();
       // return redirect()->to('/lakip/create')->withInput()->with('validation', $validation);
-      return redirect()->to('/project/create')->withInput()->with('validation', $validation);
+      return redirect()->to('/project/create')->withInput();
     }
 
     // ambil gambar<===
@@ -490,7 +528,7 @@ class Project extends BaseController
 
     session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
 
-    return redirect()->to('/project');
+    return redirect()->to('/project/data');
   }
 
 

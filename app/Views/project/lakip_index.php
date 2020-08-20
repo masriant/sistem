@@ -8,6 +8,11 @@
       <!-- <div class="text-center py-5 px-3"> -->
       <div class="text-center">
         <p class="lead">Welcome to <br><?= $message; ?></p>
+        <p> <?php if (session()->getFlashdata('pesan')) : ?>
+          <div class="alert alert-success" role="alert">
+            <?= session()->getFlashdata('pesan'); ?>
+          </div>
+          <?php endif; ?></p>
       </div>
     </div>
   </div>
@@ -22,6 +27,7 @@
       }
 
       ?>
+
       <form method="POST" action="">
         <select class="form-select form-select-sm" aria-label=".form-select-sm"
           onChange="document.location.href=this.options[this.selectedIndex].value;">
@@ -59,6 +65,8 @@
               <th>No.</th>
               <th>Nama</th>
               <th>ID User</th>
+              <th>Asal</th>
+              <th>Tempat</th>
               <th>Opsi</th>
             </tr>
           </thead>
@@ -69,6 +77,8 @@
               <td><?= $i++; ?>.</td>
               <td><?= $row['nama']; ?></td>
               <td><?= $row['userid']; ?></td>
+              <td><?= $row['kabupaten']; ?></td>
+              <td><?= $row['hotel']; ?></td>
               <td>
                 <a href="<?= base_url(); ?>/project/userid/<?= $row['id']; ?>" target="_blank"
                   class="btn btn-sm btn-warning" role="button">Data User</a>

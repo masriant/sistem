@@ -5,7 +5,7 @@
 
 
   <div class="row">
-    <div class="col-6">
+    <div class="col-8">
       <div class="card-body">
         <form class="row g-3" action="/project/simpan" method="post" enctype="multipart/form-data">
           <!-- <form class="form-horizontal" action="/lakip/save" method="post" enctype="multipart/form-data"> -->
@@ -17,7 +17,7 @@
               <label for="userid" class="col-sm-3 col-form-label">ID USER</label>
               <div class="col-md-8">
                 <input type="text" class="form-control <?= ($validation->hasError('userid')) ? 'is-invalid' : ''; ?>"
-                  name="userid" id="userid" value="<?= $kode; ?>" readonly>
+                  name="userid" id="userid" value="<?= $kode; ?>">
                 <div class="invalid-feedback">
                   <?= $validation->getError('userid'); ?>
                 </div>
@@ -163,7 +163,7 @@
               <div class="col-sm-3">
                 <img src="/assets/brand/default.png" width="100" class="img-thumbnail img-preview">
               </div>
-              <div class="col-md-6">
+              <div class="col-md-5">
                 <div class="custom-file">
                   <input type="file"
                     class="custom-file-input <?= ($validation->hasError('kodeqr')) ? 'is-invalid' : ''; ?>" id="kodeqr"

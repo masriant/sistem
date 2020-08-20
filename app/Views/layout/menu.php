@@ -35,7 +35,8 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="<?= base_url(); ?>/project/data">Project</a></li>
+            <li><a class="dropdown-item" href="<?= base_url(); ?>/project">Project</a></li>
+            <li><a class="dropdown-item" href="<?= base_url(); ?>/project/data">Project Data</a></li>
           </ul>
         </li>
 

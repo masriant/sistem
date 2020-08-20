@@ -6,11 +6,12 @@
   <main class="container">
 
     <div class="row">
-      <form class="row g-3" action="/project/update" method="post" enctype="multipart/form-data">
+      <form class="row g-3" action="<?= base_url(); ?>/project/update/<?= $project['id']; ?>" method="post"
+        enctype="multipart/form-data">
         <!-- <form class="form-horizontal" action="/lakip/save" method="post" enctype="multipart/form-data"> -->
         <?= csrf_field(); ?>
         <input type="hidden" name="slug" value="<?= $project['slug']; ?>">
-        <input type="hidden" name="sampulLama" value="<?= $project['kodeqr']; ?>">
+        <input type="hidden" name="gambarLama" value="<?= $project['kodeqr']; ?>">
         <div class="col-sm">
           <div class="card">
             <div class="card-body">
@@ -158,7 +159,8 @@
               <div class="mb-3 row">
                 <label for="kodeqr" class="col-sm-3 col-form-label">Avatar</label>
                 <div class="col-sm-3">
-                  <img src="/assets/images/<?= $project['kodeqr']; ?>" width="100" class="img-thumbnail img-preview">
+                  <img src="<?= base_url(); ?>/assets/images/<?= $project['kodeqr']; ?>" width="100"
+                    class="img-thumbnail img-preview">
                 </div>
                 <div class="col-md-5">
                   <div class="custom-file">
@@ -177,7 +179,10 @@
                 <input class="form-check-input" type="checkbox" id="gridCheck" required>
                 <label class="form-check-label" for="gridCheck">
                   <!-- Check me out -->
-                </label><button type="submit" class="btn btn-sm btn-primary">Save</button>
+                </label><button type="submit" class="btn btn-sm btn-success"><i class="fas fa-save"></i> Save</button>
+                <a href="<?= base_url(); ?>/project/<?= $project['slug']; ?>" class="btn btn-sm btn-primary"><i
+                    class="fas fa-undo-alt"></i> Back User</a>
+
               </div>
             </div>
 

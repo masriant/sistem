@@ -50,30 +50,6 @@ class Project extends BaseController
   }
 
   //--------------------------------------------------------------------
-  public function detail($slug)
-  {
-    $data = [
-      'title' => 'Detail Project',
-      'project' => $this->projectModel->getProject($slug)
-    ];
-
-    // Jika data tidak ada ditabel
-    if (empty($data['project'])) {
-      throw new \CodeIgniter\Exceptions\PageNotFoundException('Data yang anda cari adalah :  '  . $slug .  ' dan tidak ada dalam database kami.');
-    }
-    return view('project/detail', $data);
-  }
-  //--------------------------------------------------------------------
-  public function search()
-  {
-    $data = [
-      'title' => 'Form search data',
-      'project' => $this->projectModel->getProject()
-    ];
-
-    return view('project/search', $data);
-  }
-  //--------------------------------------------------------------------
 
   public function data()
   {
@@ -111,7 +87,7 @@ class Project extends BaseController
   }
   //--------------------------------------------------------------------
 
-  public function detailid($id)
+  public function detail($id)
   {
     $data = [
       'title' => 'Sertifikat',
@@ -370,21 +346,21 @@ class Project extends BaseController
     }
 
     // ambil gambar<===
-    $fileGambar = $this->request->getFile('kodeqr');
+    $filekodeqr = $this->request->getFile('kodeqr');
     // Apakah tidak ada gambar yang di upload
-    if ($fileGambar->getError() == 4) {
+    if ($filekodeqr->getError() == 4) {
       $namakodeqr = 'default.png';
     } else {
       // Generate nama kodeqr random<===
-      $namakodeqr = $fileGambar->getRandomName();
+      $namakodeqr = $filekodeqr->getRandomName();
       // pindahkan file ke folder img<===
-      $fileGambar->move('assets/images', $namakodeqr);
+      $filekodeqr->move('assets/images', $namakodeqr);
       // ambil nama file<===
-      // $namakodeqr = $fileGambar->getName(); <====
+      // $namakodeqr = $filekodeqr->getName(); <====
     }
 
 
-    $slug = url_title($this->request->getVar('nama'), '-', true);
+    $slug = url_title($this->request->getVar('userid'), '-', true);
     $this->projectModel->save([
       'userid' => $this->request->getVar('userid'),
       'nama' => $this->request->getVar('nama'),
@@ -407,7 +383,6 @@ class Project extends BaseController
 
     return redirect()->to('/project');
   }
-  //--------------------------------------------------------------------
 
   public function simpan()
   {
@@ -421,7 +396,7 @@ class Project extends BaseController
         ]
       ],
       'nama' => [
-        'rules' => 'required|is_unique[db_project.nama]',
+        'rules' => 'required|is_unique[db_project.userid]',
         'errors' => [
           'required' => '{field} harus diisi.',
           'is_unique' => '{field} sudah terdaftar.'
@@ -519,21 +494,21 @@ class Project extends BaseController
     }
 
     // ambil gambar<===
-    $fileGambar = $this->request->getFile('kodeqr');
+    $filekodeqr = $this->request->getFile('kodeqr');
     // Apakah tidak ada gambar yang di upload
-    if ($fileGambar->getError() == 4) {
+    if ($filekodeqr->getError() == 4) {
       $namakodeqr = 'default.png';
     } else {
       // Generate nama kodeqr random<===
-      $namakodeqr = $fileGambar->getRandomName();
+      $namakodeqr = $filekodeqr->getRandomName();
       // pindahkan file ke folder img<===
-      $fileGambar->move('assets/images', $namakodeqr);
+      $filekodeqr->move('assets/images', $namakodeqr);
       // ambil nama file<===
-      // $namakodeqr = $fileGambar->getName(); <====
+      // $namakodeqr = $filekodeqr->getName(); <====
     }
 
 
-    $slug = url_title($this->request->getVar('nama'), '-', true);
+    $slug = url_title($this->request->getVar('userid'), '-', true);
     $this->projectModel->save([
       'userid' => $this->request->getVar('userid'),
       'nama' => $this->request->getVar('nama'),
@@ -558,26 +533,27 @@ class Project extends BaseController
   }
 
   //--------------------------------------------------------------------
-  public function update($id)
+  //--------------------------------------------------------------------
+  public function update()
   {
     // cek judul
     $projectLama = $this->projectModel->getProject($this->request->getVar('slug'));
-    if ($projectLama['nama'] == $this->request->getVar('nama')) {
-      $rule_nama = 'required';
+    if ($projectLama['userid'] == $this->request->getVar('userid')) {
+      $rule_userid = 'required';
     } else {
-      $rule_nama = 'required|is_unique[db_project.nama]';
+      $rule_userid = 'required|is_unique[project.userid]';
     }
     // validasi input 
     if (!$this->validate([
       'userid' => [
-        'rules' => 'required',
+        'rules' => $rule_userid,
         'errors' => [
           'required' => '{field} harus diisi.',
           'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'nama' => [
-        'rules' => $rule_nama,
+        'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
           // 'is_unique' => '{field} sudah terdaftar.'
@@ -653,13 +629,13 @@ class Project extends BaseController
           // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
-      // 'kodeqr' => [
-      //   'rules' => 'required',
-      //   'errors' => [
-      //     'required' => '{field} harus diisi.',
-      //     // 'is_unique' => '{field} sudah terdaftar.'
-      //   ]
-      // ],
+      'kodeqr' => [
+        'rules' => 'required',
+        'errors' => [
+          'required' => '{field} harus diisi.',
+          // 'is_unique' => '{field} sudah terdaftar.'
+        ]
+      ],
       'kodeqr' => [
         'rules' => 'max_size[kodeqr,1024]|is_image[kodeqr]|mime_in[kodeqr,image/jpg,image/jpeg,image/png]',
         'errors' => [
@@ -674,34 +650,18 @@ class Project extends BaseController
       return redirect()->to('/project/edit/' . $this->request->getVar('slug'))->withInput();
     }
 
-
-    //  ambil gambar
-    // $fileSampul = $this->request->getFile('sampul');
-    // // cek gambar apakah tetap pakai gambar lama
-    // if ($fileSampul->getError() == 4) {
-    //   $namaSampul = $this->request->getVar('sampulLama');
-    // } else {
-    //   // Generate nama sampul random
-    //   $namaSampul = $fileSampul->getRandomName();
-    //   // pindahkan file ke folder image
-    //   $fileSampul->move('images', $namaSampul);
-    //   // hapus file yang lama
-    //   unlink('images/' . $this->request->getVar('sampulLama'));
-    // }
-
-
     // ambil gambar
-    $fileGambar = $this->request->getFile('kodeqr');
+    $filekodeqr = $this->request->getFile('kodeqr');
     // cek gambar apakah tetap pakai gambar lama
-    if ($fileGambar->getError() == 4) {
+    if ($filekodeqr->getError() == 4) {
       $namaGambar = $this->request->getVar('gambarLama');
     } else {
       // Generate nama sampul random
-      $namaGambar = $fileGambar->getRandomName();
+      $namaGambar = $filekodeqr->getRandomName();
       // pindahkan file ke folder image
-      $fileGambar->move('assets/images', $namaGambar);
+      $filekodeqr->move('images', $namaGambar);
       // hapus file yang lama
-      // unlink('assets/images/' . $this->request->getVar('gambarLama'));
+      unlink('images/' . $this->request->getVar('gambarLama'));
     }
 
 
@@ -709,46 +669,43 @@ class Project extends BaseController
 
 
     // // ambil gambar<===
-    // $fileGambar = $this->request->getFile('kodeqr');
+    // $filekodeqr = $this->request->getFile('kodeqr');
     // // Apakah tidak ada gambar yang di upload
-    // if ($fileGambar->getError() == 4) {
+    // if ($filekodeqr->getError() == 4) {
     //   $namakodeqr = 'default.png';
     // } else {
     //   // Generate nama kodeqr random<===
-    //   $namakodeqr = $fileGambar->getRandomName();
+    //   $namakodeqr = $filekodeqr->getRandomName();
     //   // pindahkan file ke folder img<===
-    //   $fileGambar->move('assets/images', $namakodeqr);
+    //   $filekodeqr->move('assets/images', $namakodeqr);
     //   // ambil nama file<===
-    //   // $namakodeqr = $fileGambar->getName(); <====
+    //   // $namakodeqr = $filekodeqr->getName(); <====
     // }
 
 
     $slug = url_title($this->request->getVar('nama'), '-', true);
     $this->projectModel->save([
-      'id'          => $id,
-      'userid'      => $this->request->getVar('userid'),
-      'nama'        => $this->request->getVar('nama'),
-      'slug'        => $slug,
-      'jabatan'     => $this->request->getVar('jabatan'),
-      'instansi'    => $this->request->getVar('instansi'),
-      'kabupaten'   => $this->request->getVar('kabupaten'),
-      'tema'        => $this->request->getVar('tema'),
-      'lokasi'      => $this->request->getVar('lokasi'),
-      'hotel'       => $this->request->getVar('hotel'),
-      'room'        => $this->request->getVar('room'),
-      'checkin'     => $this->request->getVar('checkin'),
-      'checkout'    => $this->request->getVar('checkout'),
-      'kontribusi'  => $this->request->getVar('kontribusi'),
-      'kodeqr'      => $namaGambar,
-      'updated_at'  => $this->request->getVar('updated_at'),
+      'userid' => $this->request->getVar('userid'),
+      'nama' => $this->request->getVar('nama'),
+      'slug' => $slug,
+      'jabatan' => $this->request->getVar('jabatan'),
+      'instansi' => $this->request->getVar('instansi'),
+      'kabupaten' => $this->request->getVar('kabupaten'),
+      'tema' => $this->request->getVar('tema'),
+      'lokasi' => $this->request->getVar('lokasi'),
+      'hotel' => $this->request->getVar('hotel'),
+      'room' => $this->request->getVar('room'),
+      'checkin' => $this->request->getVar('checkin'),
+      'checkout' => $this->request->getVar('checkout'),
+      'kontribusi' => $this->request->getVar('kontribusi'),
+      'kodeqr' => $this->request->getVar('kodeqr'),
+      'kodeqr' => $namaGambar
     ]);
 
-    session()->setFlashdata('pesan', 'Data berhasil diupdate.');
+    session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
 
-    return redirect()->to('/project/<?= $project["id"]; ?>');
-}
-
-
+    return redirect()->to('/project');
+  }
 
 
 
@@ -759,133 +716,129 @@ class Project extends BaseController
 
 
 
-//--------------------------------------------------------------------
-
-public function about()
-{
-// $currentPage = $this->request->getVar('page_id') ? $this->request->getVar('page_id') : 1;
-// $keyword = $this->request->getVar('keyword');
-// if ($keyword) {
-// $lakip = $this->projectModel->search($keyword);
-// } else {
-// $lakip = $this->projectModel;
-// }
-$data = [
-'title' => 'About',
-'lakip' => $this->projectModel->findAll(),
-'count' => $this->projectModel->countAll(),
-'flat' => $this->projectModel->getPlatform(),
-'versi' => $this->projectModel->getVersion(),
-'getLastQuery' => $this->projectModel->getLastQuery(),
 
 
+  //--------------------------------------------------------------------
 
-// 'lakip' => $lakip->paginate(10, 'id'),
-// 'pager' => $this->projectModel->pager,
-// 'currentPage' => $currentPage,
+  public function about()
+  {
+    // $currentPage = $this->request->getVar('page_id') ? $this->request->getVar('page_id') : 1;
+    // $keyword = $this->request->getVar('keyword');
+    // if ($keyword) {
+    //   $lakip = $this->projectModel->search($keyword);
+    // } else {
+    //   $lakip = $this->projectModel;
+    // }
+    $data = [
+      'title' => 'About',
+      'lakip' => $this->projectModel->findAll(),
+      'count' => $this->projectModel->countAll(),
+      'flat' => $this->projectModel->getPlatform(),
+      'versi' => $this->projectModel->getVersion(),
+      'getLastQuery' => $this->projectModel->getLastQuery(),
 
-];
-return view('home/about', $data);
-}
-//--------------------------------------------------------------------
 
-public function datatables()
-{
-$data = [
-'title' => 'About',
-'lakip' => $this->projectModel->findAll(),
-];
-return view('home/datatables', $data);
-}
-//--------------------------------------------------------------------
 
-public function pdf()
-{
-$lakip = $this->projectModel->findAll();
-$this->Mpdf = new Mpdf;
-$data = [
-'title' => 'PDF',
-'lakip' => $lakip,
-];
-return view('home/makepdf', $data);
-}
-//--------------------------------------------------------------------
+      // 'lakip' => $lakip->paginate(10, 'id'),
+      // 'pager' => $this->projectModel->pager,
+      // 'currentPage' => $currentPage,
 
-public function invoice()
-{
-$lakip = $this->projectModel->findAll();
-$this->Mpdf = new Mpdf;
-$data = [
-'title' => 'PDF',
-'lakip' => $lakip,
-];
-return view('home/makepdf', $data);
-}
-//--------------------------------------------------------------------
+    ];
+    return view('home/about', $data);
+  }
+  //--------------------------------------------------------------------
 
-public function getpdf()
-{
-$lakip = $this->projectModel->findAll();
-// $this->Mpdf = new Mpdf;
-// $data = [
-// 'lakip' => $lakip,
-// ];
-$mpdf = new \Mpdf\Mpdf([
-'mode' => 'utf-8',
-'margin_top' => 30,
-'format' => 'A4', 'L'
-]);
+  public function datatables()
+  {
+    $data = [
+      'title' => 'About',
+      'lakip' => $this->projectModel->findAll(),
+    ];
+    return view('home/datatables', $data);
+  }
+  //--------------------------------------------------------------------
 
-$mpdf->SetHeader('<img src="assets/brand/lakip.jpeg" width="70" />|<p>LEMBAGA ADMINISTRASI KEUANGAN DAN ILMU
-  PEMERINTAHAN</p>
-<p>SKT DITJEN POLPUM KEMENDAGRI NOMOR : 001-00-00/034/I/2019</p>
-<p>Sekretariat : Jln. Serdang Baru Raya No. 4B, Kemayoran - Jakarta 10650</p>
-<p>Website : www.lakip.co.id E-mail : admin@lakip.co.id Telp./Fax. 021-42885718</p>
-|');
+  public function pdf()
+  {
+    $lakip = $this->projectModel->findAll();
+    $this->Mpdf = new Mpdf;
+    $data = [
+      'title' => 'PDF',
+      'lakip' => $lakip,
+    ];
+    return view('home/makepdf', $data);
+  }
+  //--------------------------------------------------------------------
 
-$tgl_cetak = date('d F Y H:i:s');
-$mpdf->SetFooter(base_url() . '|{PAGENO}|' . $tgl_cetak);
+  public function invoice()
+  {
+    $lakip = $this->projectModel->findAll();
+    $this->Mpdf = new Mpdf;
+    $data = [
+      'title' => 'PDF',
+      'lakip' => $lakip,
+    ];
+    return view('home/makepdf', $data);
+  }
+  //--------------------------------------------------------------------
 
-$html = '
-<!DOCTYPE html>
-<html lang="en">
+  public function getpdf()
+  {
+    $lakip = $this->projectModel->findAll();
+    // $this->Mpdf = new Mpdf;
+    // $data = [
+    //   'lakip' => $lakip,
+    // ];
+    $mpdf = new \Mpdf\Mpdf([
+      'mode' => 'utf-8',
+      'margin_top' => 30,
+      'format' => 'A4', 'L'
+    ]);
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="/css/mypdf.css" type="text/css" rel="stylesheet" media="mpdf" />
-  <title>PDF</title>
+    $mpdf->SetHeader('<img src="assets/brand/lakip.jpeg" width="70" />|<p>LEMBAGA ADMINISTRASI KEUANGAN DAN ILMU PEMERINTAHAN</p>
+    <p>SKT DITJEN POLPUM KEMENDAGRI NOMOR : 001-00-00/034/I/2019</p> 
+    <p>Sekretariat : Jln. Serdang Baru Raya No. 4B, Kemayoran - Jakarta 10650</p>
+    <p>Website : www.lakip.co.id E-mail : admin@lakip.co.id Telp./Fax. 021-42885718</p>
+    |');
+
+    $tgl_cetak = date('d F Y H:i:s');
+    $mpdf->SetFooter(base_url() . '|{PAGENO}|' . $tgl_cetak);
+
+    $html = '<!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/mypdf.css" type="text/css" rel="stylesheet" media="mpdf" />
+    <title>PDF</title>
 </head>
-
 <body>
-  <h3>List Peserta</h3>
-  <table class="table table-bordered table-hover">
-    <thead class="table-dark">
-      <tr>
-        <th scope="col">No</th>
-        <th scope="col">Nama</th>
-        <th scope="col">Alamat</th>
-        <th scope="col">Kode</th>
-      </tr>
-    </thead>';
+<h3>List Peserta</h3>
+<table class="table table-bordered table-hover">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">No</th>
+              <th scope="col">Nama</th>
+              <th scope="col">Alamat</th>
+              <th scope="col">Kode</th>
+            </tr>
+          </thead>';
     $i = 1;
     foreach ($lakip as $row) {
-    $html .= '<tr>
-      <td>' . $i++ . '</td>
-      <td>' . $row["nama"] . '</td>
-      <td>' . $row["alamat"] . '</td>
-      <td>' . $row["kodeqr"] . '</td>
-    </tr>';
+      $html  .= '<tr>
+               <td>' . $i++ . '</td>
+               <td>' . $row["nama"] . '</td>
+               <td>' . $row["alamat"] . '</td>
+               <td>' . $row["kodeqr"] . '</td>      
+               </tr>';
     }
-    $html .= '
-  </table>
+    $html .= '</table>
 </body>
-
 </html>';
 
 
-$mpdf->WriteHTML($html);
+    $mpdf->WriteHTML($html);
 
-return redirect()->to($mpdf->Output('filename.pdf', 'I'));
-}
+    return redirect()->to($mpdf->Output('filename.pdf', 'I'));
+  }
 }

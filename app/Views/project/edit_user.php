@@ -7,11 +7,13 @@
   <div class="row">
     <div class="col-9">
       <div class="card-body">
-        <form class="row g-3" action="/project/update" method="post" enctype="multipart/form-data">
+        <form class="row g-3" action="<?= base_url(); ?>/project/update/<?= $project['id']; ?>" method="post"
+          enctype="multipart/form-data">
           <!-- <form class="form-horizontal" action="/lakip/save" method="post" enctype="multipart/form-data"> -->
           <?= csrf_field(); ?>
+
           <input type="hidden" name="slug" value="<?= $project['slug']; ?>">
-          <input type="hidden" name="sampulLama" value="<?= $project['kodeqr']; ?>">
+          <input type="hidden" name="gambarLama" value="<?= $project['kodeqr']; ?>">
           <!-- <div class="row g-3"> -->
           <div class="mb-3 row">
             <div class="mb-3 row">
@@ -166,7 +168,8 @@
             <div class="mb-3 row">
               <label for="kodeqr" class="col-sm-3 col-form-label">Avatar</label>
               <div class="col-sm-3">
-                <img src="/assets/images/<?= $project['kodeqr']; ?>" width="100" class="img-thumbnail img-preview">
+                <img src="<?= base_url(); ?>/assets/images/<?= $project['kodeqr']; ?>" width="100"
+                  class="img-thumbnail img-preview">
               </div>
               <div class="col-md-5">
                 <div class="custom-file">
@@ -190,7 +193,10 @@
           </div>
           <div class="mb-3 row">
             <div class="offset-md-3 col-md-8">
-              <button type="submit" class="btn btn-sm btn-primary">Save</button>
+              <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-save"></i> Save</button>
+              <a href="<?= base_url(); ?>/project/<?= $project['slug']; ?>" class="btn btn-sm btn-primary"> <i
+                  class="fas fa-undo-alt"></i> Back</a>
+
               <!-- <button type="reset" class="btn btn-sm btn-danger">Reset</button> -->
             </div>
           </div>

@@ -54,16 +54,16 @@
               <th>ID</th>
               <th>Nama</th>
               <th>Jabatan</th>
-              <th>Instansi</th>
-              <th>Kabupaten</th>
-              <th>Tema</th>
+              <!-- <th>Instansi</th>
+              <th>Kabupaten</th> -->
+              <!-- <th>Tema</th> -->
               <th>Lokasi</th>
               <th>Hotel</th>
               <th>Room</th>
-              <th>Checkin</th>
-              <th>Checkout</th>
+              <!-- <th>Checkin</th>
+              <th>Checkout</th> -->
               <th>Kontribusi</th>
-              <th>Gambar</th>
+              <!-- <th>Gambar</th> -->
               <th>Opsi</th>
             </tr>
           </thead>
@@ -76,16 +76,16 @@
               <td><?= $row['userid']; ?></td>
               <td><?= $row['nama']; ?></td>
               <td><?= $row['jabatan']; ?></td>
-              <td><?= $row['instansi']; ?></td>
-              <td><?= $row['kabupaten']; ?></td>
-              <td><?= $row['tema']; ?></td>
+              <!-- <td><//?= $row['instansi']; ?></td>
+              <td><?//= $row['kabupaten']; ?></td> -->
+              <!-- <td><//?= $row['tema']; ?></td> -->
               <td><?= $row['lokasi']; ?></td>
               <td><?= $row['hotel']; ?></td>
               <td><?= $row['room']; ?></td>
-              <td><?= $row['checkin']; ?></td>
-              <td><?= $row['checkout']; ?></td>
+              <!-- <td><//?= $row['checkin']; ?></td>
+              <td><//?= $row['checkout']; ?></td> -->
               <td><?= $row['kontribusi']; ?></td>
-              <td><?= $row['kodeqr']; ?></td>
+              <!-- <td><//?= $row['kodeqr']; ?></td> -->
               <td>
                 <a href="<?= base_url(); ?>/project/userid/<?= $row['id']; ?>" target="_blank"
                   class="btn btn-sm btn-warning" role="button">Data User</a>
@@ -93,6 +93,8 @@
                   class="btn btn-sm btn-success" role="button">Sertifikat</a>
                 <a href="<?= base_url(); ?>/project/kwitansi/<?= $row['id']; ?>" target="_blank"
                   class="btn btn-sm btn-danger" role="button">Kwitansi</a>
+                <a href="/project/<?= $row['slug']; ?>" class="btn btn-sm btn-success"><i class="fa fa-id-card"
+                    aria-hidden="true"></i> Detail</a>
               </td>
             </tr>
             <?php endforeach; ?>

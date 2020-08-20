@@ -86,6 +86,8 @@
                   class="btn btn-sm btn-success" role="button">Sertifikat</a>
                 <a href="<?= base_url(); ?>/project/kwitansi/<?= $row['id']; ?>" target="_blank"
                   class="btn btn-sm btn-danger" role="button">Kwitansi</a>
+                <a href="<?= base_url(); ?>/project/<?= $row['slug']; ?>" class="btn btn-sm btn-warning"><i
+                    class="fas fa-edit"></i> Detail</a>
               </td>
             </tr>
             <?php endforeach; ?>

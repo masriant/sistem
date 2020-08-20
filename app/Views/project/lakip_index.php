@@ -31,6 +31,7 @@
           <option value="about">About</option>
           <option value="datatables">Table</option>
         </select>
+
       </form>
 
     </div>
@@ -57,23 +58,23 @@
             <tr>
               <th>No.</th>
               <th>Nama</th>
-              <th>Alamat</th>
+              <th>ID User</th>
               <th>Opsi</th>
             </tr>
           </thead>
           <tbody>
             <?php $i = 1; ?>
-            <?php foreach ($lakip as $row) : ?>
+            <?php foreach ($project as $row) : ?>
             <tr>
               <td><?= $i++; ?>.</td>
               <td><?= $row['nama']; ?></td>
-              <td><?= $row['alamat']; ?></td>
+              <td><?= $row['userid']; ?></td>
               <td>
-                <a href="<?= base_url(); ?>/lakip/userid/<?= $row['id']; ?>" target="_blank"
+                <a href="<?= base_url(); ?>/project/userid/<?= $row['id']; ?>" target="_blank"
                   class="btn btn-sm btn-warning" role="button">Data User</a>
-                <a href="<?= base_url(); ?>/lakip/detail/<?= $row['id']; ?>" target="_blank"
+                <a href="<?= base_url(); ?>/project/detail/<?= $row['id']; ?>" target="_blank"
                   class="btn btn-sm btn-success" role="button">Sertifikat</a>
-                <a href="<?= base_url(); ?>/lakip/kwitansi/<?= $row['id']; ?>" target="_blank"
+                <a href="<?= base_url(); ?>/project/kwitansi/<?= $row['id']; ?>" target="_blank"
                   class="btn btn-sm btn-danger" role="button">Kwitansi</a>
               </td>
             </tr>

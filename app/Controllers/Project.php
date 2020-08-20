@@ -4,22 +4,30 @@ namespace App\Controllers;
 
 use Mpdf\Mpdf;
 use App\Models\ProjectModel;
-// use App\Models\projectModel;
 // use PhpOffice\PhpSpreadsheet\Spreadsheet;
 // use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Project extends BaseController
 {
-  // protected $projectModel;
+  protected $projectModel;
   public function __construct()
   {
     $this->projectModel = new ProjectModel();
-    $this->Mpdf = new Mpdf;
+    // $this->Mpdf = new Mpdf;
   }
   //--------------------------------------------------------------------
 
   public function index()
   {
+    $currentPage = $this->request->getVar('page_id') ? $this->request->getVar('page_id') : 1;
+    $keyword = $this->request->getVar('keyword');
+    if ($keyword) {
+      $project = $this->projectModel->search($keyword);
+    } else {
+      $project = $this->projectModel;
+    }
+
+    $test = $this->projectModel->noUrut();
     $counter = $this->projectModel->kodeUser();
     $urutan = (int) substr($counter, 3, 3);
     $urutan++;
@@ -27,13 +35,16 @@ class Project extends BaseController
     $autourut = $huruf . sprintf("%03s", $urutan);
 
     $data = [
-      'title' => 'Tambah User',
-      'validation' => \Config\Services::validation(),
-      // 'tema' => $tema,
-      // 'lakip' => $lakip,
+      'title' => 'List User',
+      'project' => $project->paginate(10, 'id'),
+      'pager' => $this->projectModel->pager,
+      'currentPage' => $currentPage,
+      // 'validation' => \Config\Services::validation(),
+      // 'project' => $this->projectModel->findAll(),
+      // 'project' => $project,
+      // 'project' => $project->paginate(),
+      'test' => $test,
       'kode' => $autourut,
-
-
     ];
     return view('project/index', $data);
   }
@@ -45,18 +56,32 @@ class Project extends BaseController
     $currentPage = $this->request->getVar('page_id') ? $this->request->getVar('page_id') : 1;
     $keyword = $this->request->getVar('keyword');
     if ($keyword) {
-      $lakip = $this->projectModel->search($keyword);
+      $project = $this->projectModel->search($keyword);
     } else {
-      $lakip = $this->projectModel;
+      $project = $this->projectModel;
     }
+
+    // $test = $this->projectModel->noUrut();
+    // $counter = $this->projectModel->kodeUser();
+    // $urutan = (int) substr($counter, 3, 3);
+    // $urutan++;
+    // $huruf = "USR-";
+    // $autourut = $huruf . sprintf("%03s", $urutan);
+
     $data = [
-      'title' => 'Data',
-      'lakip' => $this->projectModel->getAll(),
-      'lakip' => $lakip->paginate(),
-      'lakip' => $lakip->paginate(10, 'id'),
+      'title' => 'List User',
+      'project' => $project->paginate(10, 'id'),
       'pager' => $this->projectModel->pager,
       'currentPage' => $currentPage,
-      'message' => 'Admin Panel!'
+      'message' => 'Akses User Panel!'
+      // 'validation' => \Config\Services::validation(),
+      // 'tema' => $tema,
+      // 'project' => $this->projectModel->findAll(),
+      // 'kode' => $autourut,
+      // 'project' => $project,
+      // 'project' => $project->paginate(),
+      // 'test' => $test,
+
     ];
     return view('project/lakip_index', $data);
   }
@@ -128,7 +153,7 @@ class Project extends BaseController
   public function create()
   {
 
-    // $tema = $this->projectModel->listTema();
+    // $tema = $this->projectModel->listTema(); getProject
     // $lakip = $this->projectModel->findAll();
     $counter = $this->projectModel->kodeUser();
     $urutan = (int) substr($counter, 3, 3);
@@ -148,6 +173,31 @@ class Project extends BaseController
     return view('project/create_user', $data);
   }
   //--------------------------------------------------------------------
+
+  public function add()
+  {
+    // $counter = $this->projectModel->kodeUser();
+    // $urutan = (int) substr($counter, 3, 3);
+    // $urutan++;
+    // $huruf = "USR-";
+    // $autourut = $huruf . sprintf("%03s", $urutan);
+
+    $maxkode = $this->projectModel->noUrut();
+    $noUrut = (int) substr($maxkode, 3, 3);
+    $noUrut++;
+    $char = "USR-";
+    $newID = $char . sprintf("%03s", $noUrut);
+
+    $data = [
+      'title' => 'Tambah User',
+      'validation' => \Config\Services::validation(),
+      // 'kode' => $autourut,
+      'newID' => $newID,
+
+    ];
+    return view('project/add_user', $data);
+  }
+  //--------------------------------------------------------------------
   public function save()
   {
     // validasi input 
@@ -160,10 +210,10 @@ class Project extends BaseController
         ]
       ],
       'nama' => [
-        'rules' => 'required',
+        'rules' => 'required|is_unique[db_project.nama]',
         'errors' => [
           'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
+          'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'jabatan' => [
@@ -252,9 +302,156 @@ class Project extends BaseController
         ]
       ]
     ])) {
-      // $validation = \Config\Services::validation();
+      $validation = \Config\Services::validation();
       // return redirect()->to('/lakip/create')->withInput()->with('validation', $validation);
-      return redirect()->to('/project/create')->withInput();
+      return redirect()->to('/project/add')->withInput()->with('validation', $validation);
+    }
+
+    // ambil gambar<===
+    $filekodeqr = $this->request->getFile('kodeqr');
+    // Apakah tidak ada gambar yang di upload
+    if ($filekodeqr->getError() == 4) {
+      $namakodeqr = 'default.png';
+    } else {
+      // Generate nama kodeqr random<===
+      $namakodeqr = $filekodeqr->getRandomName();
+      // pindahkan file ke folder img<===
+      $filekodeqr->move('assets/images', $namakodeqr);
+      // ambil nama file<===
+      // $namakodeqr = $filekodeqr->getName(); <====
+    }
+
+
+    $slug = url_title($this->request->getVar('nama'), '-', true);
+    $this->projectModel->save([
+      'userid' => $this->request->getVar('userid'),
+      'nama' => $this->request->getVar('nama'),
+      'slug' => $slug,
+      'jabatan' => $this->request->getVar('jabatan'),
+      'instansi' => $this->request->getVar('instansi'),
+      'kabupaten' => $this->request->getVar('kabupaten'),
+      'tema' => $this->request->getVar('tema'),
+      'lokasi' => $this->request->getVar('lokasi'),
+      'hotel' => $this->request->getVar('hotel'),
+      'room' => $this->request->getVar('room'),
+      'checkin' => $this->request->getVar('checkin'),
+      'checkout' => $this->request->getVar('checkout'),
+      'kontribusi' => $this->request->getVar('kontribusi'),
+      'kodeqr' => $this->request->getVar('kodeqr'),
+      'kodeqr' => $namakodeqr
+    ]);
+
+    session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
+
+    return redirect()->to('/project');
+  }
+  public function simpan()
+  {
+    // validasi input 
+    if (!$this->validate([
+      'userid' => [
+        'rules' => 'required|is_unique[db_project.userid]',
+        'errors' => [
+          'required' => '{field} harus diisi.',
+          'is_unique' => '{field} sudah terdaftar.'
+        ]
+      ],
+      'nama' => [
+        'rules' => 'required|is_unique[db_project.userid]',
+        'errors' => [
+          'required' => '{field} harus diisi.',
+          'is_unique' => '{field} sudah terdaftar.'
+        ]
+      ],
+      'jabatan' => [
+        'rules' => 'required',
+        'errors' => [
+          'required' => '{field} harus diisi.',
+          // 'is_unique' => '{field} sudah terdaftar.'
+        ]
+      ],
+      'instansi' => [
+        'rules' => 'required',
+        'errors' => [
+          'required' => '{field} harus diisi.',
+          // 'is_unique' => '{field} sudah terdaftar.'
+        ]
+      ],
+      'kabupaten' => [
+        'rules' => 'required',
+        'errors' => [
+          'required' => '{field} harus diisi.',
+          // 'is_unique' => '{field} sudah terdaftar.'
+        ]
+      ],
+      'tema' => [
+        'rules' => 'required',
+        'errors' => [
+          'required' => '{field} harus diisi.',
+          // 'is_unique' => '{field} sudah terdaftar.'
+        ]
+      ],
+      'lokasi' => [
+        'rules' => 'required',
+        'errors' => [
+          'required' => '{field} harus diisi.',
+          // 'is_unique' => '{field} sudah terdaftar.'
+        ]
+      ],
+      'hotel' => [
+        'rules' => 'required',
+        'errors' => [
+          'required' => '{field} harus diisi.',
+          // 'is_unique' => '{field} sudah terdaftar.'
+        ]
+      ],
+      'room' => [
+        'rules' => 'required',
+        'errors' => [
+          'required' => '{field} harus diisi.',
+          // 'is_unique' => '{field} sudah terdaftar.'
+        ]
+      ],
+      'checkin' => [
+        'rules' => 'required',
+        'errors' => [
+          'required' => '{field} harus diisi.',
+          // 'is_unique' => '{field} sudah terdaftar.'
+        ]
+      ],
+      'checkout' => [
+        'rules' => 'required',
+        'errors' => [
+          'required' => '{field} harus diisi.',
+          // 'is_unique' => '{field} sudah terdaftar.'
+        ]
+      ],
+      'kontribusi' => [
+        'rules' => 'required',
+        'errors' => [
+          'required' => '{field} harus diisi.',
+          // 'is_unique' => '{field} sudah terdaftar.'
+        ]
+      ],
+      'kodeqr' => [
+        'rules' => 'required',
+        'errors' => [
+          'required' => '{field} harus diisi.',
+          // 'is_unique' => '{field} sudah terdaftar.'
+        ]
+      ],
+      'kodeqr' => [
+        'rules' => 'max_size[kodeqr,1024]|is_image[kodeqr]|mime_in[kodeqr,image/jpg,image/jpeg,image/png]',
+        'errors' => [
+          'max_size' => 'Ukuran {field} terlalu besar.',
+          'is_image' => 'Yang anda pilih bukan gambar.',
+          'mime_in' => 'Yang anda pilih bukan gambar.'
+        ]
+      ]
+    ])) {
+      $validation = \Config\Services::validation();
+      // return redirect()->to('/lakip/create')->withInput()->with('validation', $validation);
+      return redirect()->to('/project/create')->withInput()->with('validation', $validation);
     }
 
     // ambil gambar<===

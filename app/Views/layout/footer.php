@@ -51,7 +51,37 @@
     </div>
   </div>
 </footer> -->
+<script>
+$.rootDir = '/';
+$(document).ajaxStart(function() {
+  $.blockUI({
+    message: $('#loadingProgress'),
+    css: {
+      border: 'none',
+      padding: '15px',
+      backgroundColor: 'transparent',
+      '-webkit-border-radius': '10px',
+      '-moz-border-radius': '10px',
+      color: '#fff',
+      fontSize: '14px',
+      fontFamily: 'Verdana,Arial',
+      fontWeight: 50,
+    }
+  });
+});
 
+$(document).ajaxStop(function() {
+  $.unblockUI();
+});
+
+$(document).ajaxError(function(event, request, options) {
+  console.log(arguments);
+  if (request.status == 401) {
+    alert("Session Anda telah habis. Silahkan Anda login");
+    window.location.href = $.rootDir + "Account/Login";
+  }
+});
+</script>
 <!-- Optional JavaScript -->
 <!-- Popper.js first, then Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
@@ -60,6 +90,37 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
   integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous">
 </script>
+<style>
+#footer {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 15px;
+  background-color: #31363b;
+  color: white;
+  font-family: Louis George Cafe_0, Neris-SemiBold_0;
+}
+
+#footer p {
+  color: white;
+}
+
+body {
+  padding-bottom: 0px;
+}
+
+.navbar-inverse {
+  background-color: #e5232b;
+  border-color: #005596;
+}
+
+.containerhead {
+  background-image: url(/Content/images/homepage/header.png);
+  background-repeat: no-repeat;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+</style>
 </body>
 
 </html>

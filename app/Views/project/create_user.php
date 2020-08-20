@@ -5,24 +5,18 @@
 
 
   <div class="row">
-    <div class="col-9">
+    <div class="col-6">
       <div class="card-body">
-        <form class="row g-3" action="/project/save" method="post" enctype="multipart/form-data">
+        <form class="row g-3" action="/project/simpan" method="post" enctype="multipart/form-data">
           <!-- <form class="form-horizontal" action="/lakip/save" method="post" enctype="multipart/form-data"> -->
           <?= csrf_field(); ?>
           <!-- <div class="row g-3"> -->
-          <?php
-          //     <//?= $this->include('admin/_partials/navbar') ?//>
 
-          $bulan = date('n');
-          $tahun = date('Y');
-          $nomor = "/SPD/" . $bulan . "/" . $tahun;
-          ?>
           <div class="mb-3 row">
             <div class="mb-3 row">
-              <label for="userid" class="col-sm-3 col-form-label"><?= $kode; ?></label>
+              <label for="userid" class="col-sm-3 col-form-label">ID USER</label>
               <div class="col-md-8">
-                <input type="text" class="form-control <?= ($validation->hasError('kodeqr')) ? 'is-invalid' : ''; ?>"
+                <input type="text" class="form-control <?= ($validation->hasError('userid')) ? 'is-invalid' : ''; ?>"
                   name="userid" id="userid" value="<?= $kode; ?>" readonly>
                 <div class="invalid-feedback">
                   <?= $validation->getError('userid'); ?>
@@ -201,25 +195,6 @@
       </div>
     </div>
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <main class="container">
-  </main><!--  /.container -->
 
 
 

@@ -42,7 +42,7 @@ class Lakip extends BaseController
     $data = [
       'title' => 'Data',
       'lakip' => $this->lakipModel->findAll(),
-      'lakip' => $lakip->paginate(),
+      // 'lakip' => $lakip->paginate(),
       'lakip' => $lakip->paginate(10, 'id'),
       'pager' => $this->lakipModel->pager,
       'currentPage' => $currentPage,

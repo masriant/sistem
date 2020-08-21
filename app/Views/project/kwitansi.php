@@ -15,7 +15,7 @@ $updated = date_create($project['updated_at']);
     <div class="row">
       <div class="col-12">
 
-        <div class="card">
+        <!-- <div class="card">
           <div class="card-header">
             <h3 class="card-title">Data <a href="/project" class="btn btn-sm btn-primary"> <i
                   class="fas fa-undo-alt"></i> Back</a></h3>
@@ -76,13 +76,7 @@ $updated = date_create($project['updated_at']);
                 <div class="card-footer">
                   <div class="text-right">
                     <a href="/project/edit/<?= $project['slug']; ?>" class="btn btn-sm btn-warning"><i
-                        class="fas fa-edit"></i>Edit</a>
-                    <a href="/project/sertifikat/<?= $project['slug']; ?>" class="btn btn-sm btn-warning"><i
-                        class="fas fa-edit"></i>Sertifikat</a>
-                    <a href="/project/kwitansi/<?= $project['slug']; ?>" class="btn btn-sm btn-warning"><i
-                        class="fas fa-edit"></i>Kwitansi</a>
-
-
+                        class="fas fa-edit"></i> Edit P</a>
                     <form action="/project/<?= $project['id']; ?>" method="POST" class="d-inline">
                       <?= csrf_field(); ?>
                       <input type="hidden" name="_method" value="DELETE">
@@ -97,7 +91,7 @@ $updated = date_create($project['updated_at']);
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
 
 
@@ -209,11 +203,6 @@ $updated = date_create($project['updated_at']);
 
 
 
-
-
-
-
-
         <?php if (session()->getFlashdata('pesan')) : ?>
         <div class="alert alert-success" role="alert">
           <?= session()->getFlashdata('pesan'); ?>
@@ -271,68 +260,10 @@ $updated = date_create($project['updated_at']);
             </div>
           </div>
         </div>
-        <!-- batas coba -->
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <div class="card text-center">
-          <div class="card-header">
-            <h3 class="card-title">Sertifikat</h3>
-            <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
-                title="Collapse">
-                <i class="fas fa-minus"></i></button>
-              <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                <i class="fas fa-times"></i></button>
-            </div>
-          </div>
-          <div class="card-body">
-            <div>
-              <img src="/assets/brand/lakip.jpeg" width="100">
-              <p class="card-text"><?= strtoupper($lembaga); ?><br><?= strtoupper($skt); ?></p>
-            </div>
-            <hr>
-            <p class="card-text">Diberikan kepada :</p>
-            <h3 class="card-text"><?= strtoupper($project['nama']); ?></h3>
-            <p class="card-text">( <?= ucwords($project['jabatan']); ?> )</p>
-
-            <p class="lead">Terima kasih telah menjadi peserta <br>Bimbingan Teknis Nasional</p>
-            <p class="card-text">Tema :</p>
-            <p class="lead"><?= $project['tema']; ?></p>
-            <p class="card-text">Hotel : <?= $project['hotel'] . ","; ?>
-              <?= date_format($checkin, "d M Y") . " - " . date_format($checkout, "d M Y"); ?></p>
-            <p class="card-text">Dikeluarkan di <?= $project['lokasi']; ?>,
-              <?= date_format($checkout, "d M Y"); ?></p>
-
-            <a href="/project" class="btn btn-primary">Go Back</a>
-          </div>
-          <div class="card-footer text-center text-muted">
-            Updated at : <?= $project['updated_at']; ?>
-          </div>
-        </div>
       </div>
-    </div>
-
-
-
-
-  </div>
-  <!-- /.container-fluid -->
+      <!-- /.container-fluid -->
 </section>
 <!-- /.content -->
 <?= $this->endSection(); ?>

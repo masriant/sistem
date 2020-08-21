@@ -39,10 +39,6 @@ class Project extends BaseController
       'project' => $project->paginate(10, 'id'),
       'pager' => $this->projectModel->pager,
       'currentPage' => $currentPage,
-      // 'validation' => \Config\Services::validation(),
-      // 'project' => $this->projectModel->findAll(),
-      // 'project' => $project,
-      // 'project' => $project->paginate(),
       'test' => $test,
       'kode' => $autourut,
     ];
@@ -53,7 +49,7 @@ class Project extends BaseController
   public function detail($slug)
   {
     $data = [
-      'title' => 'Detail Project',
+      'title' => 'Detail User',
       'project' => $this->projectModel->getProject($slug)
     ];
 
@@ -62,6 +58,34 @@ class Project extends BaseController
       throw new \CodeIgniter\Exceptions\PageNotFoundException('Data yang anda cari adalah :  '  . $slug .  ' dan tidak ada dalam database kami.');
     }
     return view('project/detail', $data);
+  }
+  //--------------------------------------------------------------------
+  public function kwitansi($slug)
+  {
+    $data = [
+      'title' => 'Kwitansi',
+      'project' => $this->projectModel->getProject($slug)
+    ];
+
+    // Jika data tidak ada ditabel
+    if (empty($data['project'])) {
+      throw new \CodeIgniter\Exceptions\PageNotFoundException('Data yang anda cari adalah :  '  . $slug .  ' dan tidak ada dalam database kami.');
+    }
+    return view('project/kwitansi', $data);
+  }
+  //--------------------------------------------------------------------
+  public function sertifikat($slug)
+  {
+    $data = [
+      'title' => 'Sertifikat',
+      'project' => $this->projectModel->getProject($slug)
+    ];
+
+    // Jika data tidak ada ditabel
+    if (empty($data['project'])) {
+      throw new \CodeIgniter\Exceptions\PageNotFoundException('Data yang anda cari adalah :  '  . $slug .  ' dan tidak ada dalam database kami.');
+    }
+    return view('project/sertifikat', $data);
   }
   //--------------------------------------------------------------------
   public function search()
@@ -85,137 +109,93 @@ class Project extends BaseController
       $project = $this->projectModel;
     }
 
-    // $test = $this->projectModel->noUrut();
-    // $counter = $this->projectModel->kodeUser();
-    // $urutan = (int) substr($counter, 3, 3);
-    // $urutan++;
-    // $huruf = "USR-";
-    // $autourut = $huruf . sprintf("%03s", $urutan);
-
     $data = [
       'title' => 'List User',
       'project' => $project->paginate(10, 'id'),
       'pager' => $this->projectModel->pager,
       'currentPage' => $currentPage,
       'message' => 'Akses User Panel!'
-      // 'validation' => \Config\Services::validation(),
-      // 'tema' => $tema,
-      // 'project' => $this->projectModel->findAll(),
-      // 'kode' => $autourut,
-      // 'project' => $project,
-      // 'project' => $project->paginate(),
-      // 'test' => $test,
 
     ];
     return view('project/lakip_index', $data);
   }
   //--------------------------------------------------------------------
 
-  public function detailid($id)
-  {
-    $data = [
-      'title' => 'Sertifikat',
-      'lakip' => $this->projectModel->find($id),
+  // public function detailid($id)
+  // {
+  //   $data = [
+  //     'title' => 'Sertifikat',
+  //     'lakip' => $this->projectModel->find($id),
 
-    ];
-    return view('project/detail', $data);
-  }
+  //   ];
+  //   return view('project/detail', $data);
+  // }
   //--------------------------------------------------------------------
 
-  public function datauser($id)
-  {
-    $data = [
-      'title' => 'Data User ID',
-      'lakip' => $this->projectModel->find($id),
+  // public function datauser($id)
+  // {
+  //   $data = [
+  //     'title' => 'Data User ID',
+  //     'lakip' => $this->projectModel->find($id),
 
-    ];
-    return view('project/detail-id', $data);
-  }
+  //   ];
+  //   return view('project/detail-id', $data);
+  // }
   //--------------------------------------------------------------------
 
-  public function kwitansi($id)
-  {
-    $lakip = $this->projectModel->find($id);
-    $counter = $this->projectModel->kodeUser();
-    $urutan = (int) substr($counter, 3, 3);
-    $urutan++;
-    $huruf = "LKP";
-    $autourut = $huruf . sprintf("%03s", $urutan);
+  // public function kwitansi($id)
+  // {
+  //   $lakip = $this->projectModel->find($id);
+  //   $counter = $this->projectModel->kodeUser();
+  //   $urutan = (int) substr($counter, 3, 3);
+  //   $urutan++;
+  //   $huruf = "LKP";
+  //   $autourut = $huruf . sprintf("%03s", $urutan);
 
-    $data = [
-      'title' => 'Kwitansi',
-      'kontribusi' => 4500000,
-      'lakip' => $lakip,
-      'kode' => $autourut,
+  //   $data = [
+  //     'title' => 'Kwitansi',
+  //     'kontribusi' => 4500000,
+  //     'lakip' => $lakip,
+  //     'kode' => $autourut,
 
 
-    ];
-    return view('project/kwitansi-user', $data);
-  }
+  //   ];
+  //   return view('project/kwitansi-user', $data);
+  // }
   //--------------------------------------------------------------------
 
-  public function userid($id)
-  {
-    $lakip = $this->projectModel->find($id);
-    $counter = $this->projectModel->kodeUser();
-    $urutan = (int) substr($counter, 3, 3);
-    $urutan++;
-    $huruf = "LKP";
-    $autourut = $huruf . sprintf("%03s", $urutan);
+  // public function userid($id)
+  // {
+  //   $lakip = $this->projectModel->find($id);
+  //   $counter = $this->projectModel->kodeUser();
+  //   $urutan = (int) substr($counter, 3, 3);
+  //   $urutan++;
+  //   $huruf = "LKP";
+  //   $autourut = $huruf . sprintf("%03s", $urutan);
 
-    $data = [
-      'title' => 'Data User',
-      'lakip' => $lakip,
-      'kode' => $autourut,
+  //   $data = [
+  //     'title' => 'Data User',
+  //     'lakip' => $lakip,
+  //     'kode' => $autourut,
 
 
-    ];
-    return view('project/detail-user', $data);
-  }
+  //   ];
+  //   return view('project/detail-user', $data);
+  // }
   //--------------------------------------------------------------------
 
   public function create()
   {
-
-    // $tema = $this->projectModel->listTema(); getProject
-    // $lakip = $this->projectModel->findAll();
-    $counter = $this->projectModel->kodeUser();
-    $urutan = (int) substr($counter, 3, 3);
-    $urutan++;
-    $huruf = "USR-";
-    $autourut = $huruf . sprintf("%03s", $urutan);
-
-    $data = [
-      'title' => 'Tambah User',
-      'validation' => \Config\Services::validation(),
-      // 'tema' => $tema,
-      // 'lakip' => $lakip,
-      'kode' => $autourut,
-
-
-    ];
-    return view('project/create_user', $data);
-  }
-  //--------------------------------------------------------------------
-
-  public function add()
-  {
-    // $counter = $this->projectModel->kodeUser();
-    // $urutan = (int) substr($counter, 3, 3);
-    // $urutan++;
-    // $huruf = "USR-";
-    // $autourut = $huruf . sprintf("%03s", $urutan);
-
     $maxkode = $this->projectModel->noUrut();
     $noUrut = (int) substr($maxkode, 3, 3);
     $noUrut++;
     $char = "USR-";
     $newID = $char . sprintf("%03s", $noUrut);
 
+
     $data = [
       'title' => 'Tambah User',
       'validation' => \Config\Services::validation(),
-      // 'kode' => $autourut,
       'newID' => $newID,
 
     ];
@@ -223,41 +203,45 @@ class Project extends BaseController
   }
   //--------------------------------------------------------------------
 
-  public function editing($slug)
-  {
-    $data = [
-      'title' => 'Form Ubah Data',
-      'validation' => \Config\Services::validation(),
-      'project' => $this->projectModel->getProject($slug),
-    ];
+  // public function add()
+  // {
+  // $counter = $this->projectModel->kodeUser();
+  // $urutan = (int) substr($counter, 3, 3);
+  // $urutan++;
+  // $huruf = "USR-";
+  // $autourut = $huruf . sprintf("%03s", $urutan);
 
-    return view('project/user_edit', $data);
-  }
+  //   $data = [
+  //     'title' => 'Tambah User',
+  //     'validation' => \Config\Services::validation(),
+  //     'newID' => $newID,
+  // 'kode' => $autourut,
+
+  //   ];
+  //   return view('project/create_user', $data);
+  // }
+  //--------------------------------------------------------------------
+
+  // public function editing($slug)
+  // {
+  //   $data = [
+  //     'title' => 'Form Ubah Data',
+  //     'validation' => \Config\Services::validation(),
+  //     'project' => $this->projectModel->getProject($slug),
+  //   ];
+
+  //   return view('project/edit_user', $data);
+  // }
   //--------------------------------------------------------------------
 
   public function edit($slug)
   {
-    // $counter = $this->projectModel->kodeUser();
-    // $urutan = (int) substr($counter, 3, 3);
-    // $urutan++;
-    // $huruf = "USR-";
-    // $autourut = $huruf . sprintf("%03s", $urutan);
-
-    // $maxkode = $this->projectModel->noUrut();
-    // $noUrut = (int) substr($maxkode, 3, 3);
-    // $noUrut++;
-    // $char = "USR-";
-    // $newID = $char . sprintf("%03s", $noUrut);
-
     $data = [
-      'title' => 'Tambah User',
+      'title' => 'Ubah User',
       'validation' => \Config\Services::validation(),
       'project' => $this->projectModel->getProject($slug),
-      // 'kode' => $autourut,
-      // 'newID' => $newID,
-
     ];
-    return view('project/edit_user', $data);
+    return view('project/user_edit', $data);
   }
   //--------------------------------------------------------------------
   public function save()
@@ -282,77 +266,66 @@ class Project extends BaseController
         'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'instansi' => [
         'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'kabupaten' => [
         'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'tema' => [
         'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'lokasi' => [
         'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'hotel' => [
         'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'room' => [
         'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'checkin' => [
         'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'checkout' => [
         'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'kontribusi' => [
         'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'kodeqr' => [
         'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'kodeqr' => [
@@ -364,8 +337,7 @@ class Project extends BaseController
         ]
       ]
     ])) {
-      // $validation = \Config\Services::validation();
-      // return redirect()->to('/lakip/create')->withInput()->with('validation', $validation);
+
       return redirect()->to('/project/add')->withInput();
     }
 
@@ -386,21 +358,24 @@ class Project extends BaseController
 
     $slug = url_title($this->request->getVar('nama'), '-', true);
     $this->projectModel->save([
-      'userid' => $this->request->getVar('userid'),
-      'nama' => $this->request->getVar('nama'),
-      'slug' => $slug,
-      'jabatan' => $this->request->getVar('jabatan'),
-      'instansi' => $this->request->getVar('instansi'),
-      'kabupaten' => $this->request->getVar('kabupaten'),
-      'tema' => $this->request->getVar('tema'),
-      'lokasi' => $this->request->getVar('lokasi'),
-      'hotel' => $this->request->getVar('hotel'),
-      'room' => $this->request->getVar('room'),
-      'checkin' => $this->request->getVar('checkin'),
-      'checkout' => $this->request->getVar('checkout'),
-      'kontribusi' => $this->request->getVar('kontribusi'),
-      'kodeqr' => $this->request->getVar('kodeqr'),
-      'kodeqr' => $namakodeqr
+      'userid'          => $this->request->getVar('userid'),
+      'nama'            => $this->request->getVar('nama'),
+      'slug'            => $slug,
+      'jabatan'         => $this->request->getVar('jabatan'),
+      'instansi'        => $this->request->getVar('instansi'),
+      'kabupaten'       => $this->request->getVar('kabupaten'),
+      'tema'            => $this->request->getVar('tema'),
+      'lokasi'          => $this->request->getVar('lokasi'),
+      'hotel'           => $this->request->getVar('hotel'),
+      'room'            => $this->request->getVar('room'),
+      'checkin'         => $this->request->getVar('checkin'),
+      'checkout'        => $this->request->getVar('checkout'),
+      'kontribusi'      => $this->request->getVar('kontribusi'),
+      'kodeqr'          => $this->request->getVar('kodeqr'),
+      'kodeqr'          => $namakodeqr,
+      'created_at'      => $this->request->getVar('created_at'),
+      'updated_at'      => $this->request->getVar('updated_at'),
+
     ]);
 
     session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
@@ -409,248 +384,245 @@ class Project extends BaseController
   }
   //--------------------------------------------------------------------
 
-  public function simpan()
+  // public function simpan()
+  // {
+  //   // validasi input 
+  //   if (!$this->validate([
+  //     'userid' => [
+  //       'rules' => 'required|is_unique[db_project.userid]',
+  //       'errors' => [
+  //         'required' => '{field} harus diisi.',
+  //         'is_unique' => '{field} sudah terdaftar.'
+  //       ]
+  //     ],
+  //     'nama' => [
+  //       'rules' => 'required|is_unique[db_project.nama]',
+  //       'errors' => [
+  //         'required' => '{field} harus diisi.',
+  //         'is_unique' => '{field} sudah terdaftar.'
+  //       ]
+  //     ],
+  //     'jabatan' => [
+  //       'rules' => 'required',
+  //       'errors' => [
+  //         'required' => '{field} harus diisi.',
+  //       ]
+  //     ],
+  //     'instansi' => [
+  //       'rules' => 'required',
+  //       'errors' => [
+  //         'required' => '{field} harus diisi.',
+  //       ]
+  //     ],
+  //     'kabupaten' => [
+  //       'rules' => 'required',
+  //       'errors' => [
+  //         'required' => '{field} harus diisi.',
+  //       ]
+  //     ],
+  //     'tema' => [
+  //       'rules' => 'required',
+  //       'errors' => [
+  //         'required' => '{field} harus diisi.',
+  //       ]
+  //     ],
+  //     'lokasi' => [
+  //       'rules' => 'required',
+  //       'errors' => [
+  //         'required' => '{field} harus diisi.',
+  //       ]
+  //     ],
+  //     'hotel' => [
+  //       'rules' => 'required',
+  //       'errors' => [
+  //         'required' => '{field} harus diisi.',
+  //       ]
+  //     ],
+  //     'room' => [
+  //       'rules' => 'required',
+  //       'errors' => [
+  //         'required' => '{field} harus diisi.',
+  //       ]
+  //     ],
+  //     'checkin' => [
+  //       'rules' => 'required',
+  //       'errors' => [
+  //         'required' => '{field} harus diisi.',
+  //       ]
+  //     ],
+  //     'checkout' => [
+  //       'rules' => 'required',
+  //       'errors' => [
+  //         'required' => '{field} harus diisi.',
+  //       ]
+  //     ],
+  //     'kontribusi' => [
+  //       'rules' => 'required',
+  //       'errors' => [
+  //         'required' => '{field} harus diisi.',
+  //       ]
+  //     ],
+  //     'kodeqr' => [
+  //       'rules' => 'required',
+  //       'errors' => [
+  //         'required' => '{field} harus diisi.',
+  //       ]
+  //     ],
+  //     'kodeqr' => [
+  //       'rules' => 'max_size[kodeqr,1024]|is_image[kodeqr]|mime_in[kodeqr,image/jpg,image/jpeg,image/png]',
+  //       'errors' => [
+  //         'max_size' => 'Ukuran {field} terlalu besar.',
+  //         'is_image' => 'Yang anda pilih bukan gambar.',
+  //         'mime_in' => 'Yang anda pilih bukan gambar.'
+  //       ]
+  //     ]
+  //   ])) {
+
+  //     return redirect()->to('/project/create')->withInput();
+  //   }
+
+  //   // ambil gambar<===
+  //   $fileGambar = $this->request->getFile('kodeqr');
+  //   // Apakah tidak ada gambar yang di upload
+  //   if ($fileGambar->getError() == 4) {
+  //     $namakodeqr = 'default.png';
+  //   } else {
+  //     // Generate nama kodeqr random<===
+  //     $namakodeqr = $fileGambar->getRandomName();
+  //     // pindahkan file ke folder img<===
+  //     $fileGambar->move('assets/images', $namakodeqr);
+  //     // ambil nama file<===
+  //     // $namakodeqr = $fileGambar->getName(); <====
+  //   }
+
+
+  //   $slug = url_title($this->request->getVar('nama'), '-', true);
+  //   $this->projectModel->save([
+  //     'userid'        => $this->request->getVar('userid'),
+  //     'nama'          => $this->request->getVar('nama'),
+  //     'slug'          => $slug,
+  //     'jabatan'       => $this->request->getVar('jabatan'),
+  //     'instansi'      => $this->request->getVar('instansi'),
+  //     'kabupaten'     => $this->request->getVar('kabupaten'),
+  //     'tema'          => $this->request->getVar('tema'),
+  //     'lokasi'        => $this->request->getVar('lokasi'),
+  //     'hotel'         => $this->request->getVar('hotel'),
+  //     'room'          => $this->request->getVar('room'),
+  //     'checkin'       => $this->request->getVar('checkin'),
+  //     'checkout'      => $this->request->getVar('checkout'),
+  //     'kontribusi'    => $this->request->getVar('kontribusi'),
+  //     'kodeqr'        => $this->request->getVar('kodeqr'),
+  //     'kodeqr'        => $namakodeqr
+  //   ]);
+
+  //   session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
+
+  //   return redirect()->to('/project/data');
+  // }
+
+  //--------------------------------------------------------------------
+  public function delete($id)
   {
-    // validasi input 
-    if (!$this->validate([
-      'userid' => [
-        'rules' => 'required|is_unique[db_project.userid]',
-        'errors' => [
-          'required' => '{field} harus diisi.',
-          'is_unique' => '{field} sudah terdaftar.'
-        ]
-      ],
-      'nama' => [
-        'rules' => 'required|is_unique[db_project.nama]',
-        'errors' => [
-          'required' => '{field} harus diisi.',
-          'is_unique' => '{field} sudah terdaftar.'
-        ]
-      ],
-      'jabatan' => [
-        'rules' => 'required',
-        'errors' => [
-          'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
-        ]
-      ],
-      'instansi' => [
-        'rules' => 'required',
-        'errors' => [
-          'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
-        ]
-      ],
-      'kabupaten' => [
-        'rules' => 'required',
-        'errors' => [
-          'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
-        ]
-      ],
-      'tema' => [
-        'rules' => 'required',
-        'errors' => [
-          'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
-        ]
-      ],
-      'lokasi' => [
-        'rules' => 'required',
-        'errors' => [
-          'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
-        ]
-      ],
-      'hotel' => [
-        'rules' => 'required',
-        'errors' => [
-          'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
-        ]
-      ],
-      'room' => [
-        'rules' => 'required',
-        'errors' => [
-          'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
-        ]
-      ],
-      'checkin' => [
-        'rules' => 'required',
-        'errors' => [
-          'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
-        ]
-      ],
-      'checkout' => [
-        'rules' => 'required',
-        'errors' => [
-          'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
-        ]
-      ],
-      'kontribusi' => [
-        'rules' => 'required',
-        'errors' => [
-          'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
-        ]
-      ],
-      'kodeqr' => [
-        'rules' => 'required',
-        'errors' => [
-          'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
-        ]
-      ],
-      'kodeqr' => [
-        'rules' => 'max_size[kodeqr,1024]|is_image[kodeqr]|mime_in[kodeqr,image/jpg,image/jpeg,image/png]',
-        'errors' => [
-          'max_size' => 'Ukuran {field} terlalu besar.',
-          'is_image' => 'Yang anda pilih bukan gambar.',
-          'mime_in' => 'Yang anda pilih bukan gambar.'
-        ]
-      ]
-    ])) {
-      // $validation = \Config\Services::validation();
-      // return redirect()->to('/lakip/create')->withInput()->with('validation', $validation);
-      return redirect()->to('/project/create')->withInput();
+    // cari gambar berdasarkan id
+    $project = $this->projectModel->find($id);
+    // cek jika file gambarnya default.jpg
+    if ($project['kodeqr'] != 'default.jpg') {
+      // Hapus gambar
+      unlink('assets/images/' . $project['kodeqr']);
     }
 
-    // ambil gambar<===
-    $fileGambar = $this->request->getFile('kodeqr');
-    // Apakah tidak ada gambar yang di upload
-    if ($fileGambar->getError() == 4) {
-      $namakodeqr = 'default.png';
-    } else {
-      // Generate nama kodeqr random<===
-      $namakodeqr = $fileGambar->getRandomName();
-      // pindahkan file ke folder img<===
-      $fileGambar->move('assets/images', $namakodeqr);
-      // ambil nama file<===
-      // $namakodeqr = $fileGambar->getName(); <====
-    }
+    $this->projectModel->delete($id);
+    session()->setFlashdata('pesan', 'Data berhasil dihapus.');
 
-
-    $slug = url_title($this->request->getVar('nama'), '-', true);
-    $this->projectModel->save([
-      'userid' => $this->request->getVar('userid'),
-      'nama' => $this->request->getVar('nama'),
-      'slug' => $slug,
-      'jabatan' => $this->request->getVar('jabatan'),
-      'instansi' => $this->request->getVar('instansi'),
-      'kabupaten' => $this->request->getVar('kabupaten'),
-      'tema' => $this->request->getVar('tema'),
-      'lokasi' => $this->request->getVar('lokasi'),
-      'hotel' => $this->request->getVar('hotel'),
-      'room' => $this->request->getVar('room'),
-      'checkin' => $this->request->getVar('checkin'),
-      'checkout' => $this->request->getVar('checkout'),
-      'kontribusi' => $this->request->getVar('kontribusi'),
-      'kodeqr' => $this->request->getVar('kodeqr'),
-      'kodeqr' => $namakodeqr
-    ]);
-
-    session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
-
-    return redirect()->to('/project/data');
+    return redirect()->to('/project');
   }
+
 
   //--------------------------------------------------------------------
   public function update($id)
   {
+    dd($this->request->getVar());
+
     // cek judul
     $projectLama = $this->projectModel->getProject($this->request->getVar('slug'));
-    if ($projectLama['nama'] == $this->request->getVar('nama')) {
-      $rule_nama = 'required';
+    if ($projectLama['userid'] == $this->request->getVar('userid')) {
+      $rule_userid = 'required';
     } else {
-      $rule_nama = 'required|is_unique[db_project.nama]';
+      $rule_userid = 'required|is_unique[db_project.userid]';
     }
     // validasi input 
     if (!$this->validate([
       'userid' => [
-        'rules' => 'required',
+        'rules' => $rule_userid,
         'errors' => [
           'required' => '{field} harus diisi.',
           'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'nama' => [
-        'rules' => $rule_nama,
+        'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'jabatan' => [
         'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'instansi' => [
         'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'kabupaten' => [
         'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'tema' => [
         'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'lokasi' => [
         'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'hotel' => [
         'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'room' => [
         'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'checkin' => [
         'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'checkout' => [
         'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'kontribusi' => [
         'rules' => 'required',
         'errors' => [
           'required' => '{field} harus diisi.',
-          // 'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       // 'kodeqr' => [
@@ -669,25 +641,9 @@ class Project extends BaseController
         ]
       ]
     ])) {
-      // $validation = \Config\Services::validation();
-      // return redirect()->to('/lakip/create')->withInput()->with('validation', $validation);
+
       return redirect()->to('/project/edit/' . $this->request->getVar('slug'))->withInput();
     }
-
-
-    //  ambil gambar
-    // $fileSampul = $this->request->getFile('sampul');
-    // // cek gambar apakah tetap pakai gambar lama
-    // if ($fileSampul->getError() == 4) {
-    //   $namaSampul = $this->request->getVar('sampulLama');
-    // } else {
-    //   // Generate nama sampul random
-    //   $namaSampul = $fileSampul->getRandomName();
-    //   // pindahkan file ke folder image
-    //   $fileSampul->move('images', $namaSampul);
-    //   // hapus file yang lama
-    //   unlink('images/' . $this->request->getVar('sampulLama'));
-    // }
 
 
     // ambil gambar
@@ -703,24 +659,6 @@ class Project extends BaseController
       // hapus file yang lama
       // unlink('assets/images/' . $this->request->getVar('gambarLama'));
     }
-
-
-
-
-
-    // // ambil gambar<===
-    // $fileGambar = $this->request->getFile('kodeqr');
-    // // Apakah tidak ada gambar yang di upload
-    // if ($fileGambar->getError() == 4) {
-    //   $namakodeqr = 'default.png';
-    // } else {
-    //   // Generate nama kodeqr random<===
-    //   $namakodeqr = $fileGambar->getRandomName();
-    //   // pindahkan file ke folder img<===
-    //   $fileGambar->move('assets/images', $namakodeqr);
-    //   // ambil nama file<===
-    //   // $namakodeqr = $fileGambar->getName(); <====
-    // }
 
 
     $slug = url_title($this->request->getVar('nama'), '-', true);

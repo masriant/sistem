@@ -41,6 +41,8 @@ $routes->get('/project/data', 'Project::data');
 $routes->get('/komik/search', 'Komik::search');
 $routes->get('/project/edit/(:segment)', 'Project::edit/$1');
 $routes->get('/project/editing/(:segment)', 'Project::editing/$1');
+$routes->get('/project/kwitansi/(:segment)', 'Project::kwitansi/$1');
+$routes->get('/project/sertifikat/(:segment)', 'Project::sertifikat/$1');
 $routes->delete('/project/(:num)', 'Project::delete/$1');
 $routes->get('/project/(:any)', 'Project::detail/$1');
 

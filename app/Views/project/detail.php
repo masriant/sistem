@@ -2,7 +2,7 @@
 $lembaga = "LEMBAGA ADMINISTRASI KEUANGAN DAN ILMU PEMERINTAHAN";
 $skt = "SKT DITJEN POLPUM KEMENDAGRI NOMOR : 001-00-00/034/I/2019";
 $sekretariat = "Sekretariat : Jln. Serdang Baru Raya No. 4B, Kemayoran - Jakarta 10650";
-$contact = "Website : www.lakip.co.id E-mail : admin@lakip.co.id Telp. /Fax. : 021-42885718";
+$contact = "website : www.lakip.co.id E-mail : admin@lakip.co.id Telp. /Fax. : 021-42885718";
 $checkin = date_create($project['checkin']);
 $checkout = date_create($project['checkout']);
 $created = date_create($project['created_at']);
@@ -75,21 +75,22 @@ $updated = date_create($project['updated_at']);
                 </div>
                 <div class="card-footer">
                   <div class="text-right">
-                    <a href="/project/edit/<?= $project['slug']; ?>" class="btn btn-sm btn-warning"><i
-                        class="fas fa-edit"></i>Edit</a>
-                    <a href="/project/sertifikat/<?= $project['slug']; ?>" class="btn btn-sm btn-warning"><i
-                        class="fas fa-edit"></i>Sertifikat</a>
-                    <a href="/project/kwitansi/<?= $project['slug']; ?>" class="btn btn-sm btn-warning"><i
-                        class="fas fa-edit"></i>Kwitansi</a>
+                    <a href="<?= base_url('project'); ?>/edit/<?= $project['slug']; ?>"
+                      class="btn btn-sm btn-warning"><i class="fas fa-edit"></i>Edit</a>
+                    <a href="<?= base_url('project'); ?>/sertifikat/<?= $project['slug']; ?>"
+                      class="btn btn-sm btn-info"><i class="fas fa-edit"></i>Sertifikat</a>
+                    <a href="<?= base_url('project'); ?>/kwitansi/<?= $project['slug']; ?>"
+                      class="btn btn-sm btn-danger"><i class="fas fa-edit"></i>Kwitansi</a>
 
 
-                    <form action="/project/<?= $project['id']; ?>" method="POST" class="d-inline">
+                    <form action="<?= base_url(); ?>/project/<?= $project['id']; ?>" method="POST" class="d-inline">
                       <?= csrf_field(); ?>
                       <input type="hidden" name="_method" value="DELETE">
                       <button type="submit" class="btn btn-sm btn-danger"
                         onclick="return confirm('Apakah anda yakin?');"><i class="fas fa-trash-alt"></i> Delete</button>
                     </form>
-                    <a href="/project" class="btn btn-sm btn-primary"> <i class="fas fa-undo-alt"></i> Back</a>
+                    <a href="<?= base_url(); ?>/project" class="btn btn-sm btn-primary"> <i class="fas fa-undo-alt"></i>
+                      Back</a>
 
                   </div>
                 </div>
@@ -214,11 +215,6 @@ $updated = date_create($project['updated_at']);
 
 
 
-        <?php if (session()->getFlashdata('pesan')) : ?>
-        <div class="alert alert-success" role="alert">
-          <?= session()->getFlashdata('pesan'); ?>
-        </div>
-        <?php endif; ?>
 
         <!-- Percobaan -->
         <div class="row">
@@ -238,13 +234,13 @@ $updated = date_create($project['updated_at']);
               <div class="card-body">
                 <div class="row justify-content-start">
                   <div class="col-md-2">
-                    <img src="/assets/brand/lakip.jpeg" width="100">
+                    <img src="/assets/brand/lakip.jpeg" width="120">
                   </div>
                   <div class="col-md-10">
-                    <h3 class="card-text text-center"><?= strtoupper($lembaga); ?> </h3>
-                    <p class="card-text text-center">
-                      <?= strtoupper($skt); ?><br><?= strtoupper($sekretariat); ?><br><?= strtoupper($contact); ?>
-                    </p>
+                    <h4 class="card-text text-center"><strong><?= strtoupper($lembaga); ?></strong></h4>
+                    <h5 class="card-text text-center"><?= strtoupper($skt); ?></h5>
+                    <h6 class="card-text text-center"><?= ucwords($sekretariat); ?><br><?= ucfirst($contact); ?>
+                    </h6>
                   </div>
                 </div>
                 <hr>

@@ -146,17 +146,18 @@
               <td><?= $row['room']; ?></td>
               <!-- <td><//?= $row['checkin']; ?></td>
               <td><//?= $row['checkout']; ?></td> -->
-              <td><?= $row['kontribusi']; ?></td>
+              <!-- <td><//?= $row['kontribusi']; ?></td> -->
+              <td><?= "Rp. " . number_format($row['kontribusi']) . " ,-"; ?></td>
               <!-- <td><//?= $row['kodeqr']; ?></td> -->
               <td>
-                <a href="<?= base_url(); ?>/project/userid/<?= $row['id']; ?>" target="_blank"
-                  class="btn btn-sm btn-warning" role="button">Data User</a>
-                <a href="<?= base_url(); ?>/project/detail/<?= $row['id']; ?>" target="_blank"
-                  class="btn btn-sm btn-success" role="button">Sertifikat</a>
-                <a href="<?= base_url(); ?>/project/kwitansi/<?= $row['id']; ?>" target="_blank"
-                  class="btn btn-sm btn-danger" role="button">Kwitansi</a>
-                <a href="/project/<?= $row['slug']; ?>" class="btn btn-sm btn-success"><i class="fa fa-id-card"
-                    aria-hidden="true"></i> Detail</a>
+                <a href="<?= base_url('project'); ?>/edit/<?= $row['slug']; ?>" target="_blank"
+                  class="btn btn-sm btn-warning" role="button"><i class="fas fa-edit"></i>Edit User</a>
+                <a href="<?= base_url('project'); ?>/sertifikat/<?= $row['slug']; ?>" target="_blank"
+                  class="btn btn-sm btn-success" role="button"><i class="fas fa-edit"></i>Sertifikat</a>
+                <a href="<?= base_url('project'); ?>/kwitansi/<?= $row['slug']; ?>" target="_blank"
+                  class="btn btn-sm btn-danger" role="button"><i class="fas fa-edit"></i>Kwitansi</a>
+                <a href="<?= base_url('project'); ?>/<?= $row['slug']; ?>" class="btn btn-sm btn-success"><i
+                    class="fa fa-id-card" aria-hidden="true"></i> Detail</a>
               </td>
 
             </tr>

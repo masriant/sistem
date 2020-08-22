@@ -88,6 +88,20 @@ class Project extends BaseController
     return view('project/sertifikat', $data);
   }
   //--------------------------------------------------------------------
+  public function print($slug)
+  {
+    $data = [
+      'title' => 'Cetak Kwitansi',
+      'project' => $this->projectModel->getProject($slug)
+    ];
+
+    // Jika data tidak ada ditabel
+    if (empty($data['project'])) {
+      throw new \CodeIgniter\Exceptions\PageNotFoundException('Data yang anda cari adalah :  '  . $slug .  ' dan tidak ada dalam database kami.');
+    }
+    return view('project/cetak_kwitansi', $data);
+  }
+  //--------------------------------------------------------------------
   public function search()
   {
     $data = [

@@ -80,14 +80,18 @@
               <td><?= $row['kabupaten']; ?></td>
               <td><?= $row['hotel']; ?></td>
               <td>
-                <a href="<?= base_url(); ?>/project/userid/<?= $row['id']; ?>" target="_blank"
+                <!-- <a href="</?= base_url(); ?>/project/userid/</?= $row['id']; ?>" target="_blank"
                   class="btn btn-sm btn-warning" role="button">Data User</a>
-                <a href="<?= base_url(); ?>/project/detail/<?= $row['id']; ?>" target="_blank"
+                <a href="</?= base_url(); ?>/project/detail/</?= $row['id']; ?>" target="_blank"
                   class="btn btn-sm btn-success" role="button">Sertifikat</a>
-                <a href="<?= base_url(); ?>/project/kwitansi/<?= $row['id']; ?>" target="_blank"
-                  class="btn btn-sm btn-danger" role="button">Kwitansi</a>
-                <a href="<?= base_url(); ?>/project/<?= $row['slug']; ?>" class="btn btn-sm btn-warning"><i
-                    class="fas fa-edit"></i> Detail</a>
+                <a href="</?= base_url(); ?>/project/kwitansi/</?= $row['id']; ?>" target="_blank"
+                  class="btn btn-sm btn-danger" role="button">Kwitansi</a> -->
+                <a href="<?= base_url(); ?>/project/<?= $row['slug']; ?>" class="btn btn-sm btn-info">
+                  <i class="fas fa-edit"> Detail</a>
+                <a href="<?= base_url(); ?>/project/sertifikat/<?= $row['slug']; ?>" class="btn btn-sm btn-success">
+                  <i class="fas fa-edit"></i>Sertifikat</a>
+                <a href="<?= base_url(); ?>/project/kwitansi/<?= $row['slug']; ?>" class="btn btn-sm btn-danger">
+                  <i class="fas fa-edit"></i>Kwitansi</a>
               </td>
             </tr>
             <?php endforeach; ?>

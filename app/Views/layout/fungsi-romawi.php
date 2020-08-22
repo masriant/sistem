@@ -1,41 +1,42 @@
 <?php
-    function getRomawi($bln){
-        switch ($bln){
-        case 1: 
+function getRomawi($bln)
+{
+    switch ($bln) {
+        case 1:
             return "I";
-        break;
+            break;
         case 2:
             return "II";
-        break;
+            break;
         case 3:
             return "III";
-        break;
+            break;
         case 4:
             return "IV";
-        break;
+            break;
         case 5:
             return "V";
-        break;
+            break;
         case 6:
             return "VI";
-        break;
+            break;
         case 7:
             return "VII";
-        break;
+            break;
         case 8:
             return "VIII";
-        break;
+            break;
         case 9:
             return "IX";
-        break;
+            break;
         case 10:
             return "X";
-        break;
+            break;
         case 11:
             return "XI";
-        break;
+            break;
         case 12:
             return "XII";
-        break;
-        }
+            break;
     }
+}

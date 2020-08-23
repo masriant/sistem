@@ -51,8 +51,8 @@ class ProjectModel extends Model
   public function noUrut()
   {
     // return $this->table('db_project')->getPlatform();
-    // return $this->table('db_project')->countAllResults(); 
-    $this->query('SELECT MAX(userid) AS `maxkode`  FROM  `db_project`');
+    return $this->table('db_project')->countAllResults();
+    // $this->query('SELECT MAX(userid) AS `maxkode`  FROM  `db_project`');
   }
   public function noUrutan()
   {

@@ -6,7 +6,7 @@
       <!-- small box -->
       <div class="small-box bg-info">
         <div class="inner">
-          <h3><?= $count; ?></h3>
+          <h3><?= $count + 1; ?></h3>
 
           <p>New Orders</p>
         </div>
@@ -51,9 +51,9 @@
       <!-- small box -->
       <div class="small-box bg-danger">
         <div class="inner">
-          <h3><?= $count; ?></h3>
+          <h3><?= date('d M Y'); ?></h3>
 
-          <p>Unique Visitors</p>
+          <p><?= date('H:i:s'); ?></p>
         </div>
         <div class="icon">
           <i class="ion ion-pie-graph"></i>

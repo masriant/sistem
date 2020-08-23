@@ -202,11 +202,17 @@ class Project extends BaseController
 
   public function create()
   {
-    $maxkode = $this->projectModel->noUrut();
-    $noUrut = (int) substr($maxkode, 3, 3);
-    $noUrut++;
+    // $maxkode = $this->projectModel->noUrut();
+    $noid = $this->projectModel->kodeUser();
+    $noid++;
     $char = "USR-";
-    $newID = $char . sprintf("%03s", $noUrut);
+    $newID = $char . sprintf("%03s", $noid);
+
+    // $maxkode = $this->projectModel->kodeUser();
+    // $noUrut = (int) substr($maxkode, 3, 3);
+    // $noUrut++;
+    // $char = "USR-";
+    // $newID = $char . sprintf("%03s", $noUrut);
 
 
     $data = [

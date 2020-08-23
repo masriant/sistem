@@ -6,9 +6,9 @@
       <!-- small box -->
       <div class="small-box bg-info">
         <div class="inner">
-          <h3><?= $count; ?></h3>
+          <h3><?= $count + 1; ?></h3>
 
-          <p>New Orders</p>
+          <p>Next New Orders</p>
         </div>
         <div class="icon">
           <i class="ion ion-bag"></i>
@@ -23,7 +23,7 @@
         <div class="inner">
           <h3><?= $versi; ?><sup style="font-size: 20px">%</sup></h3>
 
-          <p>Bounce Rate</p>
+          <p>Version Rate</p>
         </div>
         <div class="icon">
           <i class="ion ion-stats-bars"></i>
@@ -51,9 +51,9 @@
       <!-- small box -->
       <div class="small-box bg-danger">
         <div class="inner">
-          <h3><?= $count; ?></h3>
+          <h3><?= date('d M Y'); ?></h3>
 
-          <p>Unique Visitors</p>
+          <p><?= date('H:i:s'); ?></p>
         </div>
         <div class="icon">
           <i class="ion ion-pie-graph"></i>
@@ -108,12 +108,12 @@
   <div class="row">
     <div class="col">
       <div class="table-responsive{-sm|-md|-lg|-xl|-xxl}">
-        <table class="table table-striped table-sm caption-top">
-          <caption>Number next of users USR-<?= $count + 1; ?></caption>
+        <table class="table table-striped table-sm">
+
           <thead class="table-dark">
             <tr>
               <th>No.</th>
-              <th>ID</th>
+              <!-- <th>ID</th> -->
               <th>Nama</th>
               <th>Jabatan</th>
               <!-- <th>Instansi</th>
@@ -121,7 +121,7 @@
               <!-- <th>Tema</th> -->
               <th>Lokasi</th>
               <th>Hotel</th>
-              <th>Room</th>
+              <!-- <th>Room</th> -->
               <!-- <th>Checkin</th>
               <th>Checkout</th> -->
               <th>Kontribusi</th>
@@ -135,15 +135,15 @@
             <?php foreach ($project as $row) : ?>
             <tr>
               <td><?= $i++; ?>.</td>
-              <td><?= $row['userid']; ?></td>
-              <td><?= $row['nama']; ?></td>
+              <!-- <td><//?= $row['userid']; ?></td> -->
+              <td><?= ucfirst($row['nama']); ?></td>
               <td><?= $row['jabatan']; ?></td>
               <!-- <td><//?= $row['instansi']; ?></td>
               <td><?//= $row['kabupaten']; ?></td> -->
               <!-- <td><//?= $row['tema']; ?></td> -->
               <td><?= $row['lokasi']; ?></td>
               <td><?= $row['hotel']; ?></td>
-              <td><?= $row['room']; ?></td>
+              <!-- <td><//?= $row['room']; ?></td> -->
               <!-- <td><//?= $row['checkin']; ?></td>
               <td><//?= $row['checkout']; ?></td> -->
               <!-- <td><//?= $row['kontribusi']; ?></td> -->

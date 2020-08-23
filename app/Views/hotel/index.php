@@ -78,11 +78,11 @@
         <select class="form-select form-select-sm btn-outline-danger mr-2" aria-label=".form-select-sm"
           onChange="document.location.href=this.options[this.selectedIndex].value;">
           <option selected>Open select menu</option>
-          <option value="project/create">Tambah</option>
-          <option value="project/add">Add</option>
-          <option value="project/data">Data</option>
-          <option value="project/edit">Edit</option>
-          <option value="project">Index</option>
+          <option value="hotel/create">Tambah</option>
+          <option value="hotel/add">Add</option>
+          <option value="hotel/data">Data</option>
+          <option value="hotel/edit">Edit</option>
+          <option value="hotel">Index</option>
           <option value="lakip/datatables">Table</option>
         </select>
       </form>
@@ -109,7 +109,7 @@
     <div class="col">
       <div class="table-responsive{-sm|-md|-lg|-xl|-xxl}">
         <table class="table table-striped table-sm caption-top">
-          <caption>Number next of users USR-<?= $count + 1; ?></caption>
+          <caption>Number next of users USR-<?= $test + 1; ?></caption>
           <thead class="table-dark">
             <tr>
               <th>No.</th>
@@ -132,7 +132,7 @@
           <tbody>
             <!-- </?php $i = 1; ?> -->
             <?php $i = 1 + (10 * ($currentPage - 1)); ?>
-            <?php foreach ($project as $row) : ?>
+            <?php foreach ($hotel as $row) : ?>
             <tr>
               <td><?= $i++; ?>.</td>
               <td><?= $row['userid']; ?></td>

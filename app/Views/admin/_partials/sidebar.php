@@ -44,6 +44,12 @@
                 <p>Project</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="<?php echo site_url('hotel') ?>" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Hotel</p>
+              </a>
+            </li>
           </ul>
         </li>
         <li class="nav-item">

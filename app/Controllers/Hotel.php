@@ -3,16 +3,16 @@
 namespace App\Controllers;
 
 use Mpdf\Mpdf;
-use App\Models\ProjectModel;
+use App\Models\HotelModel;
 // use PhpOffice\PhpSpreadsheet\Spreadsheet;
 // use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-class Project extends BaseController
+class Hotel extends BaseController
 {
-  protected $projectModel;
+  protected $hotelModel;
   public function __construct()
   {
-    $this->projectModel = new ProjectModel();
+    $this->hotelModel = new HotelModel();
     // $this->Mpdf = new Mpdf;
   }
   //--------------------------------------------------------------------
@@ -22,13 +22,13 @@ class Project extends BaseController
     $currentPage = $this->request->getVar('page_id') ? $this->request->getVar('page_id') : 1;
     $keyword = $this->request->getVar('keyword');
     if ($keyword) {
-      $project = $this->projectModel->search($keyword);
+      $hotel = $this->hotelModel->search($keyword);
     } else {
-      $project = $this->projectModel;
+      $hotel = $this->hotelModel;
     }
 
-    $test = $this->projectModel->noUrut();
-    $counter = $this->projectModel->kodeUser();
+    $test = $this->hotelModel->noUrut();
+    $counter = $this->hotelModel->kodeUser();
     $urutan = (int) substr($counter, 3, 3);
     $urutan++;
     $huruf = "USR-";
@@ -36,15 +36,15 @@ class Project extends BaseController
 
     $data = [
       'title' => 'List User',
-      'project' => $project->paginate(10, 'id'),
-      'pager' => $this->projectModel->pager,
+      'hotel' => $hotel->paginate(10, 'id'),
+      'pager' => $this->hotelModel->pager,
       'currentPage' => $currentPage,
       'test' => $test,
       'kode' => $autourut,
-      'count' => $this->projectModel->countAll(),
-      'versi' => $this->projectModel->getVersion(),
+      'count' => $this->hotelModel->countAll(),
+      'versi' => $this->hotelModel->getVersion(),
     ];
-    return view('project/index', $data);
+    return view('hotel/index', $data);
   }
 
   //--------------------------------------------------------------------
@@ -52,66 +52,66 @@ class Project extends BaseController
   {
     $data = [
       'title' => 'Detail User',
-      'project' => $this->projectModel->getProject($slug)
+      'hotel' => $this->hotelModel->getHotel($slug)
     ];
 
     // Jika data tidak ada ditabel
-    if (empty($data['project'])) {
+    if (empty($data['hotel'])) {
       throw new \CodeIgniter\Exceptions\PageNotFoundException('Data yang anda cari adalah :  '  . $slug .  ' dan tidak ada dalam database kami.');
     }
-    return view('project/detail', $data);
+    return view('hotel/detail', $data);
   }
   //--------------------------------------------------------------------
   public function kwitansi($slug)
   {
     $data = [
       'title' => 'Kwitansi',
-      'project' => $this->projectModel->getProject($slug)
+      'hotel' => $this->hotelModel->getHotel($slug)
     ];
 
     // Jika data tidak ada ditabel
-    if (empty($data['project'])) {
+    if (empty($data['hotel'])) {
       throw new \CodeIgniter\Exceptions\PageNotFoundException('Data yang anda cari adalah :  '  . $slug .  ' dan tidak ada dalam database kami.');
     }
-    return view('project/kwitansi', $data);
+    return view('hotel/kwitansi', $data);
   }
   //--------------------------------------------------------------------
   public function sertifikat($slug)
   {
     $data = [
       'title' => 'Sertifikat',
-      'project' => $this->projectModel->getProject($slug)
+      'hotel' => $this->hotelModel->getHotel($slug)
     ];
 
     // Jika data tidak ada ditabel
-    if (empty($data['project'])) {
+    if (empty($data['hotel'])) {
       throw new \CodeIgniter\Exceptions\PageNotFoundException('Data yang anda cari adalah :  '  . $slug .  ' dan tidak ada dalam database kami.');
     }
-    return view('project/sertifikat', $data);
+    return view('hotel/sertifikat', $data);
   }
   //--------------------------------------------------------------------
   public function print($slug)
   {
     $data = [
       'title' => 'Cetak Kwitansi',
-      'project' => $this->projectModel->getProject($slug)
+      'hotel' => $this->hotelModel->getHotel($slug)
     ];
 
     // Jika data tidak ada ditabel
-    if (empty($data['project'])) {
+    if (empty($data['hotel'])) {
       throw new \CodeIgniter\Exceptions\PageNotFoundException('Data yang anda cari adalah :  '  . $slug .  ' dan tidak ada dalam database kami.');
     }
-    return view('project/cetak_kwitansi', $data);
+    return view('hotel/cetak_kwitansi', $data);
   }
   //--------------------------------------------------------------------
   public function search()
   {
     $data = [
       'title' => 'Form search data',
-      'project' => $this->projectModel->getProject()
+      'hotel' => $this->hotelModel->getHotel()
     ];
 
-    return view('project/search', $data);
+    return view('hotel/search', $data);
   }
   //--------------------------------------------------------------------
 
@@ -120,20 +120,20 @@ class Project extends BaseController
     $currentPage = $this->request->getVar('page_id') ? $this->request->getVar('page_id') : 1;
     $keyword = $this->request->getVar('keyword');
     if ($keyword) {
-      $project = $this->projectModel->search($keyword);
+      $hotel = $this->hotelModel->search($keyword);
     } else {
-      $project = $this->projectModel;
+      $hotel = $this->hotelModel;
     }
 
     $data = [
       'title' => 'List User',
-      'project' => $project->paginate(10, 'id'),
-      'pager' => $this->projectModel->pager,
+      'hotel' => $hotel->paginate(10, 'id'),
+      'pager' => $this->hotelModel->pager,
       'currentPage' => $currentPage,
       'message' => 'Akses User Panel!'
 
     ];
-    return view('project/lakip_index', $data);
+    return view('hotel/lakip_index', $data);
   }
   //--------------------------------------------------------------------
 
@@ -141,10 +141,10 @@ class Project extends BaseController
   // {
   //   $data = [
   //     'title' => 'Sertifikat',
-  //     'lakip' => $this->projectModel->find($id),
+  //     'lakip' => $this->hotelModel->find($id),
 
   //   ];
-  //   return view('project/detail', $data);
+  //   return view('hotel/detail', $data);
   // }
   //--------------------------------------------------------------------
 
@@ -152,17 +152,17 @@ class Project extends BaseController
   // {
   //   $data = [
   //     'title' => 'Data User ID',
-  //     'lakip' => $this->projectModel->find($id),
+  //     'lakip' => $this->hotelModel->find($id),
 
   //   ];
-  //   return view('project/detail-id', $data);
+  //   return view('hotel/detail-id', $data);
   // }
   //--------------------------------------------------------------------
 
   // public function kwitansi($id)
   // {
-  //   $lakip = $this->projectModel->find($id);
-  //   $counter = $this->projectModel->kodeUser();
+  //   $lakip = $this->hotelModel->find($id);
+  //   $counter = $this->hotelModel->kodeUser();
   //   $urutan = (int) substr($counter, 3, 3);
   //   $urutan++;
   //   $huruf = "LKP";
@@ -176,14 +176,14 @@ class Project extends BaseController
 
 
   //   ];
-  //   return view('project/kwitansi-user', $data);
+  //   return view('hotel/kwitansi-user', $data);
   // }
   //--------------------------------------------------------------------
 
   // public function userid($id)
   // {
-  //   $lakip = $this->projectModel->find($id);
-  //   $counter = $this->projectModel->kodeUser();
+  //   $lakip = $this->hotelModel->find($id);
+  //   $counter = $this->hotelModel->kodeUser();
   //   $urutan = (int) substr($counter, 3, 3);
   //   $urutan++;
   //   $huruf = "LKP";
@@ -196,13 +196,13 @@ class Project extends BaseController
 
 
   //   ];
-  //   return view('project/detail-user', $data);
+  //   return view('hotel/detail-user', $data);
   // }
   //--------------------------------------------------------------------
 
   public function create()
   {
-    $maxkode = $this->projectModel->noUrut();
+    $maxkode = $this->hotelModel->noUrut();
     $noUrut = (int) substr($maxkode, 3, 3);
     $noUrut++;
     $char = "USR-";
@@ -215,13 +215,13 @@ class Project extends BaseController
       'newID' => $newID,
 
     ];
-    return view('project/add_user', $data);
+    return view('hotel/add_user', $data);
   }
   //--------------------------------------------------------------------
 
   // public function add()
   // {
-  // $counter = $this->projectModel->kodeUser();
+  // $counter = $this->hotelModel->kodeUser();
   // $urutan = (int) substr($counter, 3, 3);
   // $urutan++;
   // $huruf = "USR-";
@@ -234,7 +234,7 @@ class Project extends BaseController
   // 'kode' => $autourut,
 
   //   ];
-  //   return view('project/create_user', $data);
+  //   return view('hotel/create_user', $data);
   // }
   //--------------------------------------------------------------------
 
@@ -243,10 +243,10 @@ class Project extends BaseController
   //   $data = [
   //     'title' => 'Form Ubah Data',
   //     'validation' => \Config\Services::validation(),
-  //     'project' => $this->projectModel->getProject($slug),
+  //     'hotel' => $this->hotelModel->getHotel($slug),
   //   ];
 
-  //   return view('project/edit_user', $data);
+  //   return view('hotel/edit_user', $data);
   // }
   //--------------------------------------------------------------------
 
@@ -255,9 +255,9 @@ class Project extends BaseController
     $data = [
       'title' => 'Ubah User',
       'validation' => \Config\Services::validation(),
-      'project' => $this->projectModel->getProject($slug),
+      'hotel' => $this->hotelModel->getHotel($slug),
     ];
-    return view('project/user_edit', $data);
+    return view('hotel/user_edit', $data);
   }
   //--------------------------------------------------------------------
   public function save()
@@ -265,14 +265,14 @@ class Project extends BaseController
     // validasi input 
     if (!$this->validate([
       'userid' => [
-        'rules' => 'required|is_unique[db_project.userid]',
+        'rules' => 'required|is_unique[db_hotel.userid]',
         'errors' => [
           'required' => '{field} harus diisi.',
           'is_unique' => '{field} sudah terdaftar.'
         ]
       ],
       'nama' => [
-        'rules' => 'required|is_unique[db_project.nama]',
+        'rules' => 'required|is_unique[db_hotel.nama]',
         'errors' => [
           'required' => '{field} harus diisi.',
           'is_unique' => '{field} sudah terdaftar.'
@@ -354,7 +354,7 @@ class Project extends BaseController
       ]
     ])) {
 
-      return redirect()->to('/project/add')->withInput();
+      return redirect()->to('/hotel/add')->withInput();
     }
 
     // ambil gambar<===
@@ -373,7 +373,7 @@ class Project extends BaseController
 
 
     $slug = url_title($this->request->getVar('nama'), '-', true);
-    $this->projectModel->save([
+    $this->hotelModel->save([
       'userid'          => $this->request->getVar('userid'),
       'nama'            => $this->request->getVar('nama'),
       'slug'            => $slug,
@@ -396,7 +396,7 @@ class Project extends BaseController
 
     session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
 
-    return redirect()->to('/project');
+    return redirect()->to('/hotel');
   }
   //--------------------------------------------------------------------
 
@@ -405,14 +405,14 @@ class Project extends BaseController
   //   // validasi input 
   //   if (!$this->validate([
   //     'userid' => [
-  //       'rules' => 'required|is_unique[db_project.userid]',
+  //       'rules' => 'required|is_unique[db_hotel.userid]',
   //       'errors' => [
   //         'required' => '{field} harus diisi.',
   //         'is_unique' => '{field} sudah terdaftar.'
   //       ]
   //     ],
   //     'nama' => [
-  //       'rules' => 'required|is_unique[db_project.nama]',
+  //       'rules' => 'required|is_unique[db_hotel.nama]',
   //       'errors' => [
   //         'required' => '{field} harus diisi.',
   //         'is_unique' => '{field} sudah terdaftar.'
@@ -494,7 +494,7 @@ class Project extends BaseController
   //     ]
   //   ])) {
 
-  //     return redirect()->to('/project/create')->withInput();
+  //     return redirect()->to('/hotel/create')->withInput();
   //   }
 
   //   // ambil gambar<===
@@ -513,7 +513,7 @@ class Project extends BaseController
 
 
   //   $slug = url_title($this->request->getVar('nama'), '-', true);
-  //   $this->projectModel->save([
+  //   $this->hotelModel->save([
   //     'userid'        => $this->request->getVar('userid'),
   //     'nama'          => $this->request->getVar('nama'),
   //     'slug'          => $slug,
@@ -533,24 +533,24 @@ class Project extends BaseController
 
   //   session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
 
-  //   return redirect()->to('/project/data');
+  //   return redirect()->to('/hotel/data');
   // }
 
   //--------------------------------------------------------------------
   public function delete($id)
   {
     // cari gambar berdasarkan id
-    $project = $this->projectModel->find($id);
+    $hotel = $this->hotelModel->find($id);
     // cek jika file gambarnya default.jpg
-    if ($project['kodeqr'] != 'default.jpg') {
+    if ($hotel['kodeqr'] != 'default.jpg') {
       // Hapus gambar
-      unlink('assets/images/' . $project['kodeqr']);
+      unlink('assets/images/' . $hotel['kodeqr']);
     }
 
-    $this->projectModel->delete($id);
+    $this->hotelModel->delete($id);
     session()->setFlashdata('pesan', 'Data berhasil dihapus.');
 
-    return redirect()->to('/project');
+    return redirect()->to('/hotel');
   }
 
 
@@ -560,11 +560,11 @@ class Project extends BaseController
     dd($this->request->getVar());
 
     // cek judul
-    $projectLama = $this->projectModel->getProject($this->request->getVar('slug'));
-    if ($projectLama['userid'] == $this->request->getVar('userid')) {
+    $hotelLama = $this->hotelModel->getHotel($this->request->getVar('slug'));
+    if ($hotelLama['userid'] == $this->request->getVar('userid')) {
       $rule_userid = 'required';
     } else {
-      $rule_userid = 'required|is_unique[db_project.userid]';
+      $rule_userid = 'required|is_unique[db_hotel.userid]';
     }
     // validasi input 
     if (!$this->validate([
@@ -658,7 +658,7 @@ class Project extends BaseController
       ]
     ])) {
 
-      return redirect()->to('/project/edit/' . $this->request->getVar('slug'))->withInput();
+      return redirect()->to('/hotel/edit/' . $this->request->getVar('slug'))->withInput();
     }
 
 
@@ -678,7 +678,7 @@ class Project extends BaseController
 
 
     $slug = url_title($this->request->getVar('nama'), '-', true);
-    $this->projectModel->save([
+    $this->hotelModel->save([
       'id'          => $id,
       'userid'      => $this->request->getVar('userid'),
       'nama'        => $this->request->getVar('nama'),
@@ -699,7 +699,7 @@ class Project extends BaseController
 
     session()->setFlashdata('pesan', 'Data berhasil diupdate.');
 
-    return redirect()->to('/project/<?= $project["id"]; ?>');
+    return redirect()->to('/hotel/<?= $hotel["id"]; ?>');
 }
 
 
@@ -720,22 +720,22 @@ public function about()
 // $currentPage = $this->request->getVar('page_id') ? $this->request->getVar('page_id') : 1;
 // $keyword = $this->request->getVar('keyword');
 // if ($keyword) {
-// $lakip = $this->projectModel->search($keyword);
+// $lakip = $this->hotelModel->search($keyword);
 // } else {
-// $lakip = $this->projectModel;
+// $lakip = $this->hotelModel;
 // }
 $data = [
 'title' => 'About',
-'lakip' => $this->projectModel->findAll(),
-'count' => $this->projectModel->countAll(),
-'flat' => $this->projectModel->getPlatform(),
-'versi' => $this->projectModel->getVersion(),
-'getLastQuery' => $this->projectModel->getLastQuery(),
+'lakip' => $this->hotelModel->findAll(),
+'count' => $this->hotelModel->countAll(),
+'flat' => $this->hotelModel->getPlatform(),
+'versi' => $this->hotelModel->getVersion(),
+'getLastQuery' => $this->hotelModel->getLastQuery(),
 
 
 
 // 'lakip' => $lakip->paginate(10, 'id'),
-// 'pager' => $this->projectModel->pager,
+// 'pager' => $this->hotelModel->pager,
 // 'currentPage' => $currentPage,
 
 ];
@@ -747,7 +747,7 @@ public function datatables()
 {
 $data = [
 'title' => 'About',
-'lakip' => $this->projectModel->findAll(),
+'lakip' => $this->hotelModel->findAll(),
 ];
 return view('home/datatables', $data);
 }
@@ -755,7 +755,7 @@ return view('home/datatables', $data);
 
 public function pdf()
 {
-$lakip = $this->projectModel->findAll();
+$lakip = $this->hotelModel->findAll();
 $this->Mpdf = new Mpdf;
 $data = [
 'title' => 'PDF',
@@ -767,7 +767,7 @@ return view('home/makepdf', $data);
 
 public function invoice()
 {
-$lakip = $this->projectModel->findAll();
+$lakip = $this->hotelModel->findAll();
 $this->Mpdf = new Mpdf;
 $data = [
 'title' => 'PDF',
@@ -779,7 +779,7 @@ return view('home/makepdf', $data);
 
 public function getpdf()
 {
-$lakip = $this->projectModel->findAll();
+$lakip = $this->hotelModel->findAll();
 // $this->Mpdf = new Mpdf;
 // $data = [
 // 'lakip' => $lakip,

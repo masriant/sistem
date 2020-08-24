@@ -36,6 +36,13 @@ $routes->get('/admin', 'Admin::index');
 $routes->get('/lakip', 'Lakip::index');
 $routes->get('/project', 'Project::index');
 $routes->get('/hotel', 'Hotel::index');
+
+$routes->get('/hotel/create', 'Hotel::create');
+$routes->get('/hotel/edit/(:segment)', 'Hotel::edit/$1');
+// $routes->get('/hotel/update/(:segment)', 'Hotel::update/$1');
+$routes->delete('/hotel/(:num)', 'Hotel::delete/$1');
+$routes->get('/hotel/(:any)', 'Hotel::detail/$1');
+
 $routes->get('/project/create', 'Project::create');
 $routes->get('/project/add', 'Project::add');
 $routes->get('/project/data', 'Project::data');

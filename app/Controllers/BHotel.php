@@ -5,6 +5,9 @@ namespace App\Controllers;
 use App\Models\HotelModel;
 use CodeIgniter\Validation\Rules;
 
+use Mpdf\Mpdf;
+// use PhpOffice\PhpSpreadsheet\Spreadsheet;
+// use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Hotel extends BaseController
 {
@@ -137,7 +140,69 @@ class Hotel extends BaseController
     ];
     return view('hotel/lakip_index', $data);
   }
+  //--------------------------------------------------------------------
 
+  // public function detailid($id)
+  // {
+  //   $data = [
+  //     'title' => 'Sertifikat',
+  //     'lakip' => $this->hotelModel->find($id),
+
+  //   ];
+  //   return view('hotel/detail', $data);
+  // }
+  //--------------------------------------------------------------------
+
+  // public function datauser($id)
+  // {
+  //   $data = [
+  //     'title' => 'Data User ID',
+  //     'lakip' => $this->hotelModel->find($id),
+
+  //   ];
+  //   return view('hotel/detail-id', $data);
+  // }
+  //--------------------------------------------------------------------
+
+  // public function kwitansi($id)
+  // {
+  //   $lakip = $this->hotelModel->find($id);
+  //   $counter = $this->hotelModel->kodeUser();
+  //   $urutan = (int) substr($counter, 3, 3);
+  //   $urutan++;
+  //   $huruf = "LKP";
+  //   $autourut = $huruf . sprintf("%03s", $urutan);
+
+  //   $data = [
+  //     'title' => 'Kwitansi',
+  //     'kontribusi' => 4500000,
+  //     'lakip' => $lakip,
+  //     'kode' => $autourut,
+
+
+  //   ];
+  //   return view('hotel/kwitansi-user', $data);
+  // }
+  //--------------------------------------------------------------------
+
+  // public function userid($id)
+  // {
+  //   $lakip = $this->hotelModel->find($id);
+  //   $counter = $this->hotelModel->kodeUser();
+  //   $urutan = (int) substr($counter, 3, 3);
+  //   $urutan++;
+  //   $huruf = "LKP";
+  //   $autourut = $huruf . sprintf("%03s", $urutan);
+
+  //   $data = [
+  //     'title' => 'Data User',
+  //     'lakip' => $lakip,
+  //     'kode' => $autourut,
+
+
+  //   ];
+  //   return view('hotel/detail-user', $data);
+  // }
   //--------------------------------------------------------------------
 
   public function create()
@@ -157,6 +222,39 @@ class Hotel extends BaseController
     ];
     return view('hotel/add_hotel', $data);
   }
+  //--------------------------------------------------------------------
+
+  // public function add()
+  // {
+  // $counter = $this->hotelModel->kodeUser();
+  // $urutan = (int) substr($counter, 3, 3);
+  // $urutan++;
+  // $huruf = "USR-";
+  // $autourut = $huruf . sprintf("%03s", $urutan);
+
+  //   $data = [
+  //     'title' => 'Tambah User',
+  //     'validation' => \Config\Services::validation(),
+  //     'newID' => $newID,
+  // 'kode' => $autourut,
+
+  //   ];
+  //   return view('hotel/create_user', $data);
+  // }
+  //--------------------------------------------------------------------
+
+  // public function editing($slug)
+  // {
+  //   $data = [
+  //     'title' => 'Form Ubah Data',
+  //     'validation' => \Config\Services::validation(),
+  //     'hotel' => $this->hotelModel->getHotel($slug),
+  //   ];
+
+  //   return view('hotel/edit_user', $data);
+  // }
+  //--------------------------------------------------------------------
+
 
   //--------------------------------------------------------------------
   public function delete($id)
@@ -320,9 +418,8 @@ class Hotel extends BaseController
     $data = [
       'title' => 'Ubah Hotel',
       'validation' => \Config\Services::validation(),
-      'hotel' => $this->hotelModel->getHotel($slug)
+      'hotel' => $this->hotelModel->getHotel($slug),
     ];
-
     return view('hotel/edit_hotel', $data);
   }
 
@@ -490,131 +587,131 @@ class Hotel extends BaseController
 
   //--------------------------------------------------------------------
 
-  // public function about()
-  // {
-  //   // $currentPage = $this->request->getVar('page_id') ? $this->request->getVar('page_id') : 1;
-  //   // $keyword = $this->request->getVar('keyword');
-  //   // if ($keyword) {
-  //   // $lakip = $this->hotelModel->search($keyword);
-  //   // } else {
-  //   // $lakip = $this->hotelModel;
-  //   // }
-  //   $data = [
-  //     'title' => 'About',
-  //     'lakip' => $this->hotelModel->findAll(),
-  //     'count' => $this->hotelModel->countAll(),
-  //     'flat' => $this->hotelModel->getPlatform(),
-  //     'versi' => $this->hotelModel->getVersion(),
-  //     'getLastQuery' => $this->hotelModel->getLastQuery(),
+  public function about()
+  {
+    // $currentPage = $this->request->getVar('page_id') ? $this->request->getVar('page_id') : 1;
+    // $keyword = $this->request->getVar('keyword');
+    // if ($keyword) {
+    // $lakip = $this->hotelModel->search($keyword);
+    // } else {
+    // $lakip = $this->hotelModel;
+    // }
+    $data = [
+      'title' => 'About',
+      'lakip' => $this->hotelModel->findAll(),
+      'count' => $this->hotelModel->countAll(),
+      'flat' => $this->hotelModel->getPlatform(),
+      'versi' => $this->hotelModel->getVersion(),
+      'getLastQuery' => $this->hotelModel->getLastQuery(),
 
 
 
-  //     // 'lakip' => $lakip->paginate(10, 'id'),
-  //     // 'pager' => $this->hotelModel->pager,
-  //     // 'currentPage' => $currentPage,
+      // 'lakip' => $lakip->paginate(10, 'id'),
+      // 'pager' => $this->hotelModel->pager,
+      // 'currentPage' => $currentPage,
 
-  //   ];
-  //   return view('home/about', $data);
-  // }
+    ];
+    return view('home/about', $data);
+  }
   //--------------------------------------------------------------------
 
-  //   public function datatables()
-  //   {
-  //     $data = [
-  //       'title' => 'About',
-  //       'lakip' => $this->hotelModel->findAll(),
-  //     ];
-  //     return view('home/datatables', $data);
-  //   }
-  //   //--------------------------------------------------------------------
+  public function datatables()
+  {
+    $data = [
+      'title' => 'About',
+      'lakip' => $this->hotelModel->findAll(),
+    ];
+    return view('home/datatables', $data);
+  }
+  //--------------------------------------------------------------------
 
-  //   public function pdf()
-  //   {
-  //     $lakip = $this->hotelModel->findAll();
-  //     $this->Mpdf = new Mpdf;
-  //     $data = [
-  //       'title' => 'PDF',
-  //       'lakip' => $lakip,
-  //     ];
-  //     return view('home/makepdf', $data);
-  //   }
-  //   //--------------------------------------------------------------------
+  public function pdf()
+  {
+    $lakip = $this->hotelModel->findAll();
+    $this->Mpdf = new Mpdf;
+    $data = [
+      'title' => 'PDF',
+      'lakip' => $lakip,
+    ];
+    return view('home/makepdf', $data);
+  }
+  //--------------------------------------------------------------------
 
-  //   public function invoice()
-  //   {
-  //     $lakip = $this->hotelModel->findAll();
-  //     $this->Mpdf = new Mpdf;
-  //     $data = [
-  //       'title' => 'PDF',
-  //       'lakip' => $lakip,
-  //     ];
-  //     return view('home/makepdf', $data);
-  //   }
-  //   //--------------------------------------------------------------------
+  public function invoice()
+  {
+    $lakip = $this->hotelModel->findAll();
+    $this->Mpdf = new Mpdf;
+    $data = [
+      'title' => 'PDF',
+      'lakip' => $lakip,
+    ];
+    return view('home/makepdf', $data);
+  }
+  //--------------------------------------------------------------------
 
-  //   public function getpdf()
-  //   {
-  //     $lakip = $this->hotelModel->findAll();
-  //     // $this->Mpdf = new Mpdf;
-  //     // $data = [
-  //     // 'lakip' => $lakip,
-  //     // ];
-  //     $mpdf = new \Mpdf\Mpdf([
-  //       'mode' => 'utf-8',
-  //       'margin_top' => 30,
-  //       'format' => 'A4', 'L'
-  //     ]);
+  public function getpdf()
+  {
+    $lakip = $this->hotelModel->findAll();
+    // $this->Mpdf = new Mpdf;
+    // $data = [
+    // 'lakip' => $lakip,
+    // ];
+    $mpdf = new \Mpdf\Mpdf([
+      'mode' => 'utf-8',
+      'margin_top' => 30,
+      'format' => 'A4', 'L'
+    ]);
 
-  //     $mpdf->SetHeader('<img src="assets/brand/lakip.jpeg" width="70" />|<p>LEMBAGA ADMINISTRASI KEUANGAN DAN ILMU
-  //   PEMERINTAHAN</p>
-  // <p>SKT DITJEN POLPUM KEMENDAGRI NOMOR : 001-00-00/034/I/2019</p>
-  // <p>Sekretariat : Jln. Serdang Baru Raya No. 4B, Kemayoran - Jakarta 10650</p>
-  // <p>Website : www.lakip.co.id E-mail : admin@lakip.co.id Telp./Fax. 021-42885718</p>
-  // |');
+    $mpdf->SetHeader('<img src="assets/brand/lakip.jpeg" width="70" />|<p>LEMBAGA ADMINISTRASI KEUANGAN DAN ILMU
+  PEMERINTAHAN</p>
+<p>SKT DITJEN POLPUM KEMENDAGRI NOMOR : 001-00-00/034/I/2019</p>
+<p>Sekretariat : Jln. Serdang Baru Raya No. 4B, Kemayoran - Jakarta 10650</p>
+<p>Website : www.lakip.co.id E-mail : admin@lakip.co.id Telp./Fax. 021-42885718</p>
+|');
 
-  //     $tgl_cetak = date('d F Y H:i:s');
-  //     $mpdf->SetFooter(base_url() . '|{PAGENO}|' . $tgl_cetak);
+    $tgl_cetak = date('d F Y H:i:s');
+    $mpdf->SetFooter(base_url() . '|{PAGENO}|' . $tgl_cetak);
 
-  //     $html = '
-  // <!DOCTYPE html>
-  // <html lang="en">
+    $html = '
+<!DOCTYPE html>
+<html lang="en">
 
-  // <head>
-  //   <meta charset="UTF-8">
-  //   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  //   <link href="/css/mypdf.css" type="text/css" rel="stylesheet" media="mpdf" />
-  //   <title>PDF</title>
-  // </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/css/mypdf.css" type="text/css" rel="stylesheet" media="mpdf" />
+  <title>PDF</title>
+</head>
 
-  // <body>
-  //   <h3>List Peserta</h3>
-  //   <table class="table table-bordered table-hover">
-  //     <thead class="table-dark">
-  //       <tr>
-  //         <th scope="col">No</th>
-  //         <th scope="col">Nama</th>
-  //         <th scope="col">Alamat</th>
-  //         <th scope="col">Kode</th>
-  //       </tr>
-  //     </thead>';
-  //     $i = 1;
-  //     foreach ($lakip as $row) {
-  //       $html .= '<tr>
-  //       <td>' . $i++ . '</td>
-  //       <td>' . $row["nama"] . '</td>
-  //       <td>' . $row["alamat"] . '</td>
-  //       <td>' . $row["kodeqr"] . '</td>
-  //     </tr>';
-  //     }
-  //     $html .= '
-  //   </table>
-  // </body>
+<body>
+  <h3>List Peserta</h3>
+  <table class="table table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">Nama</th>
+        <th scope="col">Alamat</th>
+        <th scope="col">Kode</th>
+      </tr>
+    </thead>';
+    $i = 1;
+    foreach ($lakip as $row) {
+      $html .= '<tr>
+      <td>' . $i++ . '</td>
+      <td>' . $row["nama"] . '</td>
+      <td>' . $row["alamat"] . '</td>
+      <td>' . $row["kodeqr"] . '</td>
+    </tr>';
+    }
+    $html .= '
+  </table>
+</body>
 
-  // </html>';
+</html>';
 
 
-  //     $mpdf->WriteHTML($html);
+    $mpdf->WriteHTML($html);
 
-  //     return redirect()->to($mpdf->Output('filename.pdf', 'I'));
-  //   }
+    return redirect()->to($mpdf->Output('filename.pdf', 'I'));
+  }
 }

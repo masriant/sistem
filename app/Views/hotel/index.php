@@ -38,7 +38,7 @@
         <div class="inner">
           <h3><?= $count; ?></h3>
 
-          <p>User Registrations</p>
+          <p>Hotel Registrations</p>
         </div>
         <div class="icon">
           <i class="ion ion-person-add"></i>
@@ -79,7 +79,6 @@
           onChange="document.location.href=this.options[this.selectedIndex].value;">
           <option selected>Open select menu</option>
           <option value="hotel/create">Tambah</option>
-          <option value="hotel/add">Add</option>
           <option value="hotel/data">Data</option>
           <option value="hotel/edit">Edit</option>
           <option value="hotel">Index</option>
@@ -109,23 +108,17 @@
     <div class="col">
       <div class="table-responsive{-sm|-md|-lg|-xl|-xxl}">
         <table class="table table-striped table-sm caption-top">
-          <caption>Number next of users USR-<?= $test + 1; ?></caption>
+          <caption>Number next of Hotel <?= $test + 1; ?></caption>
           <thead class="table-dark">
             <tr>
               <th>No.</th>
-              <th>ID</th>
-              <th>Nama</th>
-              <th>Jabatan</th>
-              <!-- <th>Instansi</th>
-              <th>Kabupaten</th> -->
-              <!-- <th>Tema</th> -->
-              <th>Lokasi</th>
               <th>Hotel</th>
+              <th>Kota</th>
               <th>Room</th>
-              <!-- <th>Checkin</th>
-              <th>Checkout</th> -->
-              <th>Kontribusi</th>
-              <!-- <th>Gambar</th> -->
+              <th>Halfday</th>
+              <th>Fullday</th>
+              <th>FB Meeting</th>
+              <th>FB Room</th>
               <th>Opsi</th>
             </tr>
           </thead>
@@ -135,28 +128,18 @@
             <?php foreach ($hotel as $row) : ?>
             <tr>
               <td><?= $i++; ?>.</td>
-              <td><?= $row['userid']; ?></td>
-              <td><?= $row['nama']; ?></td>
-              <td><?= $row['jabatan']; ?></td>
-              <!-- <td><//?= $row['instansi']; ?></td>
-              <td><?//= $row['kabupaten']; ?></td> -->
-              <!-- <td><//?= $row['tema']; ?></td> -->
-              <td><?= $row['lokasi']; ?></td>
               <td><?= $row['hotel']; ?></td>
-              <td><?= $row['room']; ?></td>
-              <!-- <td><//?= $row['checkin']; ?></td>
-              <td><//?= $row['checkout']; ?></td> -->
-              <!-- <td><//?= $row['kontribusi']; ?></td> -->
-              <td><?= "Rp. " . number_format($row['kontribusi']) . " ,-"; ?></td>
-              <!-- <td><//?= $row['kodeqr']; ?></td> -->
+              <td><?= $row['kota']; ?></td>
+              <td><?= "Rp. " . number_format($row['bed_twin']) . " ,-"; ?></td>
+              <td><?= "Rp. " . number_format($row['meeting_halfday']) . " ,-"; ?></td>
+              <td><?= "Rp. " . number_format($row['meeting_fullday']) . " ,-"; ?></td>
+              <td><?= "Rp. " . number_format($row['meeting_fullboard']) . " ,-"; ?></td>
+              <td><?= "Rp. " . number_format($row['bed_fullboard']) . " ,-"; ?></td>
               <td>
-                <a href="<?= base_url('project'); ?>/edit/<?= $row['slug']; ?>" target="_blank"
-                  class="btn btn-sm btn-warning" role="button"><i class="fas fa-edit"></i>Edit User</a>
-                <a href="<?= base_url('project'); ?>/sertifikat/<?= $row['slug']; ?>" target="_blank"
-                  class="btn btn-sm btn-success" role="button"><i class="fas fa-edit"></i>Sertifikat</a>
-                <a href="<?= base_url('project'); ?>/kwitansi/<?= $row['slug']; ?>" target="_blank"
-                  class="btn btn-sm btn-danger" role="button"><i class="fas fa-edit"></i>Kwitansi</a>
-                <a href="<?= base_url('project'); ?>/<?= $row['slug']; ?>" class="btn btn-sm btn-success"><i
+                <a href="<?= base_url('hotel'); ?>/edit/<?= $row['slug']; ?>" target="_blank"
+                  class="btn btn-sm btn-warning" role="button"><i class="fas fa-edit"></i>Edit</a>
+
+                <a href="<?= base_url('hotel'); ?>/<?= $row['slug']; ?>" class="btn btn-sm btn-success"><i
                     class="fa fa-id-card" aria-hidden="true"></i> Detail</a>
               </td>
 

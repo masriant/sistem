@@ -8,18 +8,18 @@ use CodeIgniter\Model;
 class HotelModel extends Model
 {
   protected $table = ['db_hotel'];
-  // protected $table = ['db_project', 'db_hotel', 'db_instansi', 'db_kwitansi', 'db_register', 'db_sertifikat', 'db_content', 'db_tema'];
-
+  // // protected $table = ['db_project', 'db_hotel', 'db_instansi', 'db_kwitansi', 'db_register', 'db_sertifikat', 'db_content', 'db_tema'];
   protected $useTimestamps = true;
-  protected $allowedFields = ['hotel', 'alamat', 'kota', 'grup', 'room', 'marketing', 'contact_marketing', 'status_marketing', 'checkin', 'checkout', 'bed_single', 'bed_double', 'bed_twin', 'meeting_halfday', 'meeting_fullday', 'meeting_fullboard', 'compliment'];
+  protected $allowedFields = ['hotel', 'slug', 'alamat', 'kota', 'room', 'marketing', 'contact_marketing', 'status_marketing', 'checkin', 'checkout', 'bed_single', 'bed_double', 'bed_twin', 'meeting_halfday', 'meeting_fullday', 'meeting_fullboard', 'bed_fullboard', 'compliment'];
 
-  protected $primaryKey = 'id';
 
-  protected $returnType     = 'array';
+  // protected $primaryKey = 'id';
 
-  protected $createdField  = 'created_at';
-  protected $updatedField  = 'updated_at';
-  protected $deletedField  = 'deleted_at';
+  // // protected $returnType     = 'array';
+
+  // protected $createdField  = 'created_at';
+  // protected $updatedField  = 'updated_at';
+  // protected $deletedField  = 'deleted_at';
 
 
 
@@ -54,8 +54,8 @@ class HotelModel extends Model
     return $this->table('db_hotel')->countAllResults();
     // $this->query('SELECT MAX(userid) AS `maxkode`  FROM  `db_hotel`');
   }
-  // public function noUrutan()
+  // public function update()
   // {
-  //   $this->query('SELECT MAX(userid) AS `maxkode`  FROM  `db_hotel`');
+  //   $this->update([$db_hotel = ''[, $set = NULL[, $where = NULL[, $limit = NULL]]]]);
   // }
 }

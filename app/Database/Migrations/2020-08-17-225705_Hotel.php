@@ -19,15 +19,15 @@ class Hotel extends Migration
 				'type'           => 'VARCHAR',
 				'constraint'     => '255',
 			],
+			'slug'       => [
+				'type'           => 'VARCHAR',
+				'constraint'     => '255',
+			],
 			'alamat'       => [
 				'type'           => 'VARCHAR',
 				'constraint'     => '255',
 			],
 			'kota'       => [
-				'type'           => 'VARCHAR',
-				'constraint'     => '255',
-			],
-			'grup'       => [
 				'type'           => 'VARCHAR',
 				'constraint'     => '255',
 			],
@@ -76,6 +76,10 @@ class Hotel extends Migration
 				'constraint'     => '255',
 			],
 			'meeting_fullboard'       => [
+				'type'           => 'VARCHAR',
+				'constraint'     => '255',
+			],
+			'bed_fullboard'       => [
 				'type'           => 'VARCHAR',
 				'constraint'     => '255',
 			],

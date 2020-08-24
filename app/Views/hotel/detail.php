@@ -3,10 +3,10 @@ $lembaga = "LEMBAGA ADMINISTRASI KEUANGAN DAN ILMU PEMERINTAHAN";
 $skt = "SKT DITJEN POLPUM KEMENDAGRI NOMOR : 001-00-00/034/I/2019";
 $sekretariat = "Sekretariat : Jln. Serdang Baru Raya No. 4B, Kemayoran - Jakarta 10650";
 $contact = "website : www.lakip.co.id E-mail : admin@lakip.co.id Telp. /Fax. : 021-42885718";
-$checkin = date_create($project['checkin']);
-$checkout = date_create($project['checkout']);
-$created = date_create($project['created_at']);
-$updated = date_create($project['updated_at']);
+$checkin = date_create($hotel['checkin']);
+$checkout = date_create($hotel['checkout']);
+$created = date_create($hotel['created_at']);
+$updated = date_create($hotel['updated_at']);
 ?>
 <?= $this->extend('admin/template') ?>
 <?= $this->section('content') ?>
@@ -17,8 +17,8 @@ $updated = date_create($project['updated_at']);
 
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Data <a href="/project" class="btn btn-sm btn-primary"> <i
-                  class="fas fa-undo-alt"></i> Back</a></h3>
+            <h3 class="card-title">Data <a href="/hotel" class="btn btn-sm btn-primary"> <i class="fas fa-undo-alt"></i>
+                Back</a></h3>
 
             <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
@@ -37,24 +37,24 @@ $updated = date_create($project['updated_at']);
             <div class="col-12 col-sm-6 col-md-6 d-flex align-items-stretch">
               <div class="card bg-light">
                 <div class="card-header text-muted border-bottom-0">
-                  Detail <?= $project['userid']; ?>
+                  Detail <?= $hotel['id']; ?>
                 </div>
                 <div class="card-body pt-0">
                   <div class="row">
                     <div class="col-8">
-                      <h2 class="lead"><b><?= $project['nama']; ?></b></h2>
-                      <p class="text-muted text-sm"><b>About: </b> <?= $project['slug']; ?> </p>
+                      <h2 class="lead"><b><?= $hotel['hotel']; ?></b></h2>
+                      <p class="text-muted text-sm"><b>About: </b> <?= $hotel['slug']; ?> </p>
                       <ul class="ml-4 mb-0 fa-ul text-muted">
                         <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> <b>jabatan :
-                          </b><?= $project['jabatan']; ?> </li>
+                          </b><?= $hotel['alamat']; ?> </li>
                         <li class="small"><span class="fa-li"><i class="fas fa-user-edit"></i></span> <b>instansi :
-                          </b><?= $project['instansi']; ?> </li>
+                          </b><?= $hotel['kota']; ?> </li>
                         <li class="small"><span class="fa-li"><i class="fas fa-user-edit"></i></span> <b>Kabupaten :
-                          </b><?= $project['kabupaten']; ?> </li>
+                          </b><?= $hotel['marketing']; ?> </li>
                         <li class="small"><span class="fa-li"><i class="fas fa-user-edit"></i></span> <b>Hotel :
-                          </b><?= $project['hotel']; ?> </li>
+                          </b><?= $hotel['checkin']; ?> </li>
                         <li class="small"><span class="fa-li"><i class="fas fa-user-edit"></i></span> <b>Lokasi :
-                          </b><?= $project['lokasi']; ?> </li>
+                          </b><?= $hotel['checkout']; ?> </li>
                         <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> <b>Mulai :
                           </b><?= date_format($checkin, "d M Y"); ?> </li>
                         <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> <b>Selesai :
@@ -64,32 +64,29 @@ $updated = date_create($project['updated_at']);
                         <li class="small"><span class="fa-li"><i class="far fa-calendar-check"></i></span> <b>Update :
                           </b><?= date_format($updated, "d M Y"); ?> </li>
                         <li class="small"><span class="fa-li"><i class="fas fa-id-badge"></i></span> <b>Tema :
-                          </b><?= $project['tema']; ?> </li>
+                          </b><?= $hotel['meeting_halfday']; ?> </li>
                       </ul>
                     </div>
                     <div class="col-4 text-center">
-                      <img src="/assets/images/<?= $project['kodeqr']; ?>" alt="user-avatar"
+                      <img src="/assets/images/<?= $hotel['meeting_fullday']; ?>" alt="user-avatar"
                         class="img-circle img-fluid">
                     </div>
                   </div>
                 </div>
                 <div class="card-footer">
                   <div class="text-right">
-                    <a href="<?= base_url('project'); ?>/edit/<?= $project['slug']; ?>"
-                      class="btn btn-sm btn-warning"><i class="fas fa-edit"></i>Edit</a>
-                    <a href="<?= base_url('project'); ?>/sertifikat/<?= $project['slug']; ?>"
-                      class="btn btn-sm btn-info"><i class="fas fa-edit"></i>Sertifikat</a>
-                    <a href="<?= base_url('project'); ?>/kwitansi/<?= $project['slug']; ?>"
-                      class="btn btn-sm btn-danger"><i class="fas fa-edit"></i>Kwitansi</a>
+                    <a href="<?= base_url('hotel'); ?>/edit/<?= $hotel['slug']; ?>" class="btn btn-sm btn-warning"><i
+                        class="fas fa-edit"></i>Edit</a>
 
 
-                    <form action="<?= base_url(); ?>/project/<?= $project['id']; ?>" method="POST" class="d-inline">
+
+                    <form action="<?= base_url(); ?>/hotel/<?= $hotel['id']; ?>" method="POST" class="d-inline">
                       <?= csrf_field(); ?>
                       <input type="hidden" name="_method" value="DELETE">
                       <button type="submit" class="btn btn-sm btn-danger"
                         onclick="return confirm('Apakah anda yakin?');"><i class="fas fa-trash-alt"></i> Delete</button>
                     </form>
-                    <a href="<?= base_url(); ?>/project" class="btn btn-sm btn-primary"> <i class="fas fa-undo-alt"></i>
+                    <a href="<?= base_url(); ?>/hotel" class="btn btn-sm btn-primary"> <i class="fas fa-undo-alt"></i>
                       Back</a>
 
                   </div>
@@ -108,7 +105,7 @@ $updated = date_create($project['updated_at']);
           <div class="col">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Sertifikat <a href="/project" class="btn btn-sm btn-primary"> <i
+                <h3 class="card-title">Sertifikat <a href="/hotel" class="btn btn-sm btn-primary"> <i
                       class="fas fa-undo-alt"></i> Back</a></h3>
 
                 <div class="card-tools">
@@ -133,21 +130,21 @@ $updated = date_create($project['updated_at']);
                 </div>
                 <hr>
                 <p class="card-text">Diberikan kepada :</p>
-                <h3 class="card-text"><//?= strtoupper($project['nama']); ?></h3>
-                <p class="card-text">//( <//?= ucwords($project['jabatan']); ?> )</p>
+                <h3 class="card-text"><//?= strtoupper($hotel['nama']); ?></h3>
+                <p class="card-text">//( <//?= ucwords($hotel['jabatan']); ?> )</p>
 
                 <p class="lead">Terima kasih telah menjadi peserta <br>Bimbingan Teknis Nasional</p>
                 <p class="card-text">Tema :</p>
-                <p class="lead"><//?= $project['tema']; ?></p>
-                <p class="card-text">Hotel : <//?= $project['hotel'] . ","; ?>
+                <p class="lead"><//?= $hotel['tema']; ?></p>
+                <p class="card-text">Hotel : <//?= $hotel['hotel'] . ","; ?>
                   <//?= date_format($checkin, "d M Y") . " - " . date_format($checkout, "d M Y"); ?></p>
-                <p class="card-text">Dikeluarkan di <//?= $project['lokasi']; ?>,
+                <p class="card-text">Dikeluarkan di <//?= $hotel['lokasi']; ?>,
                   <//?= date_format($checkout, "d M Y"); ?></p>
 
-                <a href="/project" class="btn btn-primary">Go Back</a>
+                <a href="/hotel" class="btn btn-primary">Go Back</a>
               </div>
               <div class="card-footer text-center text-muted">
-                Updated at : <//?= $project['updated_at']; ?>
+                Updated at : <//?= $hotel['updated_at']; ?>
               </div>
             </div>
           </div>
@@ -159,7 +156,7 @@ $updated = date_create($project['updated_at']);
       <div class="col">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Kwitansi <a href="/project" class="btn btn-sm btn-primary"> <i
+            <h3 class="card-title">Kwitansi <a href="/hotel" class="btn btn-sm btn-primary"> <i
                   class="fas fa-undo-alt"></i> Back</a></h3>
 
             <div class="card-tools">
@@ -183,21 +180,21 @@ $updated = date_create($project['updated_at']);
             </div>
             <hr>
             <p class="card-text">Diberikan kepada :</p>
-            <h3 class="card-text"><//?= strtoupper($project['nama']); ?></h3>
-            <p class="card-text">//( <//?= ucwords($project['jabatan']); ?> )</p>
+            <h3 class="card-text"><//?= strtoupper($hotel['nama']); ?></h3>
+            <p class="card-text">//( <//?= ucwords($hotel['jabatan']); ?> )</p>
 
             <p class="lead">Terima kasih telah menjadi peserta <br>Bimbingan Teknis Nasional</p>
             <p class="card-text">Tema :</p>
-            <p class="lead"><//?= $project['tema']; ?></p>
-            <p class="card-text">Hotel : <//?= $project['hotel'] . ","; ?>
+            <p class="lead"><//?= $hotel['tema']; ?></p>
+            <p class="card-text">Hotel : <//?= $hotel['hotel'] . ","; ?>
               <//?= date_format($checkin, "d M Y") . " - " . date_format($checkout, "d M Y"); ?></p>
-            <p class="card-text">Dikeluarkan di <//?= $project['lokasi']; ?>,
+            <p class="card-text">Dikeluarkan di <//?= $hotel['lokasi']; ?>,
               <//?= date_format($checkout, "d M Y"); ?></p>
 
-            <a href="/project" class="btn btn-primary">Go Back</a>
+            <a href="/hotel" class="btn btn-primary">Go Back</a>
           </div>
           <div class="card-footer text-center text-muted">
-            Updated at : <//?= $project['updated_at']; ?>
+            Updated at : <//?= $hotel['updated_at']; ?>
           </div>
         </div>
       </div>
@@ -246,21 +243,21 @@ $updated = date_create($project['updated_at']);
                 <hr>
                 <div class="card-body text-center">
                   <p class="card-text">Diberikan kepada :</p>
-                  <h3 class="card-text"><?= strtoupper($project['nama']); ?></h3>
-                  <p class="card-text">( <?= ucwords($project['jabatan']); ?> )</p>
+                  <h3 class="card-text"><?= strtoupper($hotel['hotel']); ?></h3>
+                  <p class="card-text">( <?= ucwords($hotel['alamat']); ?> )</p>
 
                   <p class="lead">Terima kasih telah menjadi peserta <br>Bimbingan Teknis Nasional</p>
                   <p class="card-text">Tema :</p>
-                  <p class="lead"><?= $project['tema']; ?></p>
-                  <p class="card-text">Hotel : <?= $project['hotel'] . ","; ?>
+                  <p class="lead"><?= $hotel['meeting_fullday']; ?></p>
+                  <p class="card-text">Hotel : <?= $hotel['hotel'] . ","; ?>
                     <?= date_format($checkin, "d M Y") . " - " . date_format($checkout, "d M Y"); ?></p>
-                  <p class="card-text">Dikeluarkan di <?= $project['lokasi']; ?>,
+                  <p class="card-text">Dikeluarkan di <?= $hotel['kota']; ?>,
                     <?= date_format($checkout, "d M Y"); ?></p>
 
-                  <a href="/project" class="btn btn-primary">Go Back</a>
+                  <a href="/hotel" class="btn btn-primary">Go Back</a>
                 </div>
                 <div class="card-footer text-center text-muted">
-                  Updated at : <?= $project['updated_at']; ?>
+                  Updated at : <?= $hotel['updated_at']; ?>
                 </div>
               </div>
 
@@ -304,21 +301,21 @@ $updated = date_create($project['updated_at']);
             </div>
             <hr>
             <p class="card-text">Diberikan kepada :</p>
-            <h3 class="card-text"><?= strtoupper($project['nama']); ?></h3>
-            <p class="card-text">( <?= ucwords($project['jabatan']); ?> )</p>
+            <h3 class="card-text"><?= strtoupper($hotel['hotel']); ?></h3>
+            <p class="card-text">( <?= ucwords($hotel['alamat']); ?> )</p>
 
             <p class="lead">Terima kasih telah menjadi peserta <br>Bimbingan Teknis Nasional</p>
             <p class="card-text">Tema :</p>
-            <p class="lead"><?= $project['tema']; ?></p>
-            <p class="card-text">Hotel : <?= $project['hotel'] . ","; ?>
+            <p class="lead"><?= $hotel['kota']; ?></p>
+            <p class="card-text">Hotel : <?= $hotel['hotel'] . ","; ?>
               <?= date_format($checkin, "d M Y") . " - " . date_format($checkout, "d M Y"); ?></p>
-            <p class="card-text">Dikeluarkan di <?= $project['lokasi']; ?>,
+            <p class="card-text">Dikeluarkan di <?= $hotel['kota']; ?>,
               <?= date_format($checkout, "d M Y"); ?></p>
 
-            <a href="/project" class="btn btn-primary">Go Back</a>
+            <a href="/hotel" class="btn btn-primary">Go Back</a>
           </div>
           <div class="card-footer text-center text-muted">
-            Updated at : <?= $project['updated_at']; ?>
+            Updated at : <?= $hotel['updated_at']; ?>
           </div>
         </div>
       </div>

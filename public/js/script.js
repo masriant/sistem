@@ -32,6 +32,23 @@ function previewImg() {
   }
 }
 
+// previewImg Compliment
+function previewImg() {
+
+  const compliment = document.querySelector('#compliment');
+  const complimentLabel = document.querySelector('.custom-file-label');
+  const imgPreview = document.querySelector('.img-preview');
+
+  complimentLabel.textContent = compliment.files[0].name;
+
+  const fileCompliment = new FileReader();
+  fileCompliment.readAsDataURL(compliment.files[0]);
+
+  fileCompliment.onload = function (e) {
+    imgPreview.src = e.target.result;
+  }
+}
+
 function myFunction() {
   var input, filter, ul, li, a, i, txtValue;
   input = document.getElementById("myInput");

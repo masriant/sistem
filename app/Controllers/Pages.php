@@ -15,6 +15,8 @@ class Pages extends BaseController
   function showme($page = 'home')
   {
     echo 'This page is: ' . $page;
+    echo 'This page is: ' . $page;
+    echo 'This page is: ' . $page;
   }
   //--------------------------------------------------------------------
 

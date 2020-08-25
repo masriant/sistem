@@ -32,8 +32,17 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 // $routes->get('/', 'Home::index');
+$routes->get('/', 'Users::index', ['filter' => 'noauth']);
+$routes->get('logout', 'Users::logout');
+$routes->match(['get', 'post'], 'register', 'Users::register', ['filter' => 'noauth']);
+$routes->match(['get', 'post'], 'profile', 'Users::profile', ['filter' => 'auth']);
+$routes->get('dashboard', 'Dashboard::index', ['filter' => 'auth']);
+
 $routes->get('/', 'Pages::index');
+$routes->get('blog/create', 'Blog::create');
+$routes->get('blog/(:any)', 'Blog::post/$1');
 $routes->get('(:any)', 'Pages::show/$1');
+
 $routes->get('/admin', 'Admin::index');
 $routes->get('/lakip', 'Lakip::index');
 $routes->get('/project', 'Project::index');

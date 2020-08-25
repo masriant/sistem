@@ -2,15 +2,23 @@
 
 namespace App\Controllers;
 
+use App\Models\BlogModel;
+
 class Pages extends BaseController
 {
+  public function __construct()
+  {
+  }
   public function index()
   {
+    $model = new BlogModel();
+    $data['news'] = $model->getPosts();
+
     // $this->cachePage(38);
     // return view('welcome_message');
     // echo 'This is pages controler';
     // main/previews/ => 
-    echo view('main/previews/header');
+    echo view('main/previews/header', $data);
     echo view('pages/home');
     echo view('main/previews/footer');
   }
@@ -37,7 +45,7 @@ class Pages extends BaseController
     echo view('main/previews/footer');
   }
   //--------------------------------------------------------------------
-  function tampil($page = 'contact')
+  function contact($page = 'contact')
   {
     // main/_partials/ => template/_partials
     return view('pages/' . $page);

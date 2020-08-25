@@ -16,4 +16,21 @@
     </p>
   </div>
 </div>
+
+<section class="blog-section">
+  <!-- <div class="container">
+    <//?php if ($news) : ?>
+    <//?php foreach ($news as $newsItem) : ?>
+    <h3><//?php $newsItem['title'] ?></h3>
+    <//?php endforeach; ?>
+    <//?php else : ?>
+    <p class="text-center">No posts have been found</p>
+    <//?php endif; ?>
+  </div> -->
+  <!-- <//?php
+  echo "<pre>";
+  print_r//($news);
+  echo "</pre>";
+  ?> -->
+</section>
 <?= $this->endSection() ?>

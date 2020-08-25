@@ -4,20 +4,61 @@ namespace App\Controllers;
 
 class Blog extends \CodeIgniter\Controller
 {
-  public function index()
+  function post($slug)
   {
-    $data = [
-      'page_title' => 'Your title',
-      'todo_list' => ['Clean House', 'Call Mom', 'Run Errands'],
-      'title'     => "My Real Title",
-      'heading'   => "My Real Heading",
-      'message' => 'Welcome to my Blog!'
-    ];
-
-    // echo view('header');
-    // echo view('menu');
-    // echo view('default', $data, ['saveData' => true]);
-    return view('file_default', $data);
-    // echo view('footer');
+    // main/previews/ => theme/previews
+    echo view('main/previews/header');
+    echo view('blog/post');
+    echo view('main/previews/footer');
   }
+  //--------------------------------------------------------------------
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//--------------------------------------------------------------------
+// function tampil($page = 'contact')
+// {
+//   // main/_partials/ => template/_partials
+//   return view('pages/' . $page);
+// }
+
+  // public function index()
+  // {
+  //   echo view('main/previews/header');
+  //   echo view('pages/home');
+  //   echo view('main/previews/footer');
+  // }
+
+  // //--------------------------------------------------------------------
+
+  // function show($page = 'home')
+  // {
+  //   if (!is_file(APPPATH . 'Views/pages/' . $page . '.php')) {
+  //     // Whoops, we don't have a page for that!
+  //     throw new \CodeIgniter\Exceptions\PageNotFoundException($page);
+  //   }
+  //   // main/previews/ => theme/previews
+  //   echo view('main/previews/header');
+  //   echo view('pages/' . $page);
+  //   echo view('main/previews/footer');
+  // }

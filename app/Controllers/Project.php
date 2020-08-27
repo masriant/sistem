@@ -20,6 +20,9 @@ class Project extends BaseController
 
   public function index()
   {
+    // if (!session()->get('isLoggedIn'))
+    //   redirect()->to('/');
+
     $counter = $this->projectModel->kodeUser();
     $urutan = (int) substr($counter, 3, 3);
     $urutan++;

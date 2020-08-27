@@ -2,11 +2,15 @@
 
 namespace App\Controllers;
 
+use App\Models\BlogModel;
+
 class Dashboard extends BaseController
 {
   public function index()
   {
-    $data = [];
+    $model = new BlogModel();
+    $data['news'] = $model->getPosts();
+    // $data = [];
 
     echo view('main/previews/header', $data);
     echo view('dashboard');

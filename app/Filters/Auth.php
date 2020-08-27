@@ -8,17 +8,18 @@ use CodeIgniter\Filters\FilterInterface;
 
 class Auth implements FilterInterface
 {
-  public function before(RequestInterface $request)
+  public function before(RequestInterface $request, $arguments = null)
   {
-    // Do something here
+    // $auth = service('auth');
+
     if (!session()->get('isLoggedIn')) {
-      return redirect()->to('/');
+      return redirect('/');
     }
   }
 
   //--------------------------------------------------------------------
 
-  public function after(RequestInterface $request, ResponseInterface $response)
+  public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
   {
     // Do something here
   }

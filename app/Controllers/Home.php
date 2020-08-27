@@ -19,10 +19,10 @@ class Home extends BaseController
 	// 	die('cache has been cleared.');
 	// }
 
-	function showme($page = 'home')
-	{
-		echo 'This page is: ' . $page;
-	}
+	// function showme($page = 'home')
+	// {
+	// 	echo 'This page is: ' . $page;
+	// }
 	//--------------------------------------------------------------------
 
 }

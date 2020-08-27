@@ -5,25 +5,28 @@
         <h3><?= $user['firstname'] . ' ' . $user['lastname'] ?></h3>
         <hr>
         <?php if (session()->get('success')) : ?>
-          <div class="alert alert-success" role="alert">
-            <?= session()->get('success') ?>
-          </div>
+        <div class="alert alert-success" role="alert">
+          <?= session()->get('success') ?>
+        </div>
         <?php endif; ?>
-        <form class="" action="/profile" method="post">
+        <form class="" action="/profile" method="post" enctype="multipart/form-data">
+          <?= csrf_field(); ?>
           <div class="row">
             <div class="col-12 col-sm-6">
               <div class="form-group">
                 <label for="firstname">First Name</label>
-                <input type="text" class="form-control" name="firstname" id="firstname" value="<?= set_value('firstname', $user['firstname']) ?>">
+                <input type="text" class="form-control" name="firstname" id="firstname"
+                  value="<?= set_value('firstname', $user['firstname']) ?>">
               </div>
             </div>
             <div class="col-12 col-sm-6">
               <div class="form-group">
                 <label for="lastname">Last Name</label>
-                <input type="text" class="form-control" name="lastname" id="lastname" value="<?= set_value('lastname', $user['lastname']) ?>">
+                <input type="text" class="form-control" name="lastname" id="lastname"
+                  value="<?= set_value('lastname', $user['lastname']) ?>">
               </div>
             </div>
-            <div class="col-12">
+            <div class="col-12 my-3">
               <div class="form-group">
                 <label for="email">Email address</label>
                 <input type="text" class="form-control" readonly id="email" value="<?= $user['email'] ?>">
@@ -32,26 +35,27 @@
             <div class="col-12 col-sm-6">
               <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" name="password" id="password" value="">
+                <input type="password" class="form-control" name="password" id="password" value="" required>
               </div>
             </div>
             <div class="col-12 col-sm-6">
               <div class="form-group">
                 <label for="password_confirm">Confirm Password</label>
-                <input type="password" class="form-control" name="password_confirm" id="password_confirm" value="">
+                <input type="password" class="form-control" name="password_confirm" id="password_confirm" value=""
+                  required>
               </div>
             </div>
             <?php if (isset($validation)) : ?>
-              <div class="col-12">
-                <div class="alert alert-danger" role="alert">
-                  <?= $validation->listErrors() ?>
-                </div>
+            <div class="col-12 my-3">
+              <div class="alert alert-danger" role="alert">
+                <?= $validation->listErrors() ?>
               </div>
+            </div>
             <?php endif; ?>
           </div>
 
           <div class="row">
-            <div class="col-12 col-sm-4">
+            <div class="col-12 col-sm-4 my-3">
               <button type="submit" class="btn btn-primary">Update</button>
             </div>
 

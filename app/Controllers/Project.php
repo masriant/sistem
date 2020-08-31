@@ -54,8 +54,8 @@ class Project extends BaseController
     }
     $data = [
       'title' => 'Data',
-      'lakip' => $this->projectModel->getAll(),
-      'lakip' => $lakip->paginate(),
+      // 'lakip' => $this->projectModel->findAll(),
+      // 'lakip' => $lakip->paginate(),
       'lakip' => $lakip->paginate(10, 'id'),
       'pager' => $this->projectModel->pager,
       'currentPage' => $currentPage,

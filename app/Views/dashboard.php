@@ -37,7 +37,15 @@
             ?>
 
             <h1 class="display-4"><?= 'Hello ' . $salam; ?><?= session()->get('firstname') ?></h1>
-            <p class="lead">Beberapa list posting yang telah siap untuk di publikasikan :</p>
+            <p class="lead">Beberapa list posting yang telah siap untuk di publikasikan : <br>
+              <?php
+              $masaaktif = "02-09-2020";
+              $sekarang = date("d-m-Y");
+              $masaberlaku = strtotime($masaaktif) - strtotime($sekarang);
+              echo "Masa Aktif  sampai dengan: $masaaktif <br> Sekarang : $sekarang <br>";
+              echo "Masa aktif  kurang " . $masaberlaku / (24 * 60 * 60) . " hari lagi";
+              ?></p>
+
             <hr class="my-4">
             <?php $i = 1;
             if ($news) : ?>
@@ -58,7 +66,6 @@
         </div>
       </section>
 
-
       <hr class="my-4">
       <section class="blog-section">
         <div class="container">
@@ -77,6 +84,8 @@
   print_//r($news);
   echo "</pre>";
   ?> -->
+
+
       </section>
     </div>
   </div>

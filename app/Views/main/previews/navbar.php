@@ -21,8 +21,8 @@ $uri = service('uri');
         <li class="nav-item <?= ($uri->getSegment(1) == 'dashboard' ? 'active' : null) ?>">
           <a class="nav-link" href="/dashboard">Dashboard</a>
         </li>
-        <li class="nav-item <?= ($uri->getSegment(1) == 'about' ? 'active' : null) ?>">
-          <a class="nav-link" href="/about">About</a>
+        <li class="nav-item <?= ($uri->getSegment(1) == 'hotel' ? 'active' : null) ?>">
+          <a class="nav-link" href="/hotel">Hotel</a>
         </li>
         <li class="nav-item <?= ($uri->getSegment(1) == 'profile' ? 'active' : null) ?>">
           <a class="nav-link" href="/profile">Profile</a>

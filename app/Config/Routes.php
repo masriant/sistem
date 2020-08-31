@@ -54,7 +54,15 @@ $routes->get('project', 'Project::index', ['filter' => 'auth']);
 // $routes->get('project/(:any)', 'Project::$1');
 
 
-$routes->get('/komik/create', 'Komik::create');
+
+$routes->get('/hotel/create', 'Hotel::create');
+$routes->get('/hotel/edit/(:segment)', 'Hotel::edit/$1');
+// $routes->get('/hotel/update/(:segment)', 'Hotel::update/$1');
+$routes->delete('/hotel/(:num)', 'Hotel::delete/$1');
+$routes->get('/hotel/(:any)', 'Hotel::detail/$1');
+
+
+$routes->get('/komik/create', 'Komik::create', ['filter' => 'auth']);
 $routes->get('/komik/search', 'Komik::search');
 $routes->get('/komik/edit/(:segment)', 'Komik::edit/$1');
 $routes->delete('/komik/(:num)', 'Komik::delete/$1');
